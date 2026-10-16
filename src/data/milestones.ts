@@ -2,6 +2,7 @@ export interface Milestone {
   id: string;
   sceneNumber: number;
   year: string;
+  location: string;
   title: {
     es: string;
     en: string;
@@ -10,12 +11,9 @@ export interface Milestone {
     es: string;
     en: string;
   };
-  discoverer: string;
-  location: string;
-  decimalsCount: number | string;
-  piApproximation: string;
-  theme: 'obsidian' | 'gold' | 'parchment' | 'emerald' | 'amber' | 'cyber';
-  quote?: {
+  precisionValue: string;
+  theme: string;
+  quote: {
     es: string;
     en: string;
     author: string;
@@ -24,232 +22,212 @@ export interface Milestone {
 
 export const MILESTONES: Milestone[] = [
   {
-    id: 'cycle',
+    id: 'rhind',
     sceneNumber: 1,
-    year: 'El Inicio de los Tiempos',
+    year: '1650 a.C. · Tebas',
+    location: 'Tebas, Antiguo Egipto',
     title: {
-      es: 'El Ciclo Eterno',
-      en: 'The Eternal Cycle'
+      es: 'El Papiro y la Cuerda',
+      en: 'The Papyrus and the Cord'
     },
     subtitle: {
-      es: 'El orden nace del caos numérico',
-      en: 'Order emerges from numerical chaos'
+      es: 'El escriba Ahmes y la primera cuadratura de graneros',
+      en: 'The scribe Ahmes and the first granary quadrature'
     },
-    discoverer: 'La Geometría del Universo',
-    location: 'El Cosmos',
-    decimalsCount: '∞',
-    piApproximation: '3.1415926535...',
-    theme: 'obsidian',
+    precisionValue: '3.16049',
+    theme: 'egypt',
     quote: {
-      es: 'El gran libro del universo no puede ser entendido a menos que primero aprendamos el lenguaje y los caracteres en que está escrito: las matemáticas.',
-      en: 'The grand book of the universe cannot be understood unless one first learns the language and the characters in which it is written: mathematics.',
-      author: 'Galileo Galilei (1623)'
+      es: '«Quita un noveno del diámetro y construye un cuadrado con el resto. Por primera vez en la historia, la humanidad intenta atrapar una curva dentro de líneas rectas.»',
+      en: '«Take away 1/9 of the diameter and construct a square on the remainder. For the first time in history, humanity attempts to trap a curve within straight lines.»',
+      author: 'Papiro de Rhind (Problema 48, Museo Británico)'
     }
   },
   {
-    id: 'unroll',
+    id: 'syracuse',
     sceneNumber: 2,
-    year: '2000 a.C.',
+    year: '212 a.C. · Siracusa',
+    location: 'Siracusa, Magna Grecia',
     title: {
-      es: 'El Desenrollado',
-      en: 'The Unrolling'
+      es: '«No molestes a mis círculos»',
+      en: '«Do Not Disturb My Circles»'
     },
     subtitle: {
-      es: 'De la cuerda a la recta numérica',
-      en: 'From rope to number line'
+      es: 'El asedio romano y la prensa hidráulica de 96 lados',
+      en: 'The Roman siege and the 96-sided hydraulic press'
     },
-    discoverer: 'Escribas babilónicos y egipcios',
-    location: 'Mesopotamia y Valle del Nilo',
-    decimalsCount: 1,
-    piApproximation: '3.125 (25/8)',
-    theme: 'gold',
+    precisionValue: '3.1418',
+    theme: 'syracuse',
     quote: {
-      es: 'Corta el perímetro de cualquier círculo con diámetro 1: jamás caerá en un número entero.',
-      en: 'Unroll the circumference of any circle of diameter 1: it will never land on an exact integer.',
-      author: 'Papiro Rhind'
+      es: '«Noli turbare circulos meos. Mataron al hombre en la arena; su trampa geométrica sobrevivió dos mil años.»',
+      en: '«Noli turbare circulos meos. They struck the man down in the sand; his geometric cage survived two millennia.»',
+      author: 'Últimas palabras de Arquímedes de Siracusa'
     }
   },
   {
-    id: 'archimedes',
+    id: 'china',
     sceneNumber: 3,
-    year: '250 a.C.',
+    year: '480 d.C. · Jiankang',
+    location: 'Jiankang, China (Dinastía Liu Song)',
     title: {
-      es: 'La Trampa de Arquímedes',
-      en: 'Archimedes’ Trap'
+      es: 'El Monstruo de 24,576 Lados',
+      en: 'The 24,576-Sided Colossus'
     },
     subtitle: {
-      es: 'El método del agotamiento con 96 lados',
-      en: 'The method of exhaustion with 96 sides'
+      es: 'Zu Chongzhi, varillas de bambú y la legendaria Milü 355/113',
+      en: 'Zu Chongzhi, counting rods, and the legendary Milü 355/113'
     },
-    discoverer: 'Arquímedes de Siracusa',
-    location: 'Magna Grecia (Siracusa)',
-    decimalsCount: 3,
-    piApproximation: '3.1418 (223/71 < π < 22/7)',
-    theme: 'amber',
+    precisionValue: '3.1415929',
+    theme: 'china',
     quote: {
-      es: 'Atrapó al círculo entre dos jaulas poligonales de 96 lados hasta que no hubo escapatoria.',
-      en: 'He trapped the circle between two 96-sided polygonal cages until there was no escape.',
-      author: 'Sobre la medida del círculo'
+      es: '«Años moviendo varillas de bambú en el suelo. Un récord de precisión que nadie en la Tierra logró superar durante 800 años.»',
+      en: '«Years moving bamboo rods upon the floor. A precision milestone unbroken on Earth for 800 years.»',
+      author: 'Crónica del Libro de Song (Zhui Shu)'
     }
   },
   {
-    id: 'tombstone',
+    id: 'leiden',
     sceneNumber: 4,
-    year: '1610 d.C.',
-    title: {
-      es: '35 Decimales en una Lápida',
-      en: '35 Decimals on a Tombstone'
-    },
-    subtitle: {
-      es: 'Una vida entera entregada a una sola constante',
-      en: 'A whole lifetime devoted to a single constant'
-    },
-    discoverer: 'Ludolph van Ceulen',
+    year: '1610 · Leiden',
     location: 'Leiden, Países Bajos',
-    decimalsCount: 35,
-    piApproximation: '3.14159265358979323846264338327950288',
-    theme: 'obsidian',
+    title: {
+      es: '35 Dígitos en una Lápida',
+      en: '35 Digits on a Tombstone'
+    },
+    subtitle: {
+      es: 'El maestro de esgrima Ludolph van Ceulen y un polígono de 2⁶² lados',
+      en: 'Fencing master Ludolph van Ceulen and a 2⁶²-sided polygon'
+    },
+    precisionValue: '3.14159265358979323846264338327950288',
+    theme: 'leiden',
     quote: {
-      es: 'Calculó 35 cifras exactas con polígonos de 2⁶² lados. Pidió que fueran grabadas en su lápida de San Pedro en Leiden.',
-      en: 'He calculated 35 exact figures using polygons with 2⁶² sides. He requested them chiseled onto his tombstone at St. Peter’s in Leiden.',
-      author: 'Epitafio de Van Ceulen'
+      es: '«Qui in vita sua multum laboravit... Dedicó su vida a medir el círculo y pidió que los 35 decimales fueran grabados para siempre sobre su tumba.»',
+      en: '«Qui in vita sua multum laboravit... He devoted his life to measuring the circle, decreeing all 35 decimals chiseled upon his tomb.»',
+      author: 'Epitafio en la Iglesia de San Pedro, Leiden'
     }
   },
   {
-    id: 'buffon',
+    id: 'london',
     sceneNumber: 5,
-    year: '1777 d.C.',
+    year: '1706 · Londres',
+    location: 'Londres y San Petersburgo',
     title: {
-      es: 'Las Agujas de Buffon',
-      en: 'Buffon’s Needles'
+      es: 'El Bautizo del Símbolo π',
+      en: 'The Baptism of the Symbol π'
     },
     subtitle: {
-      es: 'Cuando el azar calcula la geometría',
-      en: 'When pure chance calculates geometry'
+      es: 'De la pesada frase en latín a la página 263 de William Jones',
+      en: 'From cumbersome Latin prose to William Jones’ page 263'
     },
-    discoverer: 'Georges-Louis Leclerc, Conde de Buffon',
-    location: 'París, Francia',
-    decimalsCount: 4,
-    piApproximation: '2L / (D · P) → π',
-    theme: 'parchment',
+    precisionValue: '3.1415926535...',
+    theme: 'london',
     quote: {
-      es: 'Lanza suficientes agujas sobre un piso de duelas de madera: la probabilidad de que crucen una grieta contiene a π.',
-      en: 'Toss enough needles onto parallel wooden floorboards: the probability of crossing a crack contains π.',
-      author: 'Essai d’arithmétique morale'
+      es: '«Durante milenios no tuvo nombre. En 1706, William Jones imprimió por primera vez la letra griega π, y Euler la convirtió en el lenguaje de la ciencia.»',
+      en: '«For millennia it bore no name. In 1706, William Jones first printed the Greek letter π, and Euler cast it into the universal language of science.»',
+      author: 'Synopsis Palmariorum Matheseos (1706)'
     }
   },
   {
-    id: 'ramanujan',
+    id: 'paris',
     sceneNumber: 6,
-    year: '1914 d.C.',
+    year: '1777 · París',
+    location: 'Castillo de Montbard, París',
     title: {
-      es: 'El Cuaderno de Ramanujan',
-      en: 'Ramanujan’s Notebook'
+      es: 'Las Agujas en el Suelo de Madera',
+      en: 'Needles Upon the Wooden Parquet'
     },
     subtitle: {
-      es: 'Series hipergeométricas que destrozaron la lentitud',
-      en: 'Hypergeometric series that shattered slowness'
+      es: 'El Conde de Buffon y el nacimiento de la probabilidad geométrica',
+      en: 'The Count of Buffon and the birth of geometric probability'
     },
-    discoverer: 'Srinivasa Ramanujan',
-    location: 'Kumbakonam, India / Cambridge, Reino Unido',
-    decimalsCount: '8 por término',
-    piApproximation: '9801 / (2√2 · 1103) = 3.14159273...',
-    theme: 'emerald',
+    precisionValue: '3.1446',
+    theme: 'paris',
     quote: {
-      es: 'Una ecuación para mí no tiene sentido a menos que exprese un pensamiento de Dios.',
-      en: 'An equation for me has no meaning unless it expresses a thought of God.',
-      author: 'Srinivasa Ramanujan'
+      es: '«Lanza agujas al azar sobre un suelo de madera: π ya no pertenecía solo a los círculos. Estaba escondido en el tejido mismo del azar.»',
+      en: '«Toss needles at random onto a wooden floor: π no longer belonged only to circles. It was woven into the fabric of chance itself.»',
+      author: 'Georges-Louis Leclerc, Conde de Buffon'
+    }
+  },
+  {
+    id: 'shanks',
+    sceneNumber: 7,
+    year: '1873 · París',
+    location: 'Houghton-le-Spring y París',
+    title: {
+      es: 'El Trágico Error de William Shanks',
+      en: 'The Tragic Error of William Shanks'
+    },
+    subtitle: {
+      es: '707 decimales calculados a mano y la cúpula del Palais de la Découverte',
+      en: '707 handwritten decimals and the dome of the Palais de la Découverte'
+    },
+    precisionValue: '3.14159... [Falla en el #528]',
+    theme: 'shanks',
+    quote: {
+      es: '«Veinte años de su vida tallados en madera dorada en la cúpula de París. Hasta que en 1946 una calculadora descubrió que el dígito 528 era erróneo: sus últimos 180 números eran ceniza.»',
+      en: '«Twenty years of his life carved in gilded wood in the Paris dome. Until 1946, when a mechanical calculator discovered digit 528 was wrong: his final 180 digits were ash.»',
+      author: 'Crónica del Palais de la Découverte'
     }
   },
   {
     id: 'eniac',
-    sceneNumber: 7,
-    year: '1949 d.C.',
-    title: {
-      es: 'ENIAC: La Era del Silicio',
-      en: 'ENIAC: The Silicon Dawn'
-    },
-    subtitle: {
-      es: '70 horas consecutivas de tubos de vacío para 2,037 decimales',
-      en: '70 continuous vacuum-tube hours for 2,037 decimals'
-    },
-    discoverer: 'George Reitwiesner y John von Neumann',
-    location: 'Laboratorio Balístico de Aberdeen, Maryland',
-    decimalsCount: 2037,
-    piApproximation: '3.1415926535... [2,037 dígitos]',
-    theme: 'amber',
-    quote: {
-      es: 'Las tarjetas perforadas alimentaron a la bestia de 30 toneladas. Lo que a la humanidad le costó 4,000 años, ENIAC lo pulverizó en un fin de semana.',
-      en: 'Punched cards fed the 30-ton beast. What took humanity 4,000 years, ENIAC pulverized in a single weekend.',
-      author: 'Registro técnico del Ejército de EE.UU.'
-    }
-  },
-  {
-    id: 'feynman',
     sceneNumber: 8,
-    year: '1989 d.C.',
+    year: '1914 → 1949',
+    location: 'Madras y Laboratorio de Aberdeen',
     title: {
-      es: 'El Punto de Feynman',
-      en: 'The Feynman Point'
+      es: 'El Sueño de Namagiri y el ENIAC',
+      en: 'Namagiri’s Dream and the ENIAC'
     },
     subtitle: {
-      es: 'La sobrecogedora ilusión del decimal 762: 999999',
-      en: 'The chilling illusion at decimal 762: 999999'
+      es: 'De las revelaciones de Ramanujan a las 70 horas de tubos de vacío',
+      en: 'From Ramanujan’s mystic notebook to 70 hours of vacuum tubes'
     },
-    discoverer: 'Richard Feynman / Douglas Hofstadter',
-    location: 'Pasadena, California',
-    decimalsCount: 762,
-    piApproximation: '...857973 999999 873115...',
-    theme: 'obsidian',
+    precisionValue: '2,037 dígitos',
+    theme: 'eniac',
     quote: {
-      es: 'Feynman bromeaba diciendo que quería memorizar π hasta el decimal 762 para poder recitar "nueve, nueve, nueve, nueve, nueve, nueve... y así sucesivamente", fingiendo que era racional.',
-      en: 'Feynman joked he wished to memorize π to decimal 762 so he could recite "nine, nine, nine, nine, nine, nine... and so on", pretending it was rational.',
-      author: 'Richard Feynman'
+      es: '«Ramanujan saltaba 8 decimales por paso con fórmulas soñadas en la India. En 1949, ENIAC devoró tarjetas perforadas durante 70 horas y pulverizó 4,000 años de historia humana.»',
+      en: '«Ramanujan leaped 8 decimals per step with dream-inspired formulas in India. In 1949, ENIAC chewed punched cards for 70 hours, pulverizing 4,000 years of human arithmetic.»',
+      author: 'Informe Balístico de Aberdeen'
     }
   },
   {
-    id: 'spigot',
+    id: 'cyber',
     sceneNumber: 9,
-    year: '1997 d.C.',
+    year: '1988 · Hackers',
+    location: 'Pasadena y Amsterdam',
     title: {
-      es: 'El Código en C de Dik Winter',
-      en: 'Dik Winter’s Circular C Spigot'
+      es: 'El Punto de Feynman y el Círculo en C',
+      en: 'The Feynman Point & The Circular C Code'
     },
     subtitle: {
-      es: '160 caracteres en forma de círculo que escupen infinito sin decimales flotantes',
-      en: '160 circle-shaped characters spitting infinity without floating point arithmetic'
+      es: 'La ilusión del decimal 762 (999999) y el Spigot de 160 caracteres',
+      en: 'The illusion at decimal 762 (999999) and the 160-char Spigot'
     },
-    discoverer: 'Dik T. Winter',
-    location: 'CWI Amsterdam',
-    decimalsCount: 'Dinámico',
-    piApproximation: 'Spigot Algorithm (Base mixta)',
+    precisionValue: '...999999... [Posición 762]',
     theme: 'cyber',
     quote: {
-      es: 'El algoritmo no necesita calcular los decimales anteriores con punto flotante: abre un grifo (spigot) y deja que los dígitos caigan gota a gota.',
-      en: 'The algorithm requires no previous floating point precision: it opens a spigot and lets digits drip one by one.',
-      author: 'Dik T. Winter'
+      es: '«"Nueve, nueve, nueve, nueve, nueve, nueve... y así sucesivamente". Por un instante fingió que π era racional, antes de que el código circular de Dik Winter demostrara que el infinito no tiene fin.»',
+      en: '«"Nine, nine, nine, nine, nine, nine... and so on". For one fleeting heartbeat he pretended π was rational, before Dik Winter’s circular code proved infinity has no end.»',
+      author: 'Richard Feynman & Dik T. Winter'
     }
   },
   {
-    id: 'library',
+    id: 'infinity',
     sceneNumber: 10,
-    year: 'Presente y Más Allá',
+    year: 'Presente · Cosmos',
+    location: '105 Billones de Dígitos & Tu Navegador',
     title: {
-      es: 'La Biblioteca de Infinitos',
-      en: 'The Library of Infinities'
+      es: '314 Billones de Dígitos y Tu Huella en π',
+      en: '314 Trillion Digits & Your Imprint in π'
     },
     subtitle: {
-      es: 'Toda tu vida está codificada en algún rincón de π',
-      en: 'Your entire existence is encoded somewhere within π'
+      es: 'Si π es normal, tu fecha de nacimiento ya estaba escrita antes de las estrellas',
+      en: 'If π is normal, your birthday was already inscribed before the stars existed'
     },
-    discoverer: 'Tú y el Cosmos',
-    location: '1,000,000 de dígitos en tu navegador',
-    decimalsCount: '1,000,000+',
-    piApproximation: '3.14159265358979323846...',
-    theme: 'obsidian',
+    precisionValue: '105,000,000,000,000+',
+    theme: 'infinity',
     quote: {
-      es: 'El círculo nunca se cierra, solo aumenta su resolución.',
-      en: 'The circle never closes; it only increases its resolution.',
+      es: '«No había opción salvo medir lo inconmensurable. El círculo nunca se cierra; solo aumenta nuestra resolución.»',
+      en: '«There was no choice but to measure the unmeasurable. The circle never closes; it only increases our resolution.»',
       author: 'pi-tribute.dev'
     }
   }
