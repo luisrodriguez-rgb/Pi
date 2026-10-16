@@ -1,0 +1,348 @@
+---
+import { MILESTONES } from '../../data/milestones';
+import { FORMULAS } from '../../data/formulas';
+import { type Locale } from '../../i18n';
+
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = 'es' } = Astro.props;
+const milestone = MILESTONES[8];
+const spigot = FORMULAS.dikWinterSpigot;
+---
+
+<section 
+  id="scene-9" 
+  class="scene" 
+  data-scene="spigot" 
+  data-year={milestone.year}
+  data-pi-value={milestone.piApproximation}
+  data-theme={milestone.theme}
+  data-scene-title={milestone.title[locale]}
+>
+  <div class="stage">
+    <!-- Narrative beats -->
+    <div class="narrative">
+      <div class="beat" data-beat="0.05-0.38">
+        <span class="scene-kicker">09 // AMSTERDAM, 1997 d.C.</span>
+        <h2 class="scene-title">{milestone.title[locale]}</h2>
+        <p class="beat-text">
+          {locale === 'es'
+            ? 'En 1997, Dik T. Winter escribió una de las obras de arte más célebres de la programación en C: un programa de exactamente 160 caracteres, formateado en su código fuente con la silueta de un círculo.'
+            : 'In 1997, Dik T. Winter composed one of the most revered masterpieces in C programming: a 160-character program formatted in source code as the physical silhouette of a circle.'}
+        </p>
+      </div>
+
+      <div class="beat" data-beat="0.42-0.95">
+        <span class="scene-kicker">09 // ARITMÉTICA DE BASE MIXTA</span>
+        <h2 class="scene-title">El Grifo que Gotea Infinito</h2>
+        <p class="beat-text">
+          {locale === 'es'
+            ? 'Cero punto flotante. Cero bibliotecas externas. Usando únicamente números enteros y una base mixta con denominadores impares (3, 5, 7, 9...), el algoritmo abre un "spigot" (grifo) y deja caer a π de 4 en 4 dígitos.'
+            : 'Zero floating-point numbers. Zero external libraries. Relying strictly on integer arithmetic and mixed-radix denominators (3, 5, 7, 9...), the algorithm opens a "spigot" dripping π in batches of 4 exact digits.'}
+        </p>
+      </div>
+    </div>
+
+    <!-- The Circular C Spigot Terminal Rig -->
+    <div class="spigot-rig" id="spigot-rig">
+      <div class="terminal-bar">
+        <div class="terminal-dots">
+          <span class="dot d-red"></span>
+          <span class="dot d-yellow"></span>
+          <span class="dot d-green"></span>
+        </div>
+        <span class="terminal-title">dik_winter_pi_circle.c — gcc -O3</span>
+        <span class="terminal-badge">IOCCC 1997</span>
+      </div>
+
+      <!-- Circular Source Code Listing -->
+      <div class="source-box">
+        <pre class="code-pre"><code>{spigot.lines.map((line, idx) => (
+          <div class="code-line" data-line={idx + 1}>
+            <span class="line-no">{idx + 1}</span>
+            <span class="line-code">{line}</span>
+          </div>
+        ))}</code></pre>
+      </div>
+
+      <!-- Live Terminal Output Console -->
+      <div class="console-box">
+        <div class="console-header">
+          <span class="console-prompt">$ ./a.out</span>
+          <span class="console-streaming" id="spigot-stream-status">STREAMING DIGITS (4-BY-4)</span>
+        </div>
+        <div class="console-output" id="spigot-output">
+          <span class="stream-chunk">3141</span>
+          <span class="stream-chunk">5926</span>
+          <span class="stream-chunk">5358</span>
+          <span class="stream-chunk">9793</span>
+          <span class="stream-chunk">2384</span>
+          <span class="stream-chunk">6264</span>
+          <span class="stream-chunk">3383</span>
+          <span class="stream-chunk">2795</span>
+          <span class="cursor-blink">█</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { soundEngine } from '../../scripts/audio';
+
+  const rig = document.getElementById('spigot-rig');
+  const codeLines = rig?.querySelectorAll<HTMLElement>('.code-line');
+  const chunks = rig?.querySelectorAll<HTMLElement>('.stream-chunk');
+
+  if (rig) {
+    const scene = rig.closest('[data-scene]') as HTMLElement | null;
+    let lastChunkIndex = -1;
+
+    window.addEventListener('scroll', () => {
+      if (!scene) return;
+      const p = parseFloat(getComputedStyle(scene).getPropertyValue('--p')) || 0;
+
+      // Highlight code line based on p
+      if (codeLines) {
+        const activeLineIndex = Math.min(3, Math.floor(p * 4));
+        codeLines.forEach((line, i) => {
+          line.classList.toggle('is-current', i === activeLineIndex);
+        });
+      }
+
+      // Stream chunks of digits
+      if (chunks) {
+        const visibleChunks = Math.min(chunks.length, Math.floor(p * (chunks.length + 1)));
+        chunks.forEach((chunk, i) => {
+          chunk.classList.toggle('is-visible', i < visibleChunks);
+        });
+
+        if (visibleChunks > lastChunkIndex && visibleChunks > 0) {
+          lastChunkIndex = visibleChunks;
+          soundEngine.playDigit(visibleChunks * 4);
+        }
+      }
+    }, { passive: true });
+  }
+</script>
+
+<style>
+  .scene {
+    height: 380vh;
+    position: relative;
+    --p: 0;
+  }
+
+  .stage {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: radial-gradient(circle at 50% 50%, #0d1a24 0%, #060c12 100%);
+    padding: 0 20px;
+  }
+
+  .narrative {
+    position: absolute;
+    top: 10vh;
+    max-width: 680px;
+    text-align: center;
+    pointer-events: none;
+    z-index: 5;
+  }
+
+  .beat {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0);
+    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+  }
+
+  .beat.is-active {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    pointer-events: auto;
+  }
+
+  .scene-kicker {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    color: #00e5ff;
+    display: inline-block;
+    margin-bottom: 6px;
+  }
+
+  .scene-title {
+    font-family: var(--font-serif);
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 400;
+    color: #fff;
+    margin: 0 0 10px;
+  }
+
+  .beat-text {
+    font-family: var(--font-sans);
+    font-size: clamp(0.9rem, 1.6vw, 1.05rem);
+    color: rgba(255, 255, 255, 0.75);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .spigot-rig {
+    position: relative;
+    margin-top: 19vh;
+    width: min(92vw, 760px);
+    background: rgba(10, 18, 26, 0.9);
+    border: 1px solid rgba(0, 229, 255, 0.25);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.8), inset 0 0 25px rgba(0, 229, 255, 0.05);
+    backdrop-filter: blur(12px);
+    z-index: 2;
+  }
+
+  .terminal-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 16px;
+    background: rgba(6, 12, 18, 0.95);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .terminal-dots {
+    display: flex;
+    gap: 6px;
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+  .d-red { background: #ff5f56; }
+  .d-yellow { background: #ffbd2e; }
+  .d-green { background: #27c93f; }
+
+  .terminal-title {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .terminal-badge {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: #00e5ff;
+    border: 1px solid rgba(0, 229, 255, 0.3);
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+
+  .source-box {
+    padding: 16px 20px;
+    background: #070e15;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .code-pre {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: clamp(0.7rem, 1.4vw, 0.88rem);
+    line-height: 1.6;
+    overflow-x: auto;
+  }
+
+  .code-line {
+    display: flex;
+    gap: 12px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+  }
+
+  .code-line.is-current {
+    background: rgba(0, 229, 255, 0.12);
+    box-shadow: inset 2px 0 0 #00e5ff;
+  }
+
+  .line-no {
+    color: rgba(255, 255, 255, 0.25);
+    user-select: none;
+    width: 16px;
+    text-align: right;
+  }
+
+  .line-code {
+    color: #c9d1d9;
+    white-space: pre;
+  }
+
+  .code-line.is-current .line-code {
+    color: #00e5ff;
+    text-shadow: 0 0 10px rgba(0, 229, 255, 0.4);
+  }
+
+  .console-box {
+    padding: 14px 20px;
+    background: #04080d;
+  }
+
+  .console-header {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    margin-bottom: 8px;
+  }
+
+  .console-prompt {
+    color: #27c93f;
+  }
+
+  .console-streaming {
+    color: rgba(0, 229, 255, 0.6);
+  }
+
+  .console-output {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 1.05rem;
+    color: #fff;
+    align-items: center;
+  }
+
+  .stream-chunk {
+    opacity: 0.15;
+    transition: opacity 0.2s ease, color 0.2s ease;
+  }
+
+  .stream-chunk.is-visible {
+    opacity: 1;
+    color: #00e5ff;
+    text-shadow: 0 0 8px rgba(0, 229, 255, 0.4);
+  }
+
+  .cursor-blink {
+    color: #00e5ff;
+    animation: blink-cur 0.8s infinite;
+  }
+
+  @keyframes blink-cur {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+</style>

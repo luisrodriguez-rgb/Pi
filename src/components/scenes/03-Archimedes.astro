@@ -1,0 +1,132 @@
+---
+import { MILESTONES } from '../../data/milestones';
+import ArchimedesRig from '../ArchimedesRig.astro';
+import { type Locale } from '../../i18n';
+
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = 'es' } = Astro.props;
+const milestone = MILESTONES[2];
+---
+
+<section 
+  id="scene-3" 
+  class="scene" 
+  data-scene="archimedes" 
+  data-year={milestone.year}
+  data-pi-value={milestone.piApproximation}
+  data-theme={milestone.theme}
+  data-scene-title={milestone.title[locale]}
+>
+  <div class="stage">
+    <!-- Narrative beats -->
+    <div class="narrative">
+      <div class="beat" data-beat="0.05-0.38">
+        <span class="scene-kicker">03 // SIRACUSA, 250 a.C.</span>
+        <h2 class="scene-title">{milestone.title[locale]}</h2>
+        <p class="beat-text">
+          {locale === 'es'
+            ? 'Arquímedes se dio cuenta de que no podía medir la curva directamente. Así que construyó una trampa matemática: dos polígonos regulares que encierran al círculo desde dentro y desde fuera.'
+            : 'Archimedes realized he could not measure the curve directly. So he devised a mathematical trap: two regular polygons boxing in the circle from within and without.'}
+        </p>
+      </div>
+
+      <div class="beat" data-beat="0.42-0.95">
+        <span class="scene-kicker">03 // EL MÉTODO DEL AGOTAMIENTO</span>
+        <h2 class="scene-title">Duplicación al Límite: 96 Lados</h2>
+        <p class="beat-text">
+          {locale === 'es'
+            ? 'Duplicó los lados cuatro veces sucesivas: 6 → 12 → 24 → 48 → 96 lados. Al llegar a 96 lados, la brecha se redujo a menos de 0.002. π quedó irreversiblemente acorralado entre 223/71 y 22/7.'
+            : 'He doubled the sides four times successively: 6 → 12 → 24 → 48 → 96 sides. At 96 sides, the margin narrowed under 0.002. π was irreversibly cornered between 223/71 and 22/7.'}
+        </p>
+      </div>
+    </div>
+
+    <!-- Archimedes Interactive Rig -->
+    <div class="rig-wrapper">
+      <ArchimedesRig />
+    </div>
+  </div>
+</section>
+
+<style>
+  .scene {
+    height: 380vh;
+    position: relative;
+    --p: 0;
+  }
+
+  .stage {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: radial-gradient(circle at 50% 50%, #151821 0%, #090a0e 100%);
+    padding: 0 20px;
+  }
+
+  .narrative {
+    position: absolute;
+    top: 10vh;
+    max-width: 680px;
+    text-align: center;
+    pointer-events: none;
+    z-index: 5;
+  }
+
+  .beat {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0);
+    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+  }
+
+  .beat.is-active {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    pointer-events: auto;
+  }
+
+  .scene-kicker {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    color: #ff9d00;
+    display: inline-block;
+    margin-bottom: 6px;
+  }
+
+  .scene-title {
+    font-family: var(--font-serif);
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 400;
+    color: #fff;
+    margin: 0 0 10px;
+  }
+
+  .beat-text {
+    font-family: var(--font-sans);
+    font-size: clamp(0.9rem, 1.6vw, 1.05rem);
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .rig-wrapper {
+    margin-top: 15vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    z-index: 2;
+  }
+</style>

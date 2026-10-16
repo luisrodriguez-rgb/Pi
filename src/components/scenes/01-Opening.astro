@@ -1,0 +1,208 @@
+---
+import { MILESTONES } from '../../data/milestones';
+import { UI_STRINGS, type Locale } from '../../i18n';
+
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = 'es' } = Astro.props;
+const milestone = MILESTONES[0];
+const t = UI_STRINGS[locale];
+---
+
+<section 
+  id="scene-1" 
+  class="scene" 
+  data-scene="opening" 
+  data-year={milestone.year}
+  data-pi-value={milestone.piApproximation}
+  data-theme={milestone.theme}
+  data-scene-title={milestone.title[locale]}
+>
+  <div class="stage">
+    <!-- Canvas for particle circle morphing -->
+    <canvas id="circle-morph-canvas" class="morph-canvas"></canvas>
+
+    <!-- Center Narrative Overlay -->
+    <div class="narrative-center">
+      <div class="beat beat-initial" data-beat="0.00-0.35">
+        <span class="scene-kicker">01 // INTRODUCCIÓN</span>
+        <h1 class="hero-title">{milestone.title[locale]}</h1>
+        <p class="hero-subtitle">{milestone.subtitle[locale]}</p>
+        <div class="scroll-cue">
+          <span class="mouse-icon"></span>
+          <span class="cue-text">{t.scrollPrompt}</span>
+        </div>
+      </div>
+
+      <div class="beat beat-quote" data-beat="0.45-0.95">
+        <blockquote class="galileo-quote">
+          <p>«{milestone.quote?.[locale]}»</p>
+          <cite>— {milestone.quote?.author}</cite>
+        </blockquote>
+        <div class="pi-symbol-large">π</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { CircleMorphVisualizer } from '../../scripts/circle-morph';
+
+  const canvas = document.getElementById('circle-morph-canvas') as HTMLCanvasElement | null;
+  if (canvas) {
+    new CircleMorphVisualizer(canvas);
+  }
+</script>
+
+<style>
+  .scene {
+    height: 350vh;
+    position: relative;
+    --p: 0;
+  }
+
+  .stage {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    background: radial-gradient(circle at center, #11141c 0%, #08090c 100%);
+  }
+
+  .morph-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .narrative-center {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 680px;
+    padding: 0 24px;
+    pointer-events: none;
+  }
+
+  .beat {
+    opacity: 0;
+    transform: translate3d(0, 20px, 0);
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%) translate3d(0, 20px, 0);
+  }
+
+  .beat.is-active {
+    opacity: 1;
+    transform: translateY(-50%) translate3d(0, 0, 0);
+    pointer-events: auto;
+  }
+
+  .scene-kicker {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    color: #ffd000;
+    display: inline-block;
+    margin-bottom: 12px;
+  }
+
+  .hero-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 400;
+    line-height: 1.1;
+    color: #f7f9fa;
+    margin: 0 0 16px;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+  }
+
+  .hero-subtitle {
+    font-family: var(--font-sans);
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: rgba(255, 255, 255, 0.65);
+    margin: 0 0 32px;
+    line-height: 1.5;
+  }
+
+  .scroll-cue {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0.8;
+    animation: bounce 2s infinite;
+  }
+
+  .mouse-icon {
+    width: 22px;
+    height: 36px;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-radius: 12px;
+    position: relative;
+  }
+
+  .mouse-icon::after {
+    content: '';
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 3px;
+    height: 6px;
+    background: #ffd000;
+    border-radius: 2px;
+  }
+
+  .cue-text {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.5);
+    letter-spacing: 0.05em;
+  }
+
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(6px); }
+    60% { transform: translateY(3px); }
+  }
+
+  .galileo-quote {
+    font-family: var(--font-serif);
+    font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+    font-style: italic;
+    color: #e2e8f0;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .galileo-quote cite {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-style: normal;
+    color: #ffd700;
+    margin-top: 16px;
+    letter-spacing: 0.05em;
+  }
+
+  .pi-symbol-large {
+    font-family: var(--font-serif);
+    font-size: clamp(5rem, 12vw, 8rem);
+    color: rgba(255, 208, 0, 0.15);
+    margin-top: 20px;
+    user-select: none;
+    text-shadow: 0 0 30px rgba(255, 208, 0, 0.2);
+  }
+</style>

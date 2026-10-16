@@ -1,0 +1,456 @@
+---
+import { MILESTONES } from '../../data/milestones';
+import { UI_STRINGS, type Locale } from '../../i18n';
+
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = 'es' } = Astro.props;
+const milestone = MILESTONES[9];
+const t = UI_STRINGS[locale];
+---
+
+<section 
+  id="scene-10" 
+  class="scene" 
+  data-scene="library" 
+  data-year={milestone.year}
+  data-pi-value={milestone.piApproximation}
+  data-theme={milestone.theme}
+  data-scene-title={milestone.title[locale]}
+>
+  <div class="stage">
+    <!-- Narrative beats -->
+    <div class="narrative">
+      <div class="beat" data-beat="0.05-0.35">
+        <span class="scene-kicker">10 // EL HORIZONTE DEL INFINITO</span>
+        <h2 class="scene-title">{milestone.title[locale]}</h2>
+        <p class="beat-text">
+          {locale === 'es'
+            ? 'Si π es un número normal —como todos los indicios matemáticos sugieren—, contiene en su secuencia infinita cualquier combinación finita de dígitos que puedas concebir.'
+            : 'If π is a normal number —as all mathematical evidence strongly suggests—, it harbors somewhere within its infinite stream every finite sequence of digits you can conceive.'}
+        </p>
+      </div>
+
+      <div class="beat" data-beat="0.38-0.75">
+        <span class="scene-kicker">10 // TU EXISTENCIA CODIFICADA</span>
+        <h2 class="scene-title">{t.searchTitle}</h2>
+        <p class="beat-text">
+          {locale === 'es'
+            ? 'Tu fecha de nacimiento, el número de teléfono de tu infancia, el año en que nació la persona que amas. Todo ya estaba esperando en el tejido de π antes de que existieran las estrellas.'
+            : 'Your birthday, your childhood phone number, the year your loved one was born. All were already etched into the fabric of π before the stars ever shone.'}
+        </p>
+      </div>
+
+      <div class="beat beat-closing" data-beat="0.80-0.98">
+        <div class="closing-card">
+          <blockquote class="closing-quote">
+            «{t.closingQuote}»
+          </blockquote>
+          <div class="closing-author">— pi-tribute.dev</div>
+          <p class="closing-sub">
+            {locale === 'es' 
+              ? 'De medir cuerdas en la arena de Babilonia a calcular 105 billones de decimales con supercomputadoras. El viaje del ser humano contra el infinito apenas comienza.'
+              : 'From measuring ropes in Babylonian sands to calculating 105 trillion decimals with supercomputers. Humanity’s quest against infinity has only just begun.'}
+          </p>
+          <div class="closing-actions">
+            <a href="#scene-1" class="btn-restart">
+              <span>↑</span> {locale === 'es' ? 'Volver al principio' : 'Return to beginning'}
+            </a>
+          </div>
+          <footer class="closing-credits">
+            <span>{t.credits}</span>
+          </footer>
+        </div>
+      </div>
+    </div>
+
+    <!-- The 1-Million Digits Live Search Rig -->
+    <div class="search-rig" id="search-rig">
+      <div class="search-box">
+        <div class="search-input-wrap">
+          <input 
+            type="text" 
+            id="pi-search-input" 
+            placeholder={t.searchPlaceholder}
+            maxlength="16"
+            autocomplete="off"
+            class="pi-input"
+          />
+          <button type="button" id="pi-search-btn" class="pi-btn">
+            {t.searchBtn}
+          </button>
+        </div>
+
+        <!-- Result Card -->
+        <div class="search-result" id="search-result" style="display: none;">
+          <div class="result-status" id="result-status"></div>
+          <div class="result-snippet" id="result-snippet"></div>
+        </div>
+
+        <div class="search-hint">
+          <span>{locale === 'es' ? 'Dataset cargado: 1,000,000 de dígitos reales de π' : 'Dataset loaded: 1,000,000 actual digits of π'}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { soundEngine } from '../../scripts/audio';
+
+  const input = document.getElementById('pi-search-input') as HTMLInputElement | null;
+  const btn = document.getElementById('pi-search-btn');
+  const resultBox = document.getElementById('search-result');
+  const resultStatus = document.getElementById('result-status');
+  const resultSnippet = document.getElementById('result-snippet');
+
+  let piDigits: string | null = null;
+  let isLoading = false;
+
+  async function loadDigits() {
+    if (piDigits || isLoading) return;
+    isLoading = true;
+    try {
+      const res = await fetch('/digits/pi-1m.txt');
+      const text = await res.text();
+      // Remove any whitespace or header
+      piDigits = text.replace(/[^0-9]/g, '');
+    } catch (e) {
+      console.error('Failed to load pi digits:', e);
+    } finally {
+      isLoading = false;
+    }
+  }
+
+  // Preload digits when user scrolls near scene 10 or focuses input
+  input?.addEventListener('focus', loadDigits);
+  window.addEventListener('pi-scene-change', (e: any) => {
+    if (e.detail?.sceneId === 'library' || e.detail?.sceneNumber >= 8) {
+      loadDigits();
+    }
+  });
+
+  function performSearch() {
+    if (!input || !resultBox || !resultStatus || !resultSnippet) return;
+    const query = input.value.replace(/[^0-9]/g, '');
+
+    if (!query || query.length < 2) {
+      resultBox.style.display = 'block';
+      resultStatus.innerHTML = '<span class="status-warn">Por favor ingresa al menos 2 números.</span>';
+      resultSnippet.innerHTML = '';
+      return;
+    }
+
+    if (!piDigits) {
+      resultBox.style.display = 'block';
+      resultStatus.innerHTML = '<span class="status-loading">Cargando 1,000,000 de dígitos de π en memoria...</span>';
+      loadDigits().then(() => performSearch());
+      return;
+    }
+
+    // Search query in pi stream (after 3.)
+    const idx = piDigits.indexOf(query);
+
+    resultBox.style.display = 'block';
+    if (idx !== -1) {
+      soundEngine.playFeynmanResolution();
+
+      // Show context
+      const start = Math.max(0, idx - 15);
+      const end = Math.min(piDigits.length, idx + query.length + 15);
+
+      const before = piDigits.slice(start, idx);
+      const match = piDigits.slice(idx, idx + query.length);
+      const after = piDigits.slice(idx + query.length, end);
+
+      resultStatus.innerHTML = `
+        <span class="status-success">
+          ★ ¡ENCONTRADO EN LA POSICIÓN <strong>#${idx.toLocaleString()}</strong> de π!
+        </span>
+      `;
+
+      resultSnippet.innerHTML = `
+        <div class="snippet-box">
+          <span class="snip-dim">...${before}</span>
+          <span class="snip-match">${match}</span>
+          <span class="snip-dim">${after}...</span>
+        </div>
+      `;
+    } else {
+      soundEngine.playDigit(1);
+      resultStatus.innerHTML = `
+        <span class="status-not-found">
+          No apareció dentro del primer millón de dígitos. ¡Prueba con menos dígitos (ej: DDMM o los últimos 4 dígitos)!
+        </span>
+      `;
+      resultSnippet.innerHTML = '';
+    }
+  }
+
+  btn?.addEventListener('click', performSearch);
+  input?.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') performSearch();
+  });
+</script>
+
+<style>
+  .scene {
+    height: 380vh;
+    position: relative;
+    --p: 0;
+  }
+
+  .stage {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: radial-gradient(circle at 50% 50%, #151322 0%, #090710 100%);
+    padding: 0 20px;
+  }
+
+  .narrative {
+    position: absolute;
+    top: 10vh;
+    max-width: 680px;
+    text-align: center;
+    pointer-events: none;
+    z-index: 5;
+  }
+
+  .beat {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0);
+    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+  }
+
+  .beat.is-active {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    pointer-events: auto;
+  }
+
+  .scene-kicker {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    color: #a78bfa;
+    display: inline-block;
+    margin-bottom: 6px;
+  }
+
+  .scene-title {
+    font-family: var(--font-serif);
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 400;
+    color: #fff;
+    margin: 0 0 10px;
+  }
+
+  .beat-text {
+    font-family: var(--font-sans);
+    font-size: clamp(0.9rem, 1.6vw, 1.05rem);
+    color: rgba(255, 255, 255, 0.75);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .search-rig {
+    position: relative;
+    margin-top: 18vh;
+    width: min(92vw, 680px);
+    z-index: 6;
+  }
+
+  .search-box {
+    background: rgba(18, 16, 30, 0.85);
+    border: 1px solid rgba(167, 139, 250, 0.25);
+    border-radius: 16px;
+    padding: 24px;
+    backdrop-filter: blur(14px);
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.8), inset 0 0 20px rgba(167, 139, 250, 0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .search-input-wrap {
+    display: flex;
+    gap: 10px;
+  }
+
+  .pi-input {
+    flex: 1;
+    background: rgba(0, 0, 0, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    padding: 12px 18px;
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    color: #fff;
+    outline: none;
+    transition: border-color 0.2s ease;
+  }
+
+  .pi-input:focus {
+    border-color: #ffd700;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+  }
+
+  .pi-btn {
+    background: linear-gradient(135deg, #ffd700, #ff9d00);
+    border: none;
+    border-radius: 10px;
+    padding: 12px 20px;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #0b0c10;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .pi-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
+  }
+
+  .search-result {
+    padding: 14px;
+    background: rgba(0, 0, 0, 0.35);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .result-status {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    margin-bottom: 8px;
+  }
+
+  :global(.status-success) {
+    color: #00ffcc;
+  }
+  :global(.status-warn) {
+    color: #ffbd2e;
+  }
+  :global(.status-not-found) {
+    color: #ff5f56;
+  }
+  :global(.status-loading) {
+    color: #ffd700;
+  }
+
+  :global(.snippet-box) {
+    font-family: var(--font-mono);
+    font-size: 1.1rem;
+    padding: 8px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+  }
+
+  :global(.snip-dim) {
+    color: rgba(255, 255, 255, 0.35);
+  }
+
+  :global(.snip-match) {
+    color: #ffd700;
+    font-weight: 700;
+    background: rgba(255, 215, 0, 0.15);
+    padding: 2px 6px;
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+  }
+
+  .search-hint {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.4);
+    text-align: center;
+  }
+
+  /* Closing card */
+  .closing-card {
+    background: rgba(14, 16, 22, 0.9);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    border-radius: 20px;
+    padding: 32px 30px;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(16px);
+  }
+
+  .closing-quote {
+    font-family: var(--font-serif);
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-style: italic;
+    color: #ffd700;
+    line-height: 1.4;
+    margin: 0 0 12px;
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+  }
+
+  .closing-author {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 20px;
+  }
+
+  .closing-sub {
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.6;
+    margin: 0 0 24px;
+  }
+
+  .btn-restart {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 25px;
+    padding: 10px 24px;
+    color: #fff;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .btn-restart:hover {
+    background: rgba(255, 215, 0, 0.15);
+    border-color: #ffd700;
+    color: #ffd700;
+    transform: translateY(-2px);
+  }
+
+  .closing-credits {
+    margin-top: 24px;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.35);
+  }
+
+  @media (max-width: 600px) {
+    .search-input-wrap {
+      flex-direction: column;
+    }
+  }
+</style>

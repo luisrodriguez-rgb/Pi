@@ -1,0 +1,215 @@
+---
+import { MILESTONES } from '../../data/milestones';
+import { type Locale } from '../../i18n';
+
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = 'es' } = Astro.props;
+const milestone = MILESTONES[4];
+---
+
+<section 
+  id="scene-5" 
+  class="scene" 
+  data-scene="buffon" 
+  data-year={milestone.year}
+  data-pi-value={milestone.piApproximation}
+  data-theme={milestone.theme}
+  data-scene-title={milestone.title[locale]}
+>
+  <div class="stage">
+    <!-- Narrative beats -->
+    <div class="narrative">
+      <div class="beat" data-beat="0.05-0.38">
+        <span class="scene-kicker">05 // PARÍS, 1777 d.C.</span>
+        <h2 class="scene-title">{milestone.title[locale]}</h2>
+        <p class="beat-text">
+          {locale === 'es'
+            ? 'El Conde de Buffon descubrió que la probabilidad geométrica puede calcular constantes del universo. Si lanzas agujas de longitud L sobre un suelo con tablas separadas por distancia D...'
+            : 'The Count of Buffon revealed that geometric probability can compute cosmic constants. If you drop needles of length L onto a floor with parallel boards spaced by distance D...'}
+        </p>
+      </div>
+
+      <div class="beat" data-beat="0.42-0.95">
+        <span class="scene-kicker">05 // EL AZAR REVELA A PI</span>
+        <h2 class="scene-title">La Fórmula que Emerge del Caos</h2>
+        <p class="beat-text">
+          {locale === 'es'
+            ? 'La probabilidad de que una aguja cruce una grieta es exactamente 2L / (π · D). Con L = D/2, basta dividir las agujas totales entre los cruces para ver a π converger en vivo.'
+            : 'The probability of a needle crossing a seam is precisely 2L / (π · D). With L = D/2, simply dividing total needles by crossings reveals π converging in real time.'}
+        </p>
+      </div>
+    </div>
+
+    <!-- Live Buffon Math Dashboard -->
+    <div class="buffon-dashboard">
+      <div class="stat-pill">
+        <span class="stat-lbl">AGUJAS CAÍDAS (N):</span>
+        <strong id="buffon-total" class="stat-val">0</strong>
+      </div>
+      <div class="stat-pill">
+        <span class="stat-lbl">CRUCES DE LÍNEA (C):</span>
+        <strong id="buffon-cross" class="stat-val stat-cyan">0</strong>
+      </div>
+      <div class="stat-pill stat-highlight">
+        <span class="stat-lbl">ESTIMACIÓN π ≈ N / C:</span>
+        <strong id="buffon-pi-val" class="stat-val stat-gold">---</strong>
+      </div>
+    </div>
+
+    <!-- Interactive Canvas for falling needles -->
+    <div class="canvas-container">
+      <canvas id="buffon-canvas" class="buffon-canvas"></canvas>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { BuffonSimulation } from '../../scripts/buffon';
+
+  const canvas = document.getElementById('buffon-canvas') as HTMLCanvasElement | null;
+  if (canvas) {
+    new BuffonSimulation(canvas);
+  }
+</script>
+
+<style>
+  .scene {
+    height: 380vh;
+    position: relative;
+    --p: 0;
+  }
+
+  .stage {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: radial-gradient(circle at 50% 50%, #15161c 0%, #090a0d 100%);
+    padding: 0 20px;
+  }
+
+  .narrative {
+    position: absolute;
+    top: 10vh;
+    max-width: 660px;
+    text-align: center;
+    pointer-events: none;
+    z-index: 5;
+  }
+
+  .beat {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0);
+    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+  }
+
+  .beat.is-active {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    pointer-events: auto;
+  }
+
+  .scene-kicker {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    color: #00ffcc;
+    display: inline-block;
+    margin-bottom: 6px;
+  }
+
+  .scene-title {
+    font-family: var(--font-serif);
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 400;
+    color: #fff;
+    margin: 0 0 10px;
+  }
+
+  .beat-text {
+    font-family: var(--font-sans);
+    font-size: clamp(0.9rem, 1.6vw, 1.05rem);
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .buffon-dashboard {
+    position: absolute;
+    top: 25vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    z-index: 6;
+  }
+
+  .stat-pill {
+    background: rgba(18, 22, 28, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 6px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    backdrop-filter: blur(8px);
+  }
+
+  .stat-highlight {
+    border-color: rgba(255, 208, 0, 0.3);
+    background: rgba(28, 25, 18, 0.85);
+  }
+
+  .stat-lbl {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: rgba(255, 255, 255, 0.5);
+    letter-spacing: 0.08em;
+  }
+
+  .stat-val {
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    color: #fff;
+  }
+
+  .stat-cyan {
+    color: #00ffcc;
+  }
+
+  .stat-gold {
+    color: #ffd700;
+    text-shadow: 0 0 8px rgba(255, 215, 0, 0.4);
+  }
+
+  .canvas-container {
+    position: relative;
+    width: min(92vw, 760px);
+    height: 380px;
+    margin-top: 14vh;
+    border-radius: 16px;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    overflow: hidden;
+    background: #111318;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+    z-index: 2;
+  }
+
+  .buffon-canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+</style>
