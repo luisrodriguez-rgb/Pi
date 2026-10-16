@@ -1,5 +1,6 @@
 ---
 import { MILESTONES } from '../../data/milestones';
+import SceneVideo from '../SceneVideo.astro';
 import { type Locale } from '../../i18n';
 
 interface Props {
@@ -20,6 +21,14 @@ const milestone = MILESTONES[5];
   data-scene-title={milestone.title[locale]}
 >
   <div class="stage">
+    <!-- Cinematic Atmospheric Video Background (Versailles French Oak Parquet & Sunlight) -->
+    <SceneVideo 
+      src="/videos/06-buffon.mp4" 
+      poster="/images/06-buffon.jpg" 
+      blend="normal" 
+      opacity={0.38} 
+    />
+
     <!-- Narrative Header (Uncollapsible, balanced typography positioned cleanly above rig) -->
     <div class="narrative">
       <div class="beat" data-beat="0.05-0.38">
@@ -211,7 +220,8 @@ const milestone = MILESTONES[5];
   .canvas-container {
     width: 100%;
     height: 200px;
-    background: radial-gradient(circle at 50% 50%, #201b16 0%, #100d0b 100%);
+    background: rgba(16, 12, 8, 0.55);
+    backdrop-filter: blur(3px);
     display: flex;
     justify-content: center;
     align-items: center;
