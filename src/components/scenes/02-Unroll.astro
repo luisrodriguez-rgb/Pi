@@ -1,6 +1,7 @@
 ---
 import { MILESTONES } from '../../data/milestones';
 import ArchimedesRig from '../ArchimedesRig.astro';
+import SceneVideo from '../SceneVideo.astro';
 import { type Locale } from '../../i18n';
 
 interface Props {
@@ -21,6 +22,14 @@ const milestone = MILESTONES[1];
   data-scene-title={milestone.title[locale]}
 >
   <div class="stage">
+    <!-- Cinematic Atmospheric Video Background (Google Flow / Veo) -->
+    <SceneVideo 
+      src="/videos/02-syracuse.mp4" 
+      poster="/images/02-syracuse.jpg" 
+      blend="screen" 
+      opacity={0.45} 
+    />
+
     <!-- Bloodied Sand and Halftone Stone Backdrop -->
     <div class="syracuse-bg">
       <div class="roman-sword-slash"></div>
