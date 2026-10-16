@@ -1,5 +1,6 @@
 ---
 import { MILESTONES } from '../../data/milestones';
+import SceneVideo from '../SceneVideo.astro';
 import { type Locale } from '../../i18n';
 
 interface Props {
@@ -21,6 +22,15 @@ const vanCeulenDigits = '3.14159265358979323846264338327950288'.split('');
   data-scene-title={milestone.title[locale]}
 >
   <div class="stage">
+    <!-- Cinematic Atmospheric Video Background (Google Flow / Veo) -->
+    <SceneVideo 
+      src="/videos/04-leiden.mp4" 
+      poster="/images/04-leiden.jpg" 
+      blend="lighten" 
+      focalPoint="center 55%" 
+      opacity={0.60} 
+    />
+
     <!-- Crossed Fencing Rapiers fading as p increases -->
     <div class="fencing-swords">
       <div class="rapier rapier-left"></div>
@@ -306,12 +316,13 @@ const vanCeulenDigits = '3.14159265358979323846264338327950288'.split('');
     position: relative;
     margin-top: 0;
     width: min(90vw, 560px);
-    background: #111317;
+    background: rgba(18, 20, 18, 0.45);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
     background-image: 
-      radial-gradient(circle 380px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(230, 194, 128, 0.16) 0%, transparent 100%),
-      radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-      linear-gradient(180deg, #181b21 0%, #0c0e12 100%);
-    background-size: 100% 100%, 16px 16px, 100% 100%;
+      radial-gradient(circle 380px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(230, 194, 128, 0.22) 0%, transparent 100%),
+      radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 100% 100%, 16px 16px;
     border: 1px solid rgba(230, 194, 128, 0.35);
     border-radius: 40px 40px 0 0;
     padding: 26px 26px 20px;
