@@ -1,0 +1,74 @@
+---
+// BambooRods.astro - Ancient Chinese Suànchóu (Counting Rods) Representation of 355/113
+---
+
+<div class="bamboo-rods-container">
+  <!-- Varillas de cálculo reales de la Dinastía Liu Song para 355 / 113 -->
+  <svg viewBox="0 0 500 220" class="artifact-svg bamboo-svg" aria-label="Varillas de cálculo chinas para 355/113">
+    <!-- Marco técnico de museo en bronce y laca -->
+    <rect x="1" y="1" width="498" height="218" fill="#14110e" stroke="#8c6d46" stroke-opacity="0.5" stroke-width="1" />
+    
+    <!-- NUMERADOR: 355 (Centenas: 3 verticales | Decenas: 5 horizontales | Unidades: 5 verticales) -->
+    <g transform="translate(60, 25)" stroke="#e6d7b9" stroke-width="5" stroke-linecap="square">
+      <!-- 3 (Centenas: III) -->
+      <line x1="10" y1="0" x2="10" y2="55" />
+      <line x1="25" y1="0" x2="25" y2="55" />
+      <line x1="40" y1="0" x2="40" y2="55" />
+      
+      <!-- 5 (Decenas: ≡ en cinabrio rojo) -->
+      <g stroke="#d94e28" transform="translate(85, 0)">
+        <line x1="0" y1="5"  x2="50" y2="5" />
+        <line x1="0" y1="17" x2="50" y2="17" />
+        <line x1="0" y1="29" x2="50" y2="29" />
+        <line x1="0" y1="41" x2="50" y2="41" />
+        <line x1="0" y1="53" x2="50" y2="53" />
+      </g>
+
+      <!-- 5 (Unidades: IIIII) -->
+      <g transform="translate(175, 0)">
+        <line x1="0"  y1="0" x2="0"  y2="55" />
+        <line x1="13" y1="0" x2="13" y2="55" />
+        <line x1="26" y1="0" x2="26" y2="55" />
+        <line x1="39" y1="0" x2="39" y2="55" />
+        <line x1="52" y1="0" x2="52" y2="55" />
+      </g>
+      <text x="255" y="35" fill="#e6d7b9" stroke="none" font-family="'B612 Mono', monospace" font-size="13" opacity="0.75">← 355 [密率 NUM]</text>
+    </g>
+
+    <!-- Barra divisoria de bambú rojo lacado -->
+    <line x1="40" y1="110" x2="460" y2="110" stroke="#d94e28" stroke-width="2" stroke-dasharray="6,4" />
+
+    <!-- DENOMINADOR: 113 (Centenas: 1 vertical | Decenas: 1 horizontal | Unidades: 3 verticales) -->
+    <g transform="translate(60, 135)" stroke="#e6d7b9" stroke-width="5" stroke-linecap="square">
+      <!-- 1 (Centena: I) -->
+      <line x1="25" y1="0" x2="25" y2="55" />
+      
+      <!-- 1 (Decena: —) -->
+      <line x1="85" y1="28" x2="135" y2="28" stroke="#d94e28" />
+
+      <!-- 3 (Unidades: III) -->
+      <g transform="translate(185, 0)">
+        <line x1="0"  y1="0" x2="0"  y2="55" />
+        <line x1="18" y1="0" x2="18" y2="55" />
+        <line x1="36" y1="0" x2="36" y2="55" />
+      </g>
+      <text x="255" y="35" fill="#e6d7b9" stroke="none" font-family="'B612 Mono', monospace" font-size="13" opacity="0.75">← 113 [密率 DEN]</text>
+    </g>
+  </svg>
+</div>
+
+<style>
+  .bamboo-rods-container {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    border: 1px solid var(--grid-line);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  }
+
+  .bamboo-svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+</style>
