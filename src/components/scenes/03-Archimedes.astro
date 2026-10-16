@@ -2,6 +2,7 @@
 import { MILESTONES } from '../../data/milestones';
 import { type Locale } from '../../i18n';
 import BambooRods from '../BambooRods.astro';
+import SceneVideo from '../SceneVideo.astro';
 
 interface Props {
   locale?: Locale;
@@ -21,6 +22,14 @@ const milestone = MILESTONES[2];
   data-scene-title={milestone.title[locale]}
 >
   <div class="stage">
+    <!-- Cinematic Atmospheric Video Background (Google Flow / Veo) -->
+    <SceneVideo 
+      src="/videos/03-bamboo.mp4" 
+      poster="/images/03-bamboo.jpg" 
+      blend="lighten" 
+      opacity={0.50} 
+    />
+
     <!-- Narrative Header (Positioned cleanly above the Chinese calculation rig) -->
     <div class="narrative">
       <div class="beat" data-beat="0.05-0.38">
@@ -191,6 +200,10 @@ const milestone = MILESTONES[2];
     width: 100%;
     padding: 12px 18px;
     gap: 12px;
+    background: rgba(13, 19, 16, 0.65) !important;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-radius: 0 !important;
   }
 
   .math-col {
