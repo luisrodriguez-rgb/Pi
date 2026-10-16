@@ -1,6 +1,7 @@
 ---
 import { MILESTONES } from '../../data/milestones';
 import { type Locale } from '../../i18n';
+import BambooRods from '../BambooRods.astro';
 
 interface Props {
   locale?: Locale;
@@ -20,17 +21,7 @@ const milestone = MILESTONES[2];
   data-scene-title={milestone.title[locale]}
 >
   <div class="stage">
-    <!-- Bamboo Rods & Silk Ink Texture Backdrop -->
-    <div class="china-backdrop">
-      <div class="bamboo-matrix" id="bamboo-matrix">
-        <!-- 30 visual counting rods that reorient with scroll -->
-        {Array.from({ length: 28 }).map((_, i) => (
-          <div class="bamboo-rod" style={`--i: ${i};`}></div>
-        ))}
-      </div>
-    </div>
-
-    <!-- Narrative Center (Uncollapsible, beautiful text flow) -->
+    <!-- Narrative Header (Positioned cleanly above the Chinese calculation rig) -->
     <div class="narrative">
       <div class="beat" data-beat="0.05-0.38">
         <span class="scene-kicker">03 // JIANKANG, 480 d.C. · CHINA</span>
@@ -60,29 +51,39 @@ const milestone = MILESTONES[2];
       </div>
     </div>
 
-    <!-- The 24,576-Sided Rim Zoom and Milü Fraction Card -->
-    <div class="milu-rig">
-      <div class="milu-card">
-        <span class="milu-label">FRACCIÓN SAGRADA MILÜ (密率)</span>
-        <div class="milu-fraction">
-          <span class="m-num">355</span>
-          <span class="m-line"></span>
-          <span class="m-den">113</span>
-        </div>
-        <div class="milu-decimal">
-          <span>=</span> <strong>3.14159292...</strong>
-        </div>
-        <span class="milu-accuracy">¡7 decimales exactos en el siglo V!</span>
+    <!-- Archimedes Gold Standard Technical Panel (Zero SaaS border-radius) -->
+    <div class="china-rig">
+      <!-- Museum Catalog Technical Plate -->
+      <div class="museum-plate">
+        [ FIG. 03 // JIANKANG, 480 d.C. — SU CHÓU (VARILLAS DE BAMBÚ) — PRECISIÓN: 10⁻⁷ ]
       </div>
 
-      <!-- Microscopic Facets Visualizer -->
-      <div class="facets-microscope">
-        <svg viewBox="0 0 400 120" class="facets-svg">
-          <path d="M 0,60 Q 200,58 400,60" fill="none" stroke="#2a9d8f" stroke-width="3" stroke-dasharray="1.5,1.5"/>
-          <text x="200" y="95" font-family="'JetBrains Mono', monospace" font-size="11" fill="rgba(42,157,143,0.8)" text-anchor="middle">
-            FACETAS DE 24,576 LADOS (LONGITUD &lt; 0.0001R)
-          </text>
-        </svg>
+      <!-- Live Suànchóu Ancient Rod Visualizer -->
+      <BambooRods />
+
+      <!-- Architectural Technical Breakdown Panel -->
+      <div class="math-panel blueprint-panel">
+        <div class="math-col">
+          <span class="col-title">FRACCIÓN SAGRADA MILÜ (密率)</span>
+          <span class="col-formula tabular">355 / 113</span>
+          <strong class="col-val tabular">355 / 113</strong>
+        </div>
+
+        <div class="math-divider"></div>
+
+        <div class="math-col">
+          <span class="col-title">VALOR DECIMAL OBTENIDO</span>
+          <span class="col-formula tabular">7 cifras exactas</span>
+          <strong class="col-val col-accent tabular">3.14159292...</strong>
+        </div>
+
+        <div class="math-divider"></div>
+
+        <div class="math-col">
+          <span class="col-title">FACETAS DEL POLÍGONO</span>
+          <span class="col-formula tabular">n = 24,576</span>
+          <strong class="col-val tabular">Error &lt; 0.0000003</strong>
+        </div>
       </div>
     </div>
   </div>
@@ -103,190 +104,138 @@ const milestone = MILESTONES[2];
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     overflow: hidden;
     background: radial-gradient(circle at 50% 50%, #151b18 0%, #070908 100%);
-    padding: 0 20px;
-  }
-
-  .china-backdrop {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 1;
-    overflow: hidden;
-  }
-
-  /* Matrix of bamboo calculating rods */
-  .bamboo-matrix {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 12px 18px;
-    padding: 40px;
-    opacity: 0.18;
-  }
-
-  .bamboo-rod {
-    width: 4px;
-    height: 48px;
-    background: linear-gradient(180deg, #d4a373 0%, #8d6b4f 100%);
-    border-radius: 2px;
-    transform: rotate(calc(var(--p) * 180deg + var(--i) * 15deg));
-    transition: transform 0.2s ease;
+    padding: calc(var(--hud-height, 68px) + 12px) 20px 16px;
+    box-sizing: border-box;
+    gap: 10px;
   }
 
   /* Uncollapsible Narrative Box */
   .narrative {
-    position: absolute;
-    top: 10vh;
+    position: relative;
     width: 100% !important;
     max-width: min(90vw, 740px) !important;
+    min-height: 120px;
     margin: 0 auto !important;
     text-align: center !important;
     pointer-events: none;
     z-index: 5;
-  }
-
-  .beat {
-    opacity: 0;
-    transform: translate3d(0, 16px, 0);
-    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    width: 100% !important;
-  }
-
-  .beat.is-active {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-    pointer-events: auto;
+    flex-shrink: 0;
   }
 
   .scene-kicker {
     font-family: var(--font-mono);
     font-size: 0.72rem;
     letter-spacing: 0.18em;
-    color: #2a9d8f;
+    color: #d94e28;
     display: inline-block;
-    margin-bottom: 6px;
+    margin-bottom: 4px;
   }
 
   .scene-title {
-    font-family: var(--font-serif);
-    font-size: clamp(1.8rem, 3.8vw, 2.8rem);
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 3.4vw, 2.4rem);
     font-weight: 400;
+    font-style: italic;
     color: #fff;
-    margin: 0 0 10px;
-    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9);
+    margin: 0 0 8px;
+    filter: url(#ink-displacement);
   }
 
   .beat-text {
-    font-family: var(--font-sans);
-    font-size: clamp(0.95rem, 1.8vw, 1.12rem);
-    color: rgba(255, 255, 255, 0.8);
-    line-height: 1.65;
+    font-family: var(--font-editorial);
+    font-size: clamp(0.92rem, 1.7vw, 1.05rem);
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.6;
     margin: 0;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
   }
 
   .milu-quote {
-    font-family: var(--font-serif);
-    font-size: clamp(1.3rem, 2.8vw, 1.9rem);
+    font-family: var(--font-display);
+    font-size: clamp(1.2rem, 2.5vw, 1.7rem);
     font-style: italic;
-    color: #e76f51;
-    line-height: 1.5;
+    color: #d94e28;
+    line-height: 1.45;
     margin: 0;
-    text-shadow: 0 0 25px rgba(231, 111, 81, 0.4);
   }
 
   .milu-quote cite {
     display: block;
     font-family: var(--font-mono);
-    font-size: 0.8rem;
+    font-size: 0.76rem;
     font-style: normal;
-    color: #2a9d8f;
-    margin-top: 10px;
+    color: #e6d7b9;
+    margin-top: 8px;
     letter-spacing: 0.08em;
   }
 
-  .milu-rig {
-    margin-top: 18vh;
+  /* China Rig Architecture */
+  .china-rig {
+    width: 100%;
+    max-width: 680px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 16px;
+    gap: 12px;
     z-index: 2;
+    margin-top: 2px;
   }
 
-  .milu-card {
-    background: rgba(15, 27, 24, 0.85);
-    border: 1px solid rgba(42, 157, 143, 0.35);
-    border-radius: 16px;
-    padding: 24px 36px;
-    backdrop-filter: blur(14px);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), inset 0 0 20px rgba(42, 157, 143, 0.1);
+  /* Technical Math Panel */
+  .math-panel {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    padding: 12px 18px;
+    gap: 12px;
+  }
+
+  .math-col {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    text-align: center;
+    gap: 2px;
+    flex: 1;
   }
 
-  .milu-label {
+  .col-title {
     font-family: var(--font-mono);
-    font-size: 0.7rem;
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  .col-formula {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
     color: rgba(255, 255, 255, 0.5);
-    letter-spacing: 0.1em;
   }
 
-  .milu-fraction {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  .col-val {
     font-family: var(--font-mono);
-    font-size: 2.2rem;
-    font-weight: 700;
-    color: #e76f51;
-    line-height: 1;
+    font-size: 1.15rem;
+    color: var(--fg-ink);
+    margin-top: 2px;
   }
 
-  .m-line {
-    width: 100%;
-    height: 3px;
-    background: #2a9d8f;
-    margin: 4px 0;
-    border-radius: 2px;
+  .col-accent {
+    color: #d94e28;
   }
 
-  .milu-decimal {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-family: var(--font-mono);
-    font-size: 1.3rem;
-    color: #fdfaf7;
+  .math-divider {
+    width: 1px;
+    height: 38px;
+    background: var(--grid-line);
   }
 
-  .milu-decimal strong {
-    color: #2a9d8f;
-    text-shadow: 0 0 10px rgba(42, 157, 143, 0.5);
-  }
-
-  .milu-accuracy {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    color: #ffd700;
-  }
-
-  .facets-microscope {
-    width: min(85vw, 480px);
-    height: 70px;
-  }
-
-  .facets-svg {
-    width: 100%;
-    height: 100%;
+  @media (max-height: 750px) {
+    .narrative {
+      min-height: 95px;
+    }
   }
 </style>

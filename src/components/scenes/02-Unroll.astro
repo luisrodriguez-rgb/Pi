@@ -78,10 +78,12 @@ const milestone = MILESTONES[1];
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     overflow: hidden;
     background: radial-gradient(circle at 50% 50%, #1e1410 0%, #0d0807 100%);
-    padding: 0 20px;
+    padding: calc(var(--hud-height, 68px) + 12px) 20px 16px;
+    box-sizing: border-box;
+    gap: 8px;
   }
 
   .syracuse-bg {
@@ -105,21 +107,22 @@ const milestone = MILESTONES[1];
     will-change: transform, opacity;
   }
 
-  /* Uncollapsible Narrative Box */
+  /* Non-overlapping Narrative Box Positioned Above Rig */
   .narrative {
-    position: absolute;
-    top: 10vh;
+    position: relative;
     width: 100% !important;
     max-width: min(90vw, 740px) !important;
+    min-height: 110px;
     margin: 0 auto !important;
     text-align: center !important;
     pointer-events: none;
     z-index: 5;
+    flex-shrink: 0;
   }
 
   .beat {
     opacity: 0;
-    transform: translate3d(0, 16px, 0);
+    transform: translate3d(0, 14px, 0);
     transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     position: absolute;
     left: 0;
@@ -132,6 +135,7 @@ const milestone = MILESTONES[1];
     opacity: 1;
     transform: translate3d(0, 0, 0);
     pointer-events: auto;
+    position: relative;
   }
 
   .scene-kicker {
@@ -182,10 +186,11 @@ const milestone = MILESTONES[1];
   }
 
   .rig-wrapper {
-    margin-top: 18vh;
+    margin-top: 4px;
     width: 100%;
     display: flex;
     justify-content: center;
+    align-items: center;
     z-index: 2;
   }
 </style>

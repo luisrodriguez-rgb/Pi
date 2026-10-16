@@ -27,12 +27,7 @@ const vanCeulenDigits = '3.14159265358979323846264338327950288'.split('');
       <div class="rapier rapier-right"></div>
     </div>
 
-    <!-- Museum Catalog Technical Plate -->
-    <div class="museum-plate tomb-plate">
-      [ FIG. 04 // LEIDEN, 1610 — LOSA PIETERSKERK — ESCALA 1:1 — PRECISIÓN: 10⁻³⁵ ]
-    </div>
-
-    <!-- Narrative Center (Uncollapsible, balanced typography) -->
+    <!-- Narrative Center (Uncollapsible, balanced typography positioned above slab) -->
     <div class="narrative">
       <div class="beat" data-beat="0.05-0.35">
         <span class="scene-kicker">04 // LEIDEN, 1610 d.C. · PAÍSES BAJOS</span>
@@ -63,15 +58,24 @@ const vanCeulenDigits = '3.14159265358979323846264338327950288'.split('');
     </div>
 
     <!-- The Ancient Tombstone Monument with Candlelight Physics -->
-    <div class="tombstone-slab" id="tombstone-slab">
-      <!-- Candlelight Torch Glow Layer -->
-      <div class="candlelight-glow" id="candlelight-layer"></div>
-
-      <div class="slab-arch">
-        <span class="cross-ornament">✠</span>
-        <span class="slab-heading">LUDOLPHUS VAN CEULEN</span>
-        <span class="slab-subheading">MAGISTER ARTIUM ATQUE GLADIATORI</span>
+    <div class="tombstone-wrapper">
+      <!-- Museum Catalog Technical Plate (In-Flow, Zero HUD Overlap) -->
+      <div class="museum-plate">
+        [ FIG. 04 // LEIDEN, 1610 — LOSA PIETERSKERK — ESCALA 1:1 — PRECISIÓN: 10⁻³⁵ ]
       </div>
+
+      <div class="tombstone-slab" id="tombstone-slab">
+        <!-- Authentic Chiseled Flemish Stone Texture Overlay -->
+        <div class="slab-stone-texture" aria-hidden="true"></div>
+
+        <!-- Candlelight Torch Glow Layer -->
+        <div class="candlelight-glow" id="candlelight-layer"></div>
+
+        <div class="slab-arch">
+          <span class="cross-ornament">✠</span>
+          <span class="slab-heading">LUDOLPHUS VAN CEULEN</span>
+          <span class="slab-subheading">MAGISTER ARTIUM ATQUE GLADIATORI</span>
+        </div>
 
       <div class="slab-divider"></div>
 
@@ -96,6 +100,7 @@ const vanCeulenDigits = '3.14159265358979323846264338327950288'.split('');
       </div>
     </div>
   </div>
+</div>
 </section>
 
 <script>
@@ -172,10 +177,12 @@ const vanCeulenDigits = '3.14159265358979323846264338327950288'.split('');
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     overflow: hidden;
     background: radial-gradient(circle at 50% 50%, #17191e 0%, #08090b 100%);
-    padding: 0 20px;
+    padding: calc(var(--hud-height, 68px) + 12px) 20px 16px;
+    box-sizing: border-box;
+    gap: 8px;
   }
 
   /* Crossed Fencing Rapiers */
@@ -206,27 +213,32 @@ const vanCeulenDigits = '3.14159265358979323846264338327950288'.split('');
     transform: translate(-50%, -50%) rotate(40deg);
   }
 
-  .tomb-plate {
-    position: absolute;
-    top: 6vh;
-    z-index: 6;
+  .tombstone-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 580px;
+    margin-top: 4px;
+    z-index: 2;
   }
 
-  /* Uncollapsible Narrative Box */
+  /* Non-overlapping Narrative Box Positioned Above Tombstone */
   .narrative {
-    position: absolute;
-    top: 10vh;
+    position: relative;
     width: 100% !important;
     max-width: min(90vw, 740px) !important;
+    min-height: 110px;
     margin: 0 auto !important;
     text-align: center !important;
     pointer-events: none;
     z-index: 5;
+    flex-shrink: 0;
   }
 
   .beat {
     opacity: 0;
-    transform: translate3d(0, 16px, 0);
+    transform: translate3d(0, 14px, 0);
     transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     position: absolute;
     left: 0;
@@ -239,6 +251,7 @@ const vanCeulenDigits = '3.14159265358979323846264338327950288'.split('');
     opacity: 1;
     transform: translate3d(0, 0, 0);
     pointer-events: auto;
+    position: relative;
   }
 
   .scene-kicker {
@@ -288,28 +301,42 @@ const vanCeulenDigits = '3.14159265358979323846264338327950288'.split('');
     letter-spacing: 0.05em;
   }
 
-  /* Dark Granite Stone Tombstone with Candlelight Physics */
+  /* Dark Flemish Slate Tombstone with Authentic Stone Texture & Candlelight Physics */
   .tombstone-slab {
     position: relative;
-    margin-top: 18vh;
+    margin-top: 0;
     width: min(90vw, 560px);
-    background: #13151a;
+    background: #111317;
     background-image: 
-      radial-gradient(circle 380px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(230, 194, 128, 0.12) 0%, transparent 100%),
+      radial-gradient(circle 380px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(230, 194, 128, 0.16) 0%, transparent 100%),
       radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-      linear-gradient(180deg, #1c1f26 0%, #0f1115 100%);
+      linear-gradient(180deg, #181b21 0%, #0c0e12 100%);
     background-size: 100% 100%, 16px 16px, 100% 100%;
-    border: 2px solid rgba(230, 194, 128, 0.25);
+    border: 1px solid rgba(230, 194, 128, 0.35);
     border-radius: 40px 40px 0 0;
-    padding: 30px 28px 22px;
+    padding: 26px 26px 20px;
     box-shadow: 
-      0 30px 80px rgba(0, 0, 0, 0.9),
-      inset 0 2px 4px rgba(255, 255, 255, 0.1);
+      0 30px 80px rgba(0, 0, 0, 0.95),
+      inset 0 1px 0 rgba(230, 194, 128, 0.3);
     display: flex;
     flex-direction: column;
     align-items: center;
     z-index: 2;
     cursor: grab;
+    overflow: hidden;
+  }
+
+  .slab-stone-texture {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background-image: url('/images/tombstone-texture.jpg');
+    background-size: cover;
+    background-position: center;
+    mix-blend-mode: overlay;
+    opacity: 0.36;
+    pointer-events: none;
+    z-index: 1;
   }
 
   .candlelight-glow {

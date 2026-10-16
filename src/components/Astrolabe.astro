@@ -6,15 +6,15 @@
   <div class="astrolabe-dial" id="astrolabe-dial">
     <svg viewBox="0 0 120 120" class="astrolabe-svg">
       <defs>
-        <!-- Gradients for bronze & phosphor -->
+        <!-- Gradients adapted to historical era pigments -->
         <radialGradient id="astrolabe-metal" cx="50%" cy="50%" r="50%">
-          <stop offset="60%" stop-color="rgba(18,14,10,0.92)" />
-          <stop offset="100%" stop-color="rgba(35,26,18,0.95)" />
+          <stop offset="60%" stop-color="var(--astrolabe-bg, #1a1510)" />
+          <stop offset="100%" stop-color="var(--astrolabe-rim, #2c2219)" />
         </radialGradient>
       </defs>
 
       <!-- Outer calibrated graduation ring -->
-      <circle cx="60" cy="60" r="54" fill="url(#astrolabe-metal)" stroke="var(--accent)" stroke-width="1.5" class="outer-rim" />
+      <circle cx="60" cy="60" r="54" fill="url(#astrolabe-metal)" stroke="var(--accent)" stroke-width="1.8" class="outer-rim" />
       
       <!-- Graduation ticks every 30 deg (π/6) and 90 deg (π/2) -->
       {Array.from({ length: 12 }).map((_, i) => {
@@ -38,7 +38,7 @@
       <g id="astrolabe-needle" class="needle-group">
         <line x1="60" y1="60" x2="60" y2="14" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" />
         <circle cx="60" cy="14" r="3" fill="var(--accent)" />
-        <circle cx="60" cy="60" r="4.5" fill="var(--fg-ink)" />
+        <circle cx="60" cy="60" r="4.5" fill="var(--accent)" />
       </g>
     </svg>
   </div>
@@ -94,6 +94,26 @@
     cursor: pointer;
     user-select: none;
     transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    --astrolabe-bg: #16120e;
+    --astrolabe-rim: #281f18;
+  }
+
+  :global([data-theme="infinite"]) .astrolabe-widget,
+  :global([data-theme="infinity"]) .astrolabe-widget {
+    --astrolabe-bg: #ece7db;
+    --astrolabe-rim: #ded7c6;
+  }
+
+  :global([data-theme="stone"]) .astrolabe-widget,
+  :global([data-theme="leiden"]) .astrolabe-widget,
+  :global([data-theme="paris"]) .astrolabe-widget {
+    --astrolabe-bg: #161816;
+    --astrolabe-rim: #252825;
+  }
+
+  :global([data-theme="eniac"]) .astrolabe-widget {
+    --astrolabe-bg: #0d1611;
+    --astrolabe-rim: #18281f;
   }
 
   .astrolabe-widget:hover {
@@ -110,7 +130,7 @@
   .astrolabe-svg {
     width: 100%;
     height: 100%;
-    filter: drop-shadow(0 4px 15px rgba(0, 0, 0, 0.7));
+    filter: drop-shadow(0 4px 15px rgba(0, 0, 0, 0.5));
   }
 
   .needle-group {
@@ -140,9 +160,10 @@
   .rad-label {
     font-family: var(--font-mono);
     font-size: 0.52rem;
-    color: var(--muted);
+    color: var(--accent);
     letter-spacing: 0.12em;
     margin-top: 2px;
+    font-weight: 700;
   }
 
   @media (max-width: 768px) {

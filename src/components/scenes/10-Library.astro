@@ -17,31 +17,25 @@ const t = UI_STRINGS[locale];
   data-scene="infinity" 
   data-year={milestone.year}
   data-pi-value={milestone.precisionValue}
-  data-theme={milestone.theme}
+  data-theme="infinite"
   data-scene-title={milestone.title[locale]}
 >
   <div class="stage">
-    <!-- Museum Catalog Technical Plate -->
-    <div class="museum-plate library-plate">
-      [ FIG. 10 // COSMOS, PRESENTE — CHUDNOVSKY // 105 BILLONES DE DÍGITOS ]
-    </div>
-
     <!-- Cosmic Digits Earthrise Curvature Backdrop -->
-    <div class="earthrise-curvature">
+    <div class="earthrise-curvature" aria-hidden="true">
       <svg viewBox="0 0 1000 400" class="curvature-svg" preserveAspectRatio="none">
         <defs>
           <radialGradient id="earth-glow" cx="50%" cy="100%" r="70%">
-            <stop offset="0%" stop-color="#00e5ff" stop-opacity="0.25" />
-            <stop offset="70%" stop-color="#ffd700" stop-opacity="0.08" />
-            <stop offset="100%" stop-color="#000000" stop-opacity="0" />
+            <stop offset="0%" stop-color="var(--accent)" stop-opacity="0.25" />
+            <stop offset="70%" stop-color="var(--muted)" stop-opacity="0.08" />
+            <stop offset="100%" stop-color="transparent" stop-opacity="0" />
           </radialGradient>
         </defs>
-        <!-- The Horizon of Infinity Curve -->
-        <path d="M -100,400 Q 500,160 1100,400" fill="url(#earth-glow)" stroke="#00e5ff" stroke-width="1.5" stroke-dasharray="3,3" opacity="0.6"/>
+        <path d="M -100,400 Q 500,160 1100,400" fill="url(#earth-glow)" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="3,3" opacity="0.6"/>
       </svg>
     </div>
 
-    <!-- Narrative Center (Uncollapsible, balanced typography) -->
+    <!-- Narrative Center (Uncollapsible, balanced typography positioned above rig) -->
     <div class="narrative">
       <div class="beat" data-beat="0.05-0.35">
         <span class="scene-kicker">10 // EL HORIZONTE DEL INFINITO · PRESENTE</span>
@@ -64,7 +58,7 @@ const t = UI_STRINGS[locale];
       </div>
 
       <div class="beat beat-closing" data-beat="0.80-0.98">
-        <div class="closing-card">
+        <div class="closing-card blueprint-panel">
           <blockquote class="closing-quote">
             «No había opción salvo medir lo inconmensurable. El círculo nunca se cierra; solo aumenta nuestra resolución.»
           </blockquote>
@@ -86,31 +80,36 @@ const t = UI_STRINGS[locale];
       </div>
     </div>
 
-    <!-- The 1-Million Digits Live Search Rig -->
+    <!-- The 1-Million Digits Scientific Terminal Search Rig -->
     <div class="search-rig" id="search-rig">
-      <div class="search-box">
+      <!-- Museum Catalog Technical Plate (In-Flow, Zero Collisions) -->
+      <div class="museum-plate">
+        [ FIG. 10 // COSMOS, PRESENTE — CHUDNOVSKY // 105 BILLONES DE DÍGITOS ]
+      </div>
+
+      <div class="search-box blueprint-panel">
         <div class="search-input-wrap">
           <input 
             type="text" 
             id="pi-search-input" 
-            placeholder={t.searchPlaceholder}
+            placeholder="Ej: 14031992 o cualquier secuencia"
             maxlength="16"
             autocomplete="off"
-            class="pi-input"
+            class="pi-input tabular"
           />
           <button type="button" id="pi-search-btn" class="pi-btn">
-            {t.searchBtn}
+            {locale === 'es' ? 'BUSCAR EN π' : 'SEARCH IN π'}
           </button>
         </div>
 
-        <!-- Result Card -->
+        <!-- Result Card (Technical Terminal Output) -->
         <div class="search-result" id="search-result" style="display: none;">
           <div class="result-status" id="result-status"></div>
           <div class="result-snippet" id="result-snippet"></div>
         </div>
 
         <div class="search-hint">
-          <span>{locale === 'es' ? 'Dataset cargado: 1,000,000 de dígitos reales de π' : 'Dataset loaded: 1,000,000 actual digits of π'}</span>
+          <span class="tabular">{locale === 'es' ? 'Dataset cargado: 1,000,000 de dígitos reales de π' : 'Dataset loaded: 1,000,000 actual digits of π'}</span>
         </div>
       </div>
     </div>
@@ -163,42 +162,39 @@ const t = UI_STRINGS[locale];
 
     if (!piDigits) {
       resultBox.style.display = 'block';
-      resultStatus.innerHTML = '<span class="status-loading">Cargando 1,000,000 de dígitos de π en memoria...</span>';
+      resultStatus.innerHTML = '<span class="status-loading">Cargando 1M de dígitos...</span>';
       loadDigits().then(() => performSearch());
       return;
     }
 
     const idx = piDigits.indexOf(query);
-
     resultBox.style.display = 'block';
+
     if (idx !== -1) {
-      soundEngine.playFeynmanResolution();
-
-      const start = Math.max(0, idx - 15);
-      const end = Math.min(piDigits.length, idx + query.length + 15);
-
-      const before = piDigits.slice(start, idx);
-      const match = piDigits.slice(idx, idx + query.length);
-      const after = piDigits.slice(idx + query.length, end);
+      soundEngine.playEniacHum();
+      const start = Math.max(0, idx - 6);
+      const end = Math.min(piDigits.length, idx + query.length + 6);
+      const before = piDigits.substring(start, idx);
+      const match = piDigits.substring(idx, idx + query.length);
+      const after = piDigits.substring(idx + query.length, end);
 
       resultStatus.innerHTML = `
         <span class="status-success">
-          ★ Tu fecha ya estaba escrita en π desde el origen del universo. Aparece en el decimal <strong>#${idx.toLocaleString()}</strong>:
+          ✓ ¡Encontrado en la posición <strong>${idx.toLocaleString()}</strong> de los decimales de π!
         </span>
       `;
 
       resultSnippet.innerHTML = `
-        <div class="snippet-box">
+        <div class="snippet-box tabular">
           <span class="snip-dim">...${before}</span>
           <span class="snip-match">${match}</span>
           <span class="snip-dim">${after}...</span>
         </div>
       `;
     } else {
-      soundEngine.playDigit(1);
       resultStatus.innerHTML = `
         <span class="status-not-found">
-          No apareció dentro del primer millón de dígitos. ¡Prueba con menos dígitos (ej: DDMM o los últimos 4 dígitos)!
+          ✗ No apareció en el primer millón de dígitos. (Prueba con una secuencia más corta).
         </span>
       `;
       resultSnippet.innerHTML = '';
@@ -226,16 +222,15 @@ const t = UI_STRINGS[locale];
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     overflow: hidden;
-    background: radial-gradient(circle at 50% 50%, #0d121c 0%, #040608 100%);
-    padding: 0 20px;
-  }
-
-  .library-plate {
-    position: absolute;
-    top: 6vh;
-    z-index: 6;
+    background: var(--bg-surface) !important;
+    color: var(--fg-ink) !important;
+    padding: calc(var(--hud-height, 68px) + 12px) 20px 16px;
+    box-sizing: border-box;
+    gap: 8px;
+    transition: background-color 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                color 0.8s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .earthrise-curvature {
@@ -250,21 +245,22 @@ const t = UI_STRINGS[locale];
     height: 100%;
   }
 
-  /* Uncollapsible Narrative Box */
+  /* Uncollapsible Narrative Box Positioned Above Rig */
   .narrative {
-    position: absolute;
-    top: 9vh;
+    position: relative;
     width: 100% !important;
     max-width: min(90vw, 740px) !important;
+    min-height: 110px;
     margin: 0 auto !important;
     text-align: center !important;
     pointer-events: none;
     z-index: 5;
+    flex-shrink: 0;
   }
 
   .beat {
     opacity: 0;
-    transform: translate3d(0, 16px, 0);
+    transform: translate3d(0, 14px, 0);
     transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     position: absolute;
     left: 0;
@@ -277,127 +273,131 @@ const t = UI_STRINGS[locale];
     opacity: 1;
     transform: translate3d(0, 0, 0);
     pointer-events: auto;
+    position: relative;
   }
 
   .scene-kicker {
     font-family: var(--font-mono);
     font-size: 0.72rem;
     letter-spacing: 0.18em;
-    color: #ffd700;
+    color: var(--accent);
     display: inline-block;
     margin-bottom: 6px;
   }
 
   .scene-title {
-    font-family: var(--font-serif);
+    font-family: var(--font-display);
     font-size: clamp(1.8rem, 3.8vw, 2.8rem);
     font-weight: 400;
-    color: #fff;
+    font-style: italic;
+    color: var(--fg-ink);
     margin: 0 0 10px;
-    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9);
   }
 
   .beat-text {
-    font-family: var(--font-sans);
+    font-family: var(--font-editorial);
     font-size: clamp(0.95rem, 1.8vw, 1.12rem);
-    color: rgba(255, 255, 255, 0.8);
+    color: color-mix(in srgb, var(--fg-ink) 85%, transparent);
     line-height: 1.65;
     margin: 0;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
   }
 
+  /* Search Rig Architecture */
   .search-rig {
     position: relative;
-    margin-top: 18vh;
-    width: min(92vw, 680px);
+    margin-top: 4px;
+    width: 100%;
+    max-width: 680px;
     z-index: 6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
   }
 
   .search-box {
-    background: rgba(14, 18, 28, 0.85);
-    border: 1px solid rgba(0, 229, 255, 0.25);
-    border-radius: 16px;
-    padding: 24px;
-    backdrop-filter: blur(14px);
-    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.85), inset 0 0 20px rgba(0, 229, 255, 0.05);
+    width: 100%;
+    padding: 20px 24px;
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 14px;
+    border-radius: 0;
   }
 
   .search-input-wrap {
     display: flex;
-    gap: 10px;
+    gap: 0;
+    border: 1px solid var(--grid-line);
   }
 
   .pi-input {
     flex: 1;
-    background: rgba(0, 0, 0, 0.45);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 10px;
-    padding: 12px 18px;
+    background: color-mix(in srgb, var(--bg-surface) 96%, black 4%);
+    border: none;
+    border-radius: 0;
+    padding: 12px 16px;
     font-family: var(--font-mono);
-    font-size: 1rem;
-    color: #fff;
+    font-size: 0.95rem;
+    color: var(--fg-ink);
     outline: none;
-    transition: border-color 0.2s ease;
   }
 
   .pi-input:focus {
-    border-color: #ffd700;
-    box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+    box-shadow: inset 0 0 0 1px var(--accent);
   }
 
   .pi-btn {
-    background: linear-gradient(135deg, #ffd700, #ff9d00);
+    background: var(--accent);
     border: none;
-    border-radius: 10px;
-    padding: 12px 20px;
+    border-radius: 0;
+    padding: 12px 22px;
     font-family: var(--font-mono);
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: #0b0c10;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #fff;
     cursor: pointer;
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    transition: opacity 0.15s ease;
   }
 
   .pi-btn:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
+    opacity: 0.9;
   }
 
   .search-result {
-    padding: 14px;
-    background: rgba(0, 0, 0, 0.4);
-    border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 12px 16px;
+    background: color-mix(in srgb, var(--bg-surface) 95%, black 5%);
+    border: 1px solid var(--grid-line);
+    border-radius: 0;
   }
 
   .result-status {
     font-family: var(--font-mono);
-    font-size: 0.85rem;
-    margin-bottom: 8px;
+    font-size: 0.82rem;
+    margin-bottom: 6px;
   }
 
   :global(.status-success) {
-    color: #00ffcc;
+    color: var(--accent);
+    font-weight: 700;
   }
   :global(.status-warn) {
-    color: #ffbd2e;
+    color: #d97706;
   }
   :global(.status-not-found) {
-    color: #ff5f56;
+    color: #dc2626;
   }
   :global(.status-loading) {
-    color: #ffd700;
+    color: var(--accent);
   }
 
   :global(.snippet-box) {
     font-family: var(--font-mono);
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     padding: 8px;
-    background: rgba(0, 0, 0, 0.5);
-    border-radius: 6px;
+    background: color-mix(in srgb, var(--bg-surface) 92%, black 8%);
+    border: 1px solid var(--grid-line);
+    border-radius: 0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -405,92 +405,82 @@ const t = UI_STRINGS[locale];
   }
 
   :global(.snip-dim) {
-    color: rgba(255, 255, 255, 0.35);
+    color: var(--muted);
   }
 
   :global(.snip-match) {
-    color: #ffd700;
+    color: #fff;
+    background: var(--accent);
     font-weight: 700;
-    background: rgba(255, 215, 0, 0.15);
     padding: 2px 6px;
-    border-radius: 4px;
-    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
   }
 
   .search-hint {
     font-family: var(--font-mono);
-    font-size: 0.7rem;
-    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.68rem;
+    color: var(--muted);
     text-align: center;
+    letter-spacing: 0.06em;
   }
 
   /* Closing card */
   .closing-card {
-    background: rgba(14, 18, 28, 0.9);
-    border: 1px solid rgba(255, 215, 0, 0.25);
-    border-radius: 20px;
-    padding: 32px 30px;
-    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9);
-    backdrop-filter: blur(16px);
+    padding: 28px 24px;
+    border-radius: 0;
+    text-align: center;
   }
 
   .closing-quote {
-    font-family: var(--font-serif);
-    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-family: var(--font-display);
+    font-size: clamp(1.3rem, 2.8vw, 1.8rem);
     font-style: italic;
-    color: #ffd700;
+    color: var(--accent);
     line-height: 1.4;
     margin: 0 0 12px;
-    text-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
   }
 
   .closing-author {
     font-family: var(--font-mono);
     font-size: 0.8rem;
-    color: rgba(255, 255, 255, 0.5);
-    margin-bottom: 20px;
+    color: var(--muted);
+    margin-bottom: 12px;
   }
 
   .closing-sub {
-    font-family: var(--font-sans);
-    font-size: 0.95rem;
-    color: rgba(255, 255, 255, 0.7);
-    line-height: 1.6;
-    margin: 0 0 24px;
+    font-family: var(--font-editorial);
+    font-size: 1.05rem;
+    color: var(--fg-ink);
+    margin: 0 0 20px;
+    line-height: 1.5;
+  }
+
+  .closing-actions {
+    margin-bottom: 20px;
   }
 
   .btn-restart {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 25px;
-    padding: 10px 24px;
+    padding: 10px 22px;
+    background: var(--accent);
     color: #fff;
-    font-family: var(--font-mono);
-    font-size: 0.85rem;
     text-decoration: none;
-    transition: all 0.2s ease;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    border-radius: 0;
+    transition: opacity 0.15s ease;
   }
 
   .btn-restart:hover {
-    background: rgba(255, 215, 0, 0.15);
-    border-color: #ffd700;
-    color: #ffd700;
-    transform: translateY(-2px);
+    opacity: 0.9;
   }
 
   .closing-credits {
-    margin-top: 24px;
     font-family: var(--font-mono);
     font-size: 0.7rem;
-    color: rgba(255, 255, 255, 0.35);
-  }
-
-  @media (max-width: 600px) {
-    .search-input-wrap {
-      flex-direction: column;
-    }
+    color: var(--muted);
   }
 </style>
