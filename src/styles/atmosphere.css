@@ -314,3 +314,11 @@ body.is-blueprint .scene::after {
 body.is-blueprint #blueprint-badge {
   display: flex !important;
 }
+
+/* Sincronización 1:1 con --p y vídeo para elementos con entrada escalonada */
+.sync-reveal {
+  opacity: clamp(0, calc((var(--p) - var(--start, 0)) * 5), 1);
+  transform: translate3d(0, calc((1 - clamp(0, calc((var(--p) - var(--start, 0)) * 4), 1)) * 40px), 0);
+  will-change: transform, opacity;
+}
+
