@@ -1,0 +1,49 @@
+---
+import Hud from '../components/Hud.astro';
+import { UI_STRINGS, type Locale } from '../i18n';
+import '../styles/global.css';
+
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = 'es' } = Astro.props;
+const t = UI_STRINGS[locale];
+---
+
+<!doctype html>
+<html lang={locale} data-theme="obsidian">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{t.siteTitle}</title>
+    <meta name="description" content={t.siteDescription} />
+
+    <!-- Open Graph / Meta -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={t.siteTitle} />
+    <meta property="og:description" content={t.siteDescription} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={t.siteTitle} />
+    <meta name="twitter:description" content={t.siteDescription} />
+    <meta name="theme-color" content="#08090c" />
+  </head>
+  <body>
+    <!-- Cinematic noise grain overlay -->
+    <div class="film-grain" aria-hidden="true"></div>
+
+    <!-- Persistent Navigation HUD -->
+    <Hud locale={locale} />
+
+    <!-- Scrollytelling Scenes -->
+    <main id="main-content">
+      <slot />
+    </main>
+
+    <!-- Scroll engine script -->
+    <script>
+      import '../scripts/scroll';
+    </script>
+  </body>
+</html>

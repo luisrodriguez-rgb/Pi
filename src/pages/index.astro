@@ -1,16 +1,26 @@
 ---
+import Layout from '../layouts/Layout.astro';
+import OpeningScene from '../components/scenes/01-Opening.astro';
+import UnrollScene from '../components/scenes/02-Unroll.astro';
+import ArchimedesScene from '../components/scenes/03-Archimedes.astro';
+import TombstoneScene from '../components/scenes/04-Tombstone.astro';
+import BuffonScene from '../components/scenes/05-Buffon.astro';
+import RamanujanScene from '../components/scenes/06-Ramanujan.astro';
+import EniacScene from '../components/scenes/07-Eniac.astro';
+import FeynmanScene from '../components/scenes/08-Feynman.astro';
+import SpigotScene from '../components/scenes/09-Spigot.astro';
+import LibraryScene from '../components/scenes/10-Library.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout locale="es">
+  <OpeningScene locale="es" />
+  <UnrollScene locale="es" />
+  <ArchimedesScene locale="es" />
+  <TombstoneScene locale="es" />
+  <BuffonScene locale="es" />
+  <RamanujanScene locale="es" />
+  <EniacScene locale="es" />
+  <FeynmanScene locale="es" />
+  <SpigotScene locale="es" />
+  <LibraryScene locale="es" />
+</Layout>
