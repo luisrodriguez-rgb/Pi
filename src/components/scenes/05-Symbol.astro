@@ -20,38 +20,7 @@ const milestone = MILESTONES[4];
   data-scene-title={milestone.title[locale]}
 >
   <div class="stage">
-    <!-- Museum Catalog Technical Plate -->
-    <div class="museum-plate symbol-plate">
-      [ FIG. 05 // LONDRES, 1706 — SYNOPSIS PALMARIORUM — PÁGINA 263 ]
-    </div>
-
-    <!-- Cumbersome Latin Phrase that collapses into π (Midudev Scene 8 Tribute) -->
-    <div class="latin-phrase-container">
-      <div class="latin-words">
-        <span class="w w-1">Quantitas</span>
-        <span class="w w-2">in</span>
-        <span class="w w-3">circulo</span>
-        <span class="w w-4">quae</span>
-        <span class="w w-5">cum</span>
-        <span class="w w-6">diametro</span>
-        <span class="w w-7">inscripta</span>
-        <span class="w w-8">peripheriam</span>
-        <span class="w w-9">definit</span>
-      </div>
-
-      <!-- The Giant Collapsed Pi Glyph -->
-      <div class="giant-pi-glyph">π</div>
-
-      <!-- William Jones 1706 Page 263 Facsimile Frame -->
-      <div class="jones-facsimile">
-        <div class="facsimile-badge">SYNOPSIS PALMARIORUM MATHESEOS · PAGINA 263</div>
-        <p class="facsimile-extract">
-          «...There are various other ways of approximating the Ratio of the Diameter to the Circumference; one of the most remarkable is that by the celebrated Series... = 3.14159 &c. = π»
-        </p>
-      </div>
-    </div>
-
-    <!-- Narrative Center (Uncollapsible, balanced typography) -->
+    <!-- Narrative Header (In-flow, balanced typography, zero collision with catalog plate) -->
     <div class="narrative">
       <div class="beat" data-beat="0.05-0.38">
         <span class="scene-kicker">05 // LONDRES, 1706 d.C. · WILLIAM JONES</span>
@@ -59,7 +28,7 @@ const milestone = MILESTONES[4];
         <p class="beat-text">
           {locale === 'es'
             ? 'Durante cuatro milenios, el número no tuvo nombre. Los sabios lo llamaban con pesadas frases en latín: «La cantidad que, cuando el diámetro es 1, representa la circunferencia». Hasta que un profesor galés autodidacta abrió un libro y cambió la historia.'
-            : 'For four thousand years, the number had no name. Scholars referred to it in cumbersome Latin prose: «The quantity which, when diameter is unity, defines the circumference». Until a self-taught Welsh tutor opened a ledger and changed history.'}
+            : 'For four thousand years, the number had no name. Sages denoted it with cumbersome Latin circumlocutions: «The quantity which, when diameter is 1, defines the circumference». Until a self-taught Welsh tutor opened a book and changed mathematics forever.'}
         </p>
       </div>
 
@@ -69,7 +38,7 @@ const milestone = MILESTONES[4];
         <p class="beat-text">
           {locale === 'es'
             ? 'En la página 263 de su obra Synopsis Palmariorum Matheseos, William Jones imprimió por primera vez la letra griega π (por "periferia"). Tres décadas después, Leonhard Euler la adoptó, convirtiéndola en el símbolo universal del cosmos.'
-            : 'On page 263 of Synopsis Palmariorum Matheseos, William Jones printed the Greek letter π (for "periphery") for the first time. Three decades later, Leonhard Euler adopted it, turning it into the universal signature of the cosmos.'}
+            : 'Upon page 263 of his Synopsis Palmariorum Matheseos, William Jones set into metal type the Greek letter π (for "periphery"). Three decades later, Leonhard Euler championed it, crystallizing it as the cosmos’s universal glyph.'}
         </p>
       </div>
 
@@ -80,8 +49,93 @@ const milestone = MILESTONES[4];
         </blockquote>
       </div>
     </div>
+
+    <!-- Symbol Transformation Stage (Positioned below narrative, zero empty void) -->
+    <div class="symbol-stage" id="symbol-stage">
+      <!-- Museum Catalog Technical Plate (In-Flow) -->
+      <div class="museum-plate">
+        [ FIG. 05 // LONDRES, 1706 — SYNOPSIS PALMARIORUM — PÁGINA 263 ]
+      </div>
+
+      <!-- Historical Facsimile and Compression Laboratory -->
+      <div class="symbol-display blueprint-panel">
+        <!-- Interactive Latin Circumlocution to Pi Compressor -->
+        <div class="compression-rig">
+          <div class="latin-words" id="latin-stream">
+            <span class="w w-1">Quantitas</span>
+            <span class="w w-2">in</span>
+            <span class="w w-3">circulo</span>
+            <span class="w w-4">quae</span>
+            <span class="w w-5">cum</span>
+            <span class="w w-6">diametro</span>
+            <span class="w w-7">inscripta</span>
+            <span class="w w-8">peripheriam</span>
+            <span class="w w-9">definit</span>
+          </div>
+
+          <!-- The Illuminated Pi Glyph -->
+          <div class="pi-monolith" id="pi-monolith">
+            <span class="pi-greek-char">π</span>
+            <span class="pi-sub">PERIPHERIA · 1706</span>
+          </div>
+        </div>
+
+        <!-- William Jones 1706 Original Facsimile Card (Zero SaaS Border-Radius) -->
+        <div class="jones-facsimile">
+          <div class="facsimile-header">
+            <span class="facsimile-badge">SYNOPSIS PALMARIORUM MATHESEOS · PÁGINA 263</span>
+            <button type="button" id="toggle-collapse-btn" class="collapse-btn">
+              <span class="btn-indicator"></span>
+              <span id="collapse-btn-label">SIMULAR COMPRESIÓN (68 LETRAS → 1 SÍMBOLO)</span>
+            </button>
+          </div>
+          <p class="facsimile-extract">
+            «...There are various other ways of approximating the Ratio of the Diameter to the Circumference; one of the most remarkable is that by the celebrated Series... = 3.14159 &amp;c. = <strong>π</strong>»
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
+
+<script>
+  const symbolStage = document.getElementById('symbol-stage');
+  const latinStream = document.getElementById('latin-stream');
+  const piMonolith = document.getElementById('pi-monolith');
+  const toggleBtn = document.getElementById('toggle-collapse-btn');
+  const btnLabel = document.getElementById('collapse-btn-label');
+
+  let isCollapsed = false;
+
+  function updateCollapseState(collapsed: boolean) {
+    isCollapsed = collapsed;
+    latinStream?.classList.toggle('is-compressed', collapsed);
+    piMonolith?.classList.toggle('is-revealed', collapsed);
+    if (btnLabel) {
+      btnLabel.textContent = collapsed 
+        ? 'EXPANDIR A FRASE EN LATÍN (68 LETRAS)' 
+        : 'SIMULAR COMPRESIÓN (68 LETRAS → 1 SÍMBOLO)';
+    }
+  }
+
+  toggleBtn?.addEventListener('click', () => {
+    updateCollapseState(!isCollapsed);
+  });
+
+  if (symbolStage) {
+    const scene = symbolStage.closest('[data-scene]') as HTMLElement | null;
+    window.addEventListener('scroll', () => {
+      if (!scene) return;
+      const p = parseFloat(getComputedStyle(scene).getPropertyValue('--p')) || 0;
+      // Smooth automatic transition when scrolling through beats 2 and 3
+      if (p > 0.42 && !isCollapsed) {
+        updateCollapseState(true);
+      } else if (p < 0.28 && isCollapsed) {
+        updateCollapseState(false);
+      }
+    }, { passive: true });
+  }
+</script>
 
 <style>
   .scene {
@@ -98,172 +152,243 @@ const milestone = MILESTONES[4];
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     overflow: hidden;
     background: radial-gradient(circle at 50% 50%, #171513 0%, #080706 100%);
-    padding: 0 20px;
+    padding: calc(var(--hud-height, 68px) + 12px) 20px 16px;
+    box-sizing: border-box;
+    gap: 10px;
   }
 
-  .symbol-plate {
-    position: absolute;
-    top: 6vh;
-    z-index: 6;
-  }
-
-  /* Latin phrase container collapsing into the center */
-  .latin-phrase-container {
-    position: absolute;
-    inset: 0;
-    display: grid;
-    place-items: center;
-    pointer-events: none;
-    z-index: 2;
-  }
-
-  .latin-words {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 16px 24px;
-    max-width: 800px;
-    padding: 20px;
-    /* Scale down and fade as p goes from 0.3 to 0.7 */
-    transform: scale(calc(1 - var(--p) * 0.8));
-    opacity: calc(clamp(0, 1 - var(--p) * 2, 1));
-    filter: blur(calc(var(--p) * 8px));
-    will-change: transform, opacity, filter;
-  }
-
-  .w {
-    font-family: var(--font-serif);
-    font-size: clamp(1.4rem, 3vw, 2.4rem);
-    font-style: italic;
-    color: rgba(212, 175, 55, 0.4);
-    letter-spacing: 0.05em;
-  }
-
-  /* Giant Pi Glyph appearing at the center as words collapse */
-  .giant-pi-glyph {
-    position: absolute;
-    font-family: var(--font-serif);
-    font-size: clamp(8rem, 25vw, 18rem);
-    font-weight: 700;
-    color: #ffd700;
-    line-height: 1;
-    text-shadow: 
-      0 0 40px rgba(255, 215, 0, 0.5),
-      0 0 80px rgba(255, 215, 0, 0.2);
-    transform: scale(calc(clamp(0.2, (var(--p) - 0.3) * 1.8, 1)));
-    opacity: calc(clamp(0, (var(--p) - 0.35) * 3, 1));
-    will-change: transform, opacity;
-  }
-
-  /* William Jones Facsimile Frame */
-  .jones-facsimile {
-    position: absolute;
-    bottom: 8vh;
-    max-width: min(88vw, 620px);
-    background: rgba(20, 18, 15, 0.9);
-    border: 1px solid rgba(212, 175, 55, 0.3);
-    border-radius: 12px;
-    padding: 16px 24px;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8);
-    opacity: calc(clamp(0, (var(--p) - 0.75) * 4, 1));
-    transform: translateY(calc((1 - var(--p)) * 30px));
-    will-change: opacity, transform;
-  }
-
-  .facsimile-badge {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    letter-spacing: 0.12em;
-    color: #ffd700;
-    margin-bottom: 8px;
-  }
-
-  .facsimile-extract {
-    font-family: var(--font-serif);
-    font-size: 0.95rem;
-    font-style: italic;
-    color: rgba(255, 255, 255, 0.8);
-    line-height: 1.5;
-    margin: 0;
-  }
-
-  /* Uncollapsible Narrative Box */
+  /* Uncollapsible In-Flow Narrative Box */
   .narrative {
-    position: absolute;
-    top: 10vh;
+    position: relative;
     width: 100% !important;
     max-width: min(90vw, 740px) !important;
+    min-height: 120px;
     margin: 0 auto !important;
     text-align: center !important;
     pointer-events: none;
     z-index: 5;
-  }
-
-  .beat {
-    opacity: 0;
-    transform: translate3d(0, 16px, 0);
-    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    width: 100% !important;
-  }
-
-  .beat.is-active {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-    pointer-events: auto;
+    flex-shrink: 0;
   }
 
   .scene-kicker {
     font-family: var(--font-mono);
     font-size: 0.72rem;
     letter-spacing: 0.18em;
-    color: #ffd700;
+    color: #c59b27;
     display: inline-block;
-    margin-bottom: 6px;
+    margin-bottom: 4px;
   }
 
   .scene-title {
-    font-family: var(--font-serif);
-    font-size: clamp(1.8rem, 3.8vw, 2.8rem);
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 3.4vw, 2.4rem);
     font-weight: 400;
+    font-style: italic;
     color: #fff;
-    margin: 0 0 10px;
-    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9);
+    margin: 0 0 8px;
+    filter: url(#ink-displacement);
   }
 
   .beat-text {
-    font-family: var(--font-sans);
-    font-size: clamp(0.95rem, 1.8vw, 1.12rem);
-    color: rgba(255, 255, 255, 0.8);
-    line-height: 1.65;
+    font-family: var(--font-editorial);
+    font-size: clamp(0.92rem, 1.7vw, 1.05rem);
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.6;
     margin: 0;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
   }
 
   .symbol-quote {
-    font-family: var(--font-serif);
-    font-size: clamp(1.3rem, 2.8vw, 1.9rem);
+    font-family: var(--font-display);
+    font-size: clamp(1.2rem, 2.5vw, 1.7rem);
     font-style: italic;
-    color: #ffd700;
-    line-height: 1.5;
+    color: #c59b27;
+    line-height: 1.45;
     margin: 0;
-    text-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
   }
 
   .symbol-quote cite {
     display: block;
     font-family: var(--font-mono);
-    font-size: 0.8rem;
+    font-size: 0.76rem;
     font-style: normal;
     color: rgba(255, 255, 255, 0.6);
-    margin-top: 10px;
+    margin-top: 8px;
     letter-spacing: 0.05em;
+  }
+
+  /* Symbol Transformation Stage */
+  .symbol-stage {
+    position: relative;
+    width: 100%;
+    max-width: 760px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2px;
+    z-index: 2;
+  }
+
+  .symbol-display {
+    width: 100%;
+    padding: 20px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    background: rgba(18, 16, 14, 0.95) !important;
+    border: 1px solid rgba(197, 155, 39, 0.35) !important;
+  }
+
+  .compression-rig {
+    position: relative;
+    width: 100%;
+    min-height: 130px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .latin-words {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px 18px;
+    max-width: 640px;
+    padding: 10px;
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .latin-words.is-compressed {
+    transform: scale(0.6);
+    opacity: 0.12;
+    filter: blur(4px);
+    pointer-events: none;
+  }
+
+  .w {
+    font-family: var(--font-display);
+    font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+    font-style: italic;
+    color: rgba(212, 175, 55, 0.75);
+    letter-spacing: 0.04em;
+    transition: color 0.3s ease;
+  }
+
+  /* Giant Pi Monolith */
+  .pi-monolith {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transform: scale(0.3);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .pi-monolith.is-revealed {
+    transform: scale(1);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .pi-greek-char {
+    font-family: var(--font-display);
+    font-size: clamp(5.5rem, 12vw, 8rem);
+    font-weight: 700;
+    color: #c59b27;
+    line-height: 1;
+    text-shadow: 
+      0 0 30px rgba(197, 155, 39, 0.5),
+      0 0 60px rgba(197, 155, 39, 0.2);
+  }
+
+  .pi-sub {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  /* Facsimile Plate */
+  .jones-facsimile {
+    width: 100%;
+    padding: 14px 18px;
+    border-top: 1px solid var(--grid-line);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .facsimile-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .facsimile-badge {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    color: #c59b27;
+  }
+
+  .collapse-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: transparent;
+    border: 1px solid rgba(197, 155, 39, 0.4);
+    color: #ede8dc;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    padding: 4px 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .collapse-btn:hover {
+    border-color: #c59b27;
+    background: rgba(197, 155, 39, 0.15);
+    color: #c59b27;
+  }
+
+  .btn-indicator {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #c59b27;
+  }
+
+  .facsimile-extract {
+    font-family: var(--font-editorial);
+    font-size: 0.92rem;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .facsimile-extract strong {
+    color: #c59b27;
+    font-size: 1.1rem;
+    font-family: var(--font-display);
+  }
+
+  @media (max-height: 750px) {
+    .compression-rig {
+      min-height: 100px;
+    }
+    .pi-greek-char {
+      font-size: 4.5rem;
+    }
   }
 </style>
