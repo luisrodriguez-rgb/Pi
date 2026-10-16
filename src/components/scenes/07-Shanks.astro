@@ -20,6 +20,11 @@ const milestone = MILESTONES[6];
   data-scene-title={milestone.title[locale]}
 >
   <div class="stage">
+    <!-- Museum Catalog Technical Plate -->
+    <div class="museum-plate shanks-plate">
+      [ FIG. 07 // HOUGHTON, 1873 — BÓVEDA PALAIS DE LA DÉCOUVERTE — ERROR #528 ]
+    </div>
+
     <!-- Dome Spiral Rig (Palais de la Découverte 707 digits) -->
     <div class="dome-stage" id="shanks-dome">
       <div class="dome-circle-track">
@@ -118,6 +123,12 @@ const milestone = MILESTONES[6];
     overflow: hidden;
     background: radial-gradient(circle at 50% 50%, #1e1114 0%, #0a0607 100%);
     padding: 0 20px;
+  }
+
+  .shanks-plate {
+    position: absolute;
+    top: 6vh;
+    z-index: 6;
   }
 
   /* Uncollapsible Narrative Box */

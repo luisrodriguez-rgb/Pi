@@ -21,6 +21,11 @@ const t = UI_STRINGS[locale];
   data-scene-title={milestone.title[locale]}
 >
   <div class="stage">
+    <!-- Museum Catalog Technical Plate -->
+    <div class="museum-plate library-plate">
+      [ FIG. 10 // COSMOS, PRESENTE — CHUDNOVSKY // 105 BILLONES DE DÍGITOS ]
+    </div>
+
     <!-- Cosmic Digits Earthrise Curvature Backdrop -->
     <div class="earthrise-curvature">
       <svg viewBox="0 0 1000 400" class="curvature-svg" preserveAspectRatio="none">
@@ -225,6 +230,12 @@ const t = UI_STRINGS[locale];
     overflow: hidden;
     background: radial-gradient(circle at 50% 50%, #0d121c 0%, #040608 100%);
     padding: 0 20px;
+  }
+
+  .library-plate {
+    position: absolute;
+    top: 6vh;
+    z-index: 6;
   }
 
   .earthrise-curvature {

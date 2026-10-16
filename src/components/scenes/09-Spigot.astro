@@ -28,6 +28,11 @@ const circularCode = `                 #include <stdio.h>
   data-scene-title={milestone.title[locale]}
 >
   <div class="stage">
+    <!-- Museum Catalog Technical Plate -->
+    <div class="museum-plate spigot-plate">
+      [ FIG. 09 // AMSTERDAM, 1988 — IOCCC WINNER // SPIGOT BASE MIXTA ]
+    </div>
+
     <!-- Narrative Center (Uncollapsible, balanced typography) -->
     <div class="narrative">
       <div class="beat" data-beat="0.05-0.38">
@@ -137,6 +142,12 @@ const circularCode = `                 #include <stdio.h>
     overflow: hidden;
     background: radial-gradient(circle at 50% 50%, #0d1624 0%, #050a10 100%);
     padding: 0 20px;
+  }
+
+  .spigot-plate {
+    position: absolute;
+    top: 6vh;
+    z-index: 6;
   }
 
   /* Uncollapsible Narrative Box */
