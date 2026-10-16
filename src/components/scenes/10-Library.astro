@@ -1,5 +1,6 @@
 ---
 import { MILESTONES } from '../../data/milestones';
+import SceneVideo from '../SceneVideo.astro';
 import { UI_STRINGS, type Locale } from '../../i18n';
 
 interface Props {
@@ -21,6 +22,14 @@ const t = UI_STRINGS[locale];
   data-scene-title={milestone.title[locale]}
 >
   <div class="stage">
+    <!-- Cinematic Atmospheric Video Background (Alabaster White & Klein Blue Infinite Horizon) -->
+    <SceneVideo 
+      src="/videos/10-horizon.mp4" 
+      poster="/images/10-horizon.jpg" 
+      blend="normal" 
+      opacity={0.85} 
+    />
+
     <!-- Cosmic Digits Earthrise Curvature Backdrop -->
     <div class="earthrise-curvature" aria-hidden="true">
       <svg viewBox="0 0 1000 400" class="curvature-svg" preserveAspectRatio="none">
