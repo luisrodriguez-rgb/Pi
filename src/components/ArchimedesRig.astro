@@ -57,6 +57,15 @@ const steps = FORMULAS.archimedes.steps;
     </div>
   </div>
 
+  <!-- Interactive Hydraulic Polygon Clamping Controls -->
+  <div class="polygon-selector" id="polygon-selector">
+    <button type="button" class="poly-step-btn is-active" data-step="0">6 LADOS</button>
+    <button type="button" class="poly-step-btn" data-step="1">12 LADOS</button>
+    <button type="button" class="poly-step-btn" data-step="2">24 LADOS</button>
+    <button type="button" class="poly-step-btn" data-step="3">48 LADOS</button>
+    <button type="button" class="poly-step-btn" data-step="4">96 LADOS (22/7)</button>
+  </div>
+
   <!-- Realtime calculation panel (Blueprint Technical Styling) -->
   <div class="math-panel">
     <div class="math-bound math-lower">
@@ -139,6 +148,39 @@ const steps = FORMULAS.archimedes.steps;
 
   let currentSides = -1;
 
+  const stepButtons = document.querySelectorAll<HTMLButtonElement>('.poly-step-btn');
+  let manualStep = false;
+
+  function setStep(index: number) {
+    stepButtons.forEach((btn, i) => btn.classList.toggle('is-active', i === index));
+    const step = stepsData[index];
+    const n = step.n;
+    currentSides = n;
+    soundEngine.playPolygonDoubling(n);
+    const rCircum = R / Math.cos(Math.PI / n);
+    if (polyInscribed) polyInscribed.setAttribute('points', calculatePolygonPoints(n, R));
+    if (polyCircum) polyCircum.setAttribute('points', calculatePolygonPoints(n, rCircum));
+    const lower = n * Math.sin(Math.PI / n);
+    const upper = n * Math.tan(Math.PI / n);
+    const diff = upper - lower;
+    if (sidesEl) sidesEl.textContent = `n = ${n}`;
+    if (lowerValEl) lowerValEl.textContent = lower.toFixed(5);
+    if (lowerFracEl) lowerFracEl.textContent = step.lowerFrac;
+    if (upperValEl) upperValEl.textContent = upper.toFixed(5);
+    if (upperFracEl) upperFracEl.textContent = step.upperFrac;
+    if (trapLeft) trapLeft.textContent = lower.toFixed(4);
+    if (trapRight) trapRight.textContent = upper.toFixed(4);
+    if (trapError) trapError.textContent = diff.toFixed(5);
+  }
+
+  stepButtons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      manualStep = true;
+      const idx = parseInt(btn.dataset.step || '0', 10);
+      setStep(idx);
+    });
+  });
+
   function updateRig() {
     if (!rig) return;
     const scene = rig.closest('[data-scene]') as HTMLElement | null;
@@ -147,7 +189,10 @@ const steps = FORMULAS.archimedes.steps;
     const pVal = parseFloat(getComputedStyle(scene).getPropertyValue('--p')) || 0;
     const p = Math.min(1, Math.max(0, pVal));
 
+    if (manualStep) return;
+
     const stepIndex = Math.min(4, Math.floor(p * 5));
+    stepButtons.forEach((btn, i) => btn.classList.toggle('is-active', i === stepIndex));
     const step = stepsData[stepIndex];
     const n = step.n;
 
@@ -179,7 +224,10 @@ const steps = FORMULAS.archimedes.steps;
     }
   }
 
-  window.addEventListener('scroll', updateRig, { passive: true });
+  window.addEventListener('scroll', () => {
+    manualStep = false;
+    updateRig();
+  }, { passive: true });
   updateRig();
 
   // ==========================================================
@@ -319,6 +367,34 @@ const steps = FORMULAS.archimedes.steps;
     font-family: var(--font-mono);
     font-size: 0.95rem;
     color: var(--accent);
+  }
+
+  /* Hydraulic Polygon Selector */
+  .polygon-selector {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .poly-step-btn {
+    background: color-mix(in srgb, var(--bg-surface) 92%, transparent);
+    border: 1px solid var(--grid-line);
+    color: var(--fg-ink);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    padding: 5px 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .poly-step-btn:hover, .poly-step-btn.is-active {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(217, 78, 40, 0.14);
+    box-shadow: 0 0 10px rgba(217, 78, 40, 0.3);
   }
 
   /* Blueprint Technical Panel */
