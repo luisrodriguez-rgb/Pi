@@ -2,6 +2,7 @@
 import { MILESTONES } from '../../data/milestones';
 import { UI_STRINGS, type Locale } from '../../i18n';
 import RhindArtifact from '../RhindArtifact.astro';
+import SceneVideo from '../SceneVideo.astro';
 
 interface Props {
   locale?: Locale;
@@ -22,15 +23,13 @@ const t = UI_STRINGS[locale];
   data-scene-title={milestone.title[locale]}
 >
   <div class="stage">
-    <!-- Papyrus Ambient Fiber Backdrop -->
-    <div class="papyrus-ambient" aria-hidden="true">
-      <img 
-        src="/images/rhind-papyrus.jpg" 
-        alt="" 
-        class="papyrus-photo-bg historical-photo" 
-        loading="eager"
-      />
-    </div>
+    <!-- Cinematic Atmospheric Video Background (Google Flow / Veo) -->
+    <SceneVideo 
+      src="/videos/01-egypt.mp4" 
+      poster="/images/01-egypt.jpg" 
+      blend="lighten" 
+      opacity={0.55} 
+    />
 
     <!-- 2-Column Responsive Layout (DSKY Midudev Philosophy) -->
     <div class="stage-layout">
@@ -328,7 +327,9 @@ const t = UI_STRINGS[locale];
     max-width: 400px;
     position: relative;
     padding: 16px;
-    background: color-mix(in srgb, var(--bg-surface) 94%, transparent);
+    background: rgba(26, 20, 14, 0.45);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
     border: 1px solid var(--grid-line);
   }
 
