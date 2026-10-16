@@ -45,21 +45,23 @@ const t = UI_STRINGS[locale];
     <!-- Center: Precision reached in this era (Strictly tabular nums) -->
     <div class="hud-section hud-center">
       <div class="hud-meta-block">
-        <span class="hud-label">ODÓMETRO DE PRECISIÓN (π)</span>
+        <span class="hud-label">{locale === 'es' ? 'PRECISIÓN HISTÓRICA [π]' : 'HISTORICAL PRECISION [π]'}</span>
         <span id="hud-pi" class="hud-value hud-mono-value tabular">3.16049...</span>
       </div>
     </div>
 
-    <!-- Right: Scene indicator, Audio toggle, Language -->
+    <!-- Right: Scene indicator, Audio toggle, Language (Generous spacing & dial aesthetic) -->
     <div class="hud-section hud-right">
-      <div class="hud-scene-counter">
-        <span class="hud-label">CAPÍTULO</span>
+      <div class="hud-scene-counter" title={locale === 'es' ? 'Capítulo actual del homenaje' : 'Current chapter'}>
+        <span class="hud-label">{locale === 'es' ? 'CAPÍTULO' : 'CHAPTER'}</span>
         <span class="hud-counter-box tabular">
           <strong id="hud-scene-num">01</strong>
           <span class="hud-dim">/</span>
           <span class="hud-dim">10</span>
         </span>
       </div>
+
+      <div class="hud-divider"></div>
 
       <!-- Audio Synth Toggle -->
       <button 
@@ -76,6 +78,8 @@ const t = UI_STRINGS[locale];
         </span>
         <span id="audio-btn-label" class="hud-btn-text tabular">SONIDO</span>
       </button>
+
+      <div class="hud-divider"></div>
 
       <!-- Language selector -->
       <div class="lang-switch tabular">
@@ -265,6 +269,19 @@ const t = UI_STRINGS[locale];
     color: var(--accent);
     font-variant-numeric: tabular-nums slashed-zero;
     letter-spacing: 0.02em;
+  }
+
+  .hud-right {
+    gap: 16px;
+  }
+
+  .hud-scene-counter {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 10px;
+    border: 1px solid var(--grid-line);
+    background: color-mix(in srgb, var(--bg-surface) 95%, transparent);
   }
 
   .hud-counter-box {
