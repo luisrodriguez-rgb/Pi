@@ -1,6 +1,7 @@
 ---
 import { MILESTONES } from '../../data/milestones';
 import PunchCard from '../PunchCard.astro';
+import SceneVideo from '../SceneVideo.astro';
 import { type Locale } from '../../i18n';
 
 interface Props {
@@ -21,6 +22,14 @@ const milestone = MILESTONES[7];
   data-scene-title={milestone.title[locale]}
 >
   <div class="stage">
+    <!-- Cinematic Atmospheric Video Background (Aberdeen 1949 Vacuum Tubes & Silicon Dawn) -->
+    <SceneVideo 
+      src="/videos/08-eniac.mp4" 
+      poster="/images/08-eniac.jpg" 
+      blend="screen" 
+      opacity={0.55} 
+    />
+
     <!-- Narrative Center (Uncollapsible, balanced typography positioned above rig) -->
     <div class="narrative">
       <div class="beat" data-beat="0.05-0.38">
