@@ -1,0 +1,227 @@
+@import url('https://fonts.googleapis.com/css2?family=B612+Mono:ital,wght@0,400;0,700;1,400;1,700&family=IM+Fell+English:ital@0;1&family=Instrument+Serif:ital@0;1&family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&display=swap');
+
+:root {
+  /* Historical Typographic Hierarchy */
+  --font-display: 'IM Fell English', Georgia, serif;
+  --font-editorial: 'Newsreader', 'Instrument Serif', Georgia, serif;
+  --font-mono: 'B612 Mono', monospace;
+
+  /* I. Era Arcaica (Egipto, Siracusa, China - Default) */
+  --bg-surface: #120e0a;
+  --fg-ink: #e6d7b9;
+  --accent: #d94e28;
+  --muted: #8c6d46;
+  --grid-line: color-mix(in srgb, var(--fg-ink) 12%, transparent);
+  --error-ink: #9e1b1b;
+  --phosphor: #39ff88;
+  --glow-accent: rgba(217, 78, 40, 0.4);
+}
+
+/* II. Era de Hierro e Imprenta (Leiden, Londres, París, Shanks) */
+[data-theme="stone"],
+[data-theme="leiden"],
+[data-theme="london"],
+[data-theme="paris"],
+[data-theme="shanks"] {
+  --bg-surface: #161816;
+  --fg-ink: #ede8dc;
+  --accent: #c59b27;
+  --muted: #848c82;
+  --grid-line: color-mix(in srgb, var(--fg-ink) 10%, transparent);
+  --glow-accent: rgba(197, 155, 39, 0.45);
+}
+
+/* Shanks specific carmine error */
+[data-theme="shanks"] {
+  --accent: #e63946;
+  --glow-accent: rgba(230, 57, 70, 0.5);
+}
+
+/* III. Era Termoiónica (Ramanujan y ENIAC, Culto Hacker) */
+[data-theme="eniac"],
+[data-theme="cyber"] {
+  --bg-surface: #0a110d;
+  --fg-ink: #dfd3b9;
+  --accent: #39ff88;
+  --muted: #2e4a36;
+  --grid-line: rgba(57, 255, 136, 0.12);
+  --glow-accent: rgba(57, 255, 136, 0.5);
+}
+
+/* IV. Era Cuántica / Infinito (Inversión Brutalista Alabastro / Klein) */
+[data-theme="infinite"],
+[data-theme="infinity"] {
+  --bg-surface: #f4f1ea;
+  --fg-ink: #090a0f;
+  --accent: #002fa7; /* Azul Ultramar Internacional Klein */
+  --muted: #7d8291;
+  --grid-line: rgba(9, 10, 15, 0.12);
+  --glow-accent: rgba(0, 47, 167, 0.35);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background-color: var(--bg-surface);
+  color: var(--fg-ink);
+  font-family: var(--font-editorial);
+  scroll-behavior: smooth;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Hide native scrollbar - navigation driven by Astrolabe */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+}
+html, body {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+body {
+  overflow-x: hidden;
+  background-color: var(--bg-surface);
+  color: var(--fg-ink);
+  transition: background-color 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+              color 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  /* 80px Astronomical Blueprint Grid */
+  background-image: 
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+  background-size: 80px 80px;
+  background-position: center top;
+}
+
+/* GPU Static 35mm Analog Film Grain */
+.film-grain {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.048;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+/* Strict Tabular Numbers: Zero pixel wobble at 60 FPS */
+.pi-digits, .tabular, [data-tabular] {
+  font-family: var(--font-mono) !important;
+  font-variant-numeric: tabular-nums slashed-zero !important;
+  letter-spacing: -0.02em !important;
+}
+
+/* Organic Chiseled / Pressed Ink Displacement Filter for Titles */
+.chiseled-title, .antique-title {
+  filter: url(#ink-displacement);
+}
+
+/* Museum Catalog Technical Labels */
+.museum-plate {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 10px;
+  border: 1px solid var(--grid-line);
+  background: color-mix(in srgb, var(--bg-surface) 90%, transparent);
+}
+
+.museum-plate::before {
+  content: '■';
+  font-size: 0.5rem;
+  color: var(--accent);
+}
+
+/* Architectural Crosshair / Registration Markers (+) */
+.grid-cross {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  pointer-events: none;
+  color: var(--grid-line);
+}
+.grid-cross::before, .grid-cross::after {
+  content: '';
+  position: absolute;
+  background: currentColor;
+}
+.grid-cross::before {
+  top: 3px; left: 0; width: 7px; height: 1px;
+}
+.grid-cross::after {
+  top: 0; left: 3px; width: 1px; height: 7px;
+}
+
+/* Uncollapsible Narrative Rules */
+.narrative, .narrative-center {
+  width: 100% !important;
+  max-width: min(90vw, 760px) !important;
+  margin: 0 auto !important;
+  padding: 0 24px !important;
+  box-sizing: border-box !important;
+  text-align: center !important;
+}
+
+.beat {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  text-wrap: balance !important;
+  word-break: normal !important;
+  overflow-wrap: break-word !important;
+  white-space: normal !important;
+}
+
+/* ============================================================
+   X-RAY BLUEPRINT MODE (Easter Egg: Alt Key or Click [π])
+   Reveals mathematical wireframe, DOM vector layers, and --p values
+   ============================================================ */
+body.is-blueprint {
+  --grid-line: rgba(57, 255, 136, 0.3) !important;
+  --bg-surface: #040906 !important;
+  --fg-ink: #39ff88 !important;
+  --accent: #00ffff !important;
+}
+
+body.is-blueprint .papyrus-backdrop,
+body.is-blueprint .syracuse-bg,
+body.is-blueprint .china-backdrop,
+body.is-blueprint .earthrise-curvature,
+body.is-blueprint .film-grain {
+  opacity: 0.12 !important;
+}
+
+body.is-blueprint * {
+  outline: 1px dashed rgba(57, 255, 136, 0.22) !important;
+}
+
+body.is-blueprint .scene::after {
+  content: "DEBUG // SCENE: " attr(data-scene) " | --p: " attr(style) " | GPU COMPOSITED LAYER";
+  position: absolute;
+  top: 20px;
+  left: 36px;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: #39ff88;
+  background: rgba(0, 0, 0, 0.85);
+  padding: 4px 10px;
+  border: 1px solid #39ff88;
+  z-index: 100;
+  pointer-events: none;
+}
+
+body.is-blueprint #blueprint-badge {
+  display: flex !important;
+}
