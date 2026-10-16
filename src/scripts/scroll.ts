@@ -91,6 +91,46 @@ export function initScrollEngine() {
 
   // Initial calculation
   updateScenes();
+
+  // ==========================================================
+  // Hybrid Scroll-Modulated Cinematic Video Engine (60 FPS GPU Safe)
+  // ==========================================================
+  const videos = document.querySelectorAll<HTMLVideoElement>('[data-scene-video]');
+
+  if (videos.length > 0) {
+    const videoObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        const video = entry.target as HTMLVideoElement;
+        if (entry.isIntersecting) {
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      });
+    }, { rootMargin: '250px 0px' });
+
+    videos.forEach((v) => videoObserver.observe(v));
+
+    let lastScrollY = window.scrollY;
+    let velocityTimeout: any;
+
+    window.addEventListener('scroll', () => {
+      const delta = Math.abs(window.scrollY - lastScrollY);
+      lastScrollY = window.scrollY;
+
+      const targetRate = Math.min(1.65, 0.85 + delta * 0.012);
+      videos.forEach((v) => {
+        if (!v.paused) v.playbackRate = targetRate;
+      });
+
+      clearTimeout(velocityTimeout);
+      velocityTimeout = setTimeout(() => {
+        videos.forEach((v) => {
+          if (!v.paused) v.playbackRate = 0.85; // Elegant cinematic slow-motion rest
+        });
+      }, 150);
+    }, { passive: true });
+  }
 }
 
 // Auto-run if in browser
