@@ -1,0 +1,165 @@
+---
+import { MILESTONES } from '../../data/milestones';
+import PunchCard from '../PunchCard.astro';
+import { type Locale } from '../../i18n';
+
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = 'es' } = Astro.props;
+const milestone = MILESTONES[7];
+---
+
+<section 
+  id="scene-8" 
+  class="scene" 
+  data-scene="eniac" 
+  data-year={milestone.year}
+  data-pi-value={milestone.precisionValue}
+  data-theme={milestone.theme}
+  data-scene-title={milestone.title[locale]}
+>
+  <div class="stage">
+    <!-- Narrative Center (Uncollapsible, balanced typography) -->
+    <div class="narrative">
+      <div class="beat" data-beat="0.05-0.38">
+        <span class="scene-kicker">08 // MADRAS Y CAMBRIDGE, 1914 · RAMANUJAN</span>
+        <h2 class="scene-title">El Sueño de Namagiri</h2>
+        <p class="beat-text">
+          {locale === 'es'
+            ? 'Srinivasa Ramanujan afirmaba que la diosa Namagiri escribía fórmulas en su lengua mientras dormía. Entre ellas, una serie infinita con el factor 2√2/9801 que destroza la lentitud: con un solo paso de cálculo clava 8 decimales exactos de golpe.'
+            : 'Srinivasa Ramanujan declared the goddess Namagiri inscribed equations upon his tongue in dreams. Among them was an infinite series with prefactor 2√2/9801 that obliterated mathematical slowness: in a single step, it nails 8 exact decimals.'}
+        </p>
+      </div>
+
+      <div class="beat" data-beat="0.42-0.80">
+        <span class="scene-kicker">08 // ABERDEEN, 1949 · EL AMANECER DEL SILICIO</span>
+        <h2 class="scene-title">ENIAC: 70 Horas para 2,037 Dígitos</h2>
+        <p class="beat-text">
+          {locale === 'es'
+            ? 'En 1949, John von Neumann introdujo a π dentro de una bestia de 30 toneladas y 17,468 tubos de vacío. Durante el fin de semana del 4 de julio, las tarjetas perforadas devoraron 2,037 decimales en 70 horas continuas, pulverizando 4,000 años de aritmética humana.'
+            : 'In 1949, John von Neumann fed π into a 30-ton colossus of 17,468 vacuum tubes. Over the July 4th weekend, 80-column punch cards chewed out 2,037 exact decimals in 70 continuous hours, pulverizing four millennia of human labor.'}
+        </p>
+      </div>
+
+      <div class="beat beat-climax" data-beat="0.84-0.98">
+        <blockquote class="eniac-quote">
+          <p>«El cálculo manual había muerto. La era del silicio abría las compuertas del infinito.»</p>
+          <cite>— George Reitwiesner &amp; John von Neumann (1949)</cite>
+        </blockquote>
+      </div>
+    </div>
+
+    <!-- The Dual Ramanujan / ENIAC PunchCard Rig -->
+    <div class="dual-tech-stage">
+      <PunchCard />
+    </div>
+  </div>
+</section>
+
+<style>
+  .scene {
+    height: 380vh;
+    position: relative;
+    --p: 0;
+  }
+
+  .stage {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: radial-gradient(circle at 50% 50%, #0d1a12 0%, #050a07 100%);
+    padding: 0 20px;
+  }
+
+  /* Uncollapsible Narrative Box */
+  .narrative {
+    position: absolute;
+    top: 9vh;
+    width: 100% !important;
+    max-width: min(90vw, 740px) !important;
+    margin: 0 auto !important;
+    text-align: center !important;
+    pointer-events: none;
+    z-index: 5;
+  }
+
+  .beat {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0);
+    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    width: 100% !important;
+  }
+
+  .beat.is-active {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    pointer-events: auto;
+  }
+
+  .scene-kicker {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    color: #33ff33;
+    display: inline-block;
+    margin-bottom: 6px;
+  }
+
+  .scene-title {
+    font-family: var(--font-serif);
+    font-size: clamp(1.8rem, 3.8vw, 2.8rem);
+    font-weight: 400;
+    color: #fff;
+    margin: 0 0 10px;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9);
+  }
+
+  .beat-text {
+    font-family: var(--font-sans);
+    font-size: clamp(0.95rem, 1.8vw, 1.12rem);
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.65;
+    margin: 0;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+  }
+
+  .eniac-quote {
+    font-family: var(--font-serif);
+    font-size: clamp(1.3rem, 2.8vw, 1.9rem);
+    font-style: italic;
+    color: #33ff33;
+    line-height: 1.5;
+    margin: 0;
+    text-shadow: 0 0 25px rgba(51, 255, 51, 0.5);
+  }
+
+  .eniac-quote cite {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-style: normal;
+    color: rgba(255, 255, 255, 0.6);
+    margin-top: 10px;
+    letter-spacing: 0.05em;
+  }
+
+  .dual-tech-stage {
+    margin-top: 18vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    z-index: 2;
+  }
+</style>

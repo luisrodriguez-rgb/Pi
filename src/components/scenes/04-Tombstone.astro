@@ -14,42 +14,55 @@ const vanCeulenDigits = '3.14159265358979323846264338327950288'.split('');
 <section 
   id="scene-4" 
   class="scene" 
-  data-scene="tombstone" 
+  data-scene="leiden" 
   data-year={milestone.year}
-  data-pi-value={milestone.piApproximation}
+  data-pi-value={milestone.precisionValue}
   data-theme={milestone.theme}
   data-scene-title={milestone.title[locale]}
 >
   <div class="stage">
-    <!-- Narrative beats -->
+    <!-- Crossed Fencing Rapiers fading as p increases -->
+    <div class="fencing-swords">
+      <div class="rapier rapier-left"></div>
+      <div class="rapier rapier-right"></div>
+    </div>
+
+    <!-- Narrative Center (Uncollapsible, balanced typography) -->
     <div class="narrative">
       <div class="beat" data-beat="0.05-0.35">
-        <span class="scene-kicker">04 // LEIDEN, 1610 d.C.</span>
+        <span class="scene-kicker">04 // LEIDEN, 1610 d.C. · PAÍSES BAJOS</span>
         <h2 class="scene-title">{milestone.title[locale]}</h2>
         <p class="beat-text">
           {locale === 'es'
-            ? 'El matemático germano-holandés Ludolph van Ceulen dedicó la mayor parte de su vida a llevar el método poligonal de Arquímedes hasta el límite absoluto: un polígono monstruoso de 2⁶² lados (4,611,686,018,427,387,904 lados).'
-            : 'German-Dutch mathematician Ludolph van Ceulen spent the bulk of his life pushing Archimedes’ exhaustion method to its outer limit: a monstrous polygon of 2⁶² sides (4,611,686,018,427,387,904 sides).'}
+            ? 'El maestro de esgrima e ingeniería militar Ludolph van Ceulen dedicó la mayor parte de su vida a un duelo implacable contra el infinito: un polígono de 2⁶² lados (más de cuatro trillones de caras). A mano limpia, sin calculadoras, obtuvo 35 cifras exactas.'
+            : 'Fencing and military engineering master Ludolph van Ceulen dedicated the greater part of his life to a relentless duel against infinity: a 2⁶²-sided polygon (over four trillion facets). By hand alone, with zero mechanical aids, he attained 35 exact figures.'}
         </p>
       </div>
 
-      <div class="beat" data-beat="0.40-0.95">
-        <span class="scene-kicker">04 // EL EPITAFIO DE PI</span>
-        <h2 class="scene-title">Cincelado en la Piedra de San Pedro</h2>
+      <div class="beat" data-beat="0.40-0.80">
+        <span class="scene-kicker">04 // EL CINCEL EN LA PIEDRA NEGRA</span>
+        <h2 class="scene-title">El Epitafio de la Iglesia de San Pedro</h2>
         <p class="beat-text">
           {locale === 'es'
-            ? 'A mano limpia, sin calculadoras, obtuvo 35 cifras decimales exactas. Estaba tan orgulloso de su hazaña que ordenó en su testamento que estos 35 números fueran cincelados sobre su lápida sepulcral.'
-            : 'By hand, with zero mechanical aids, he attained 35 exact decimal digits. He was so proud of this feat that he dictated in his will that all 35 numbers be engraved upon his tombstone.'}
+            ? 'Estaba tan orgulloso de su sacrificio que ordenó en su testamento que aquellos 35 números fueran cincelados sobre su lápida sepulcral en la Pieterskerk de Leiden. Cada golpe de cincel grabó su vida en la roca.'
+            : 'He took such fierce pride in his sacrifice that he ordered in his final will that those 35 numbers be chiseled upon his tombstone in the Pieterskerk of Leiden. Each chisel strike carved his lifetime into the bedrock.'}
         </p>
+      </div>
+
+      <div class="beat beat-climax" data-beat="0.84-0.98">
+        <blockquote class="tomb-latin-quote">
+          <p>«Qui in vita sua multum laboravit...»</p>
+          <cite>«Quien en su vida trabajó incansablemente midiendo el círculo.» — Lápida de Van Ceulen</cite>
+        </blockquote>
       </div>
     </div>
 
-    <!-- The Ancient Tombstone Monument -->
+    <!-- The Ancient Tombstone Monument with Chiseled Digits -->
     <div class="tombstone-slab" id="tombstone-slab">
       <div class="slab-arch">
         <span class="cross-ornament">✠</span>
         <span class="slab-heading">LUDOLPHUS VAN CEULEN</span>
-        <span class="slab-subheading">ANNO DOMINI MDCX</span>
+        <span class="slab-subheading">MAGISTER ARTIUM ATQUE GLADIATORI</span>
       </div>
 
       <div class="slab-divider"></div>
@@ -57,13 +70,11 @@ const vanCeulenDigits = '3.14159265358979323846264338327950288'.split('');
       <!-- The 35 Chiseled Digits Grid -->
       <div class="chiseled-grid">
         {vanCeulenDigits.map((char, index) => {
-          // Normalize threshold 0.15 to 0.85
           const threshold = 0.15 + (index / vanCeulenDigits.length) * 0.70;
           return (
             <span 
               class={`chiseled-glyph ${char === '.' ? 'dot-glyph' : ''}`}
               data-threshold={threshold.toFixed(3)}
-              style={`--threshold: ${threshold.toFixed(3)};`}
             >
               {char}
             </span>
@@ -72,7 +83,7 @@ const vanCeulenDigits = '3.14159265358979323846264338327950288'.split('');
       </div>
 
       <div class="slab-footer">
-        <span class="slab-counter-label">DÍGITOS CINCELADOS:</span>
+        <span class="slab-counter-label">DÍGITOS CINCELADOS EN LA CRIPTA:</span>
         <strong id="chiseled-count" class="slab-counter-num">0 / 35</strong>
       </div>
     </div>
@@ -104,7 +115,6 @@ const vanCeulenDigits = '3.14159265358979323846264338327950288'.split('');
 
       if (countEl) countEl.textContent = `${activeCount} / 35`;
 
-      // Play chisel sound when a new batch of 5 digits is engraved
       if (Math.floor(activeCount / 5) > Math.floor(lastChiseled / 5)) {
         soundEngine.playChisel();
       }
@@ -133,15 +143,46 @@ const vanCeulenDigits = '3.14159265358979323846264338327950288'.split('');
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    background: radial-gradient(circle at 50% 50%, #17171e 0%, #0a0a0d 100%);
+    background: radial-gradient(circle at 50% 50%, #17191e 0%, #08090b 100%);
     padding: 0 20px;
   }
 
+  /* Crossed Fencing Rapiers */
+  .fencing-swords {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    opacity: calc(clamp(0, 1 - var(--p) * 2.5, 0.4));
+    transition: opacity 0.3s ease;
+  }
+
+  .rapier {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 2px;
+    height: 280px;
+    background: linear-gradient(180deg, #e6c280 0%, rgba(230, 194, 128, 0.1) 100%);
+    box-shadow: 0 0 10px rgba(230, 194, 128, 0.3);
+  }
+
+  .rapier-left {
+    transform: translate(-50%, -50%) rotate(-40deg);
+  }
+
+  .rapier-right {
+    transform: translate(-50%, -50%) rotate(40deg);
+  }
+
+  /* Uncollapsible Narrative Box */
   .narrative {
     position: absolute;
-    top: 11vh;
-    max-width: 660px;
-    text-align: center;
+    top: 10vh;
+    width: 100% !important;
+    max-width: min(90vw, 740px) !important;
+    margin: 0 auto !important;
+    text-align: center !important;
     pointer-events: none;
     z-index: 5;
   }
@@ -154,6 +195,7 @@ const vanCeulenDigits = '3.14159265358979323846264338327950288'.split('');
     left: 0;
     right: 0;
     top: 0;
+    width: 100% !important;
   }
 
   .beat.is-active {
@@ -164,46 +206,67 @@ const vanCeulenDigits = '3.14159265358979323846264338327950288'.split('');
 
   .scene-kicker {
     font-family: var(--font-mono);
-    font-size: 0.7rem;
+    font-size: 0.72rem;
     letter-spacing: 0.18em;
-    color: #e2b714;
+    color: #e6c280;
     display: inline-block;
     margin-bottom: 6px;
   }
 
   .scene-title {
     font-family: var(--font-serif);
-    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-size: clamp(1.8rem, 3.8vw, 2.8rem);
     font-weight: 400;
     color: #fff;
     margin: 0 0 10px;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9);
   }
 
   .beat-text {
     font-family: var(--font-sans);
-    font-size: clamp(0.9rem, 1.6vw, 1.05rem);
-    color: rgba(255, 255, 255, 0.7);
-    line-height: 1.5;
+    font-size: clamp(0.95rem, 1.8vw, 1.12rem);
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.65;
     margin: 0;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
   }
 
-  /* Dark Granite Stone Tombstone Monument */
+  .tomb-latin-quote {
+    font-family: var(--font-serif);
+    font-size: clamp(1.3rem, 2.8vw, 1.9rem);
+    font-style: italic;
+    color: #e6c280;
+    line-height: 1.5;
+    margin: 0;
+    text-shadow: 0 0 25px rgba(230, 194, 128, 0.4);
+  }
+
+  .tomb-latin-quote cite {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-style: normal;
+    color: rgba(255, 255, 255, 0.6);
+    margin-top: 10px;
+    letter-spacing: 0.05em;
+  }
+
+  /* Dark Granite Stone Tombstone */
   .tombstone-slab {
     position: relative;
     margin-top: 18vh;
-    width: min(90vw, 540px);
-    background: #14161b;
+    width: min(90vw, 560px);
+    background: #13151a;
     background-image: 
       radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-      linear-gradient(180deg, #1d2026 0%, #111317 100%);
+      linear-gradient(180deg, #1c1f26 0%, #0f1115 100%);
     background-size: 16px 16px, 100% 100%;
-    border: 2px solid rgba(255, 255, 255, 0.12);
+    border: 2px solid rgba(230, 194, 128, 0.25);
     border-radius: 40px 40px 12px 12px;
-    padding: 32px 30px 24px;
+    padding: 30px 28px 22px;
     box-shadow: 
       0 30px 80px rgba(0, 0, 0, 0.9),
-      inset 0 2px 4px rgba(255, 255, 255, 0.1),
-      inset 0 -4px 12px rgba(0, 0, 0, 0.6);
+      inset 0 2px 4px rgba(255, 255, 255, 0.1);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -215,12 +278,12 @@ const vanCeulenDigits = '3.14159265358979323846264338327950288'.split('');
     flex-direction: column;
     align-items: center;
     gap: 4px;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
   }
 
   .cross-ornament {
     font-size: 1.2rem;
-    color: rgba(212, 175, 55, 0.6);
+    color: #e6c280;
   }
 
   .slab-heading {
@@ -232,30 +295,29 @@ const vanCeulenDigits = '3.14159265358979323846264338327950288'.split('');
 
   .slab-subheading {
     font-family: var(--font-mono);
-    font-size: 0.65rem;
-    letter-spacing: 0.2em;
-    color: rgba(212, 175, 55, 0.7);
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    color: rgba(230, 194, 128, 0.7);
   }
 
   .slab-divider {
     width: 60px;
     height: 1px;
-    background: rgba(212, 175, 55, 0.3);
-    margin: 8px 0 16px;
+    background: rgba(230, 194, 128, 0.3);
+    margin: 8px 0 14px;
   }
 
-  /* The Chiseled Digits */
   .chiseled-grid {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     gap: 6px 8px;
-    max-width: 460px;
+    max-width: 480px;
     padding: 16px;
-    background: rgba(0, 0, 0, 0.35);
+    background: rgba(0, 0, 0, 0.4);
     border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.05);
   }
 
   .chiseled-glyph {
@@ -268,22 +330,18 @@ const vanCeulenDigits = '3.14159265358979323846264338327950288'.split('');
     place-items: center;
     color: rgba(255, 255, 255, 0.08);
     transform: scale(0.92);
-    transition: 
-      color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-      transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-      text-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .dot-glyph {
     width: 12px;
   }
 
-  /* Chiseled state: illuminated gold engraving */
   .chiseled-glyph.is-chiseled {
-    color: #ffd700;
+    color: #e6c280;
     transform: scale(1);
     text-shadow: 
-      0 0 10px rgba(255, 215, 0, 0.6),
+      0 0 12px rgba(230, 194, 128, 0.6),
       0 2px 4px rgba(0, 0, 0, 0.9);
   }
 
@@ -291,7 +349,7 @@ const vanCeulenDigits = '3.14159265358979323846264338327950288'.split('');
     display: flex;
     align-items: center;
     gap: 8px;
-    margin-top: 20px;
+    margin-top: 18px;
     font-family: var(--font-mono);
     font-size: 0.75rem;
   }
@@ -302,6 +360,6 @@ const vanCeulenDigits = '3.14159265358979323846264338327950288'.split('');
   }
 
   .slab-counter-num {
-    color: #ffd700;
+    color: #e6c280;
   }
 </style>

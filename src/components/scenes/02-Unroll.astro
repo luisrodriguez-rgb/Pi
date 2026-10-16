@@ -1,5 +1,6 @@
 ---
 import { MILESTONES } from '../../data/milestones';
+import ArchimedesRig from '../ArchimedesRig.astro';
 import { type Locale } from '../../i18n';
 
 interface Props {
@@ -13,107 +14,58 @@ const milestone = MILESTONES[1];
 <section 
   id="scene-2" 
   class="scene" 
-  data-scene="unroll" 
+  data-scene="syracuse" 
   data-year={milestone.year}
-  data-pi-value={milestone.piApproximation}
+  data-pi-value={milestone.precisionValue}
   data-theme={milestone.theme}
   data-scene-title={milestone.title[locale]}
 >
   <div class="stage">
-    <!-- Narrative beats -->
+    <!-- Bloodied Sand and Halftone Stone Backdrop -->
+    <div class="syracuse-bg">
+      <div class="roman-sword-slash"></div>
+    </div>
+
+    <!-- Narrative Center (Zero-collapse, high aesthetic typography) -->
     <div class="narrative">
-      <div class="beat" data-beat="0.05-0.40">
-        <span class="scene-kicker">02 // GEOMETRÍA FUNDAMENTAL</span>
+      <div class="beat" data-beat="0.05-0.38">
+        <span class="scene-kicker">02 // SIRACUSA, 212 a.C. · MAGNA GRECIA</span>
         <h2 class="scene-title">{milestone.title[locale]}</h2>
         <p class="beat-text">
-          {locale === 'es' 
-            ? 'Imagina una rueda perfecta cuyo diámetro mide exactamente 1 unidad. Si marcas un punto rojo en su base y la haces rodar sobre el suelo...' 
-            : 'Imagine a perfect wheel whose diameter measures exactly 1 unit. Mark a red dot on its rim and let it roll across the floor...'}
+          {locale === 'es'
+            ? 'Los legionarios romanos asaltan Siracusa. Un soldado irrumpe en el patio de Arquímedes. El anciano de 75 años está arrodillado dibujando en la arena con una vara. Al ver la sombra del soldado sobre su dibujo, susurra sus últimas palabras: «Noli turbare circulos meos».'
+            : 'Roman legionaries sack Syracuse. A soldier storms into Archimedes’ courtyard. The 75-year-old mathematician is kneeling in the dirt, tracing curves with a rod. Seeing the soldier’s shadow cast over his diagrams, he whispers his final words: «Noli turbare circulos meos».'}
         </p>
       </div>
 
-      <div class="beat" data-beat="0.45-0.95">
-        <span class="scene-kicker">02 // EL DESCUBRIMIENTO</span>
-        <h2 class="scene-title">La Distancia Trascendente</h2>
+      <div class="beat" data-beat="0.42-0.80">
+        <span class="scene-kicker">02 // LA PRENSA HIDRÁULICA GEOMÉTRICA</span>
+        <h2 class="scene-title">La Trampa de los 96 Lados</h2>
         <p class="beat-text">
-          {locale === 'es' 
-            ? 'Al completar exactamente una vuelta completa (360°), la rueda jamás cae sobre un número entero ni sobre una fracción finita. Se detiene exactamente en 3.14159265...' 
-            : 'Upon completing exactly one full turn (360°), the wheel never lands on an integer or a finite fraction. It halts precisely at 3.14159265...'}
+          {locale === 'es'
+            ? 'Dos polígonos —uno por dentro y otro por fuera— se cierran sobre el círculo como una prensa. Con cada duplicación (6 → 12 → 24 → 48 → 96 lados), el espacio se asfixia. π queda atrapado sin escapatoria entre 223/71 y 22/7.'
+            : 'Two regular polygons —one within and one without— clamp shut around the circle like a hydraulic press. With each doubling (6 → 12 → 24 → 48 → 96 sides), the margins suffocate. π is trapped without escape between 223/71 and 22/7.'}
         </p>
+      </div>
+
+      <div class="beat beat-climax" data-beat="0.84-0.98">
+        <blockquote class="sword-quote">
+          <p>«Mataron al hombre en la arena. Su trampa geométrica sobrevivió dos mil años.»</p>
+          <cite>— 223/71 &lt; π &lt; 22/7 (3.1418)</cite>
+        </blockquote>
       </div>
     </div>
 
-    <!-- The Rolling Wheel and Trail Rig -->
-    <div class="unroll-rig">
-      <!-- Live readout of distance traveled -->
-      <div class="distance-badge">
-        <span class="d-label">DISTANCIA RECORRIDA:</span>
-        <strong class="d-val">calc(var(--p) * π)</strong>
-      </div>
-
-      <div class="track-area">
-        <!-- Rolling Wheel (r = 50px -> D = 100px -> Circumference = 314.159px) -->
-        <div class="wheel-assembly">
-          <svg viewBox="0 0 100 100" class="wheel-svg">
-            <defs>
-              <linearGradient id="wheel-rim-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#ffd700" />
-                <stop offset="100%" stop-color="#ff9d00" />
-              </linearGradient>
-            </defs>
-            <!-- Outer rim -->
-            <circle cx="50" cy="50" r="47" stroke="url(#wheel-rim-grad)" stroke-width="4" fill="rgba(255, 215, 0, 0.05)" />
-            <!-- Spokes -->
-            <line x1="50" y1="3" x2="50" y2="97" stroke="rgba(255, 215, 0, 0.4)" stroke-width="2" />
-            <line x1="3" y1="50" x2="97" y2="50" stroke="rgba(255, 215, 0, 0.4)" stroke-width="2" />
-            <line x1="17" y1="17" x2="83" y2="83" stroke="rgba(255, 215, 0, 0.25)" stroke-width="1.5" />
-            <line x1="17" y1="83" x2="83" y2="17" stroke="rgba(255, 215, 0, 0.25)" stroke-width="1.5" />
-            <!-- Center hub -->
-            <circle cx="50" cy="50" r="8" fill="#ffd700" />
-            <!-- The red reference contact point (at bottom = 50, 97) -->
-            <circle cx="50" cy="97" r="5" fill="#ff3366" stroke="#fff" stroke-width="1.5" />
-          </svg>
-        </div>
-
-        <!-- The unrolled luminous trail (scaleX GPU transform) -->
-        <div class="unrolled-trail"></div>
-
-        <!-- Number line ruler -->
-        <div class="ruler">
-          <div class="ruler-tick tick-0" style="left: 0px;">
-            <div class="tick-mark"></div>
-            <span class="tick-label">0</span>
-          </div>
-          <div class="ruler-tick tick-1" style="left: 100px;">
-            <div class="tick-mark"></div>
-            <span class="tick-label">1</span>
-          </div>
-          <div class="ruler-tick tick-2" style="left: 200px;">
-            <div class="tick-mark"></div>
-            <span class="tick-label">2</span>
-          </div>
-          <div class="ruler-tick tick-3" style="left: 300px;">
-            <div class="tick-mark"></div>
-            <span class="tick-label">3</span>
-          </div>
-          <!-- Exact π mark at 314.159px -->
-          <div class="ruler-tick tick-pi" style="left: 314.16px;">
-            <div class="tick-mark pi-mark"></div>
-            <span class="tick-label pi-label">π = 3.14159...</span>
-          </div>
-          <div class="ruler-tick tick-4" style="left: 400px;">
-            <div class="tick-mark"></div>
-            <span class="tick-label">4</span>
-          </div>
-        </div>
-      </div>
+    <!-- Archimedes Hydraulic Rig Visualizer -->
+    <div class="rig-wrapper">
+      <ArchimedesRig />
     </div>
   </div>
 </section>
 
 <style>
   .scene {
-    height: 350vh;
+    height: 380vh;
     position: relative;
     --p: 0;
   }
@@ -128,15 +80,39 @@ const milestone = MILESTONES[1];
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    background: radial-gradient(circle at 50% 40%, #161822 0%, #08090c 100%);
-    padding: 0 24px;
+    background: radial-gradient(circle at 50% 50%, #1e1410 0%, #0d0807 100%);
+    padding: 0 20px;
   }
 
+  .syracuse-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Red Roman Sword Slash cuts diagonally across the screen when p > 0.8 */
+  .roman-sword-slash {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 3px;
+    height: 140%;
+    background: linear-gradient(180deg, transparent 0%, #e63946 50%, transparent 100%);
+    box-shadow: 0 0 20px #e63946, 0 0 40px rgba(230, 57, 70, 0.6);
+    transform: rotate(45deg) translate3d(calc((1 - var(--p)) * 200vw), 0, 0);
+    opacity: calc(clamp(0, (var(--p) - 0.75) * 4, 1));
+    will-change: transform, opacity;
+  }
+
+  /* Uncollapsible Narrative Box */
   .narrative {
     position: absolute;
-    top: 14vh;
-    max-width: 650px;
-    text-align: center;
+    top: 10vh;
+    width: 100% !important;
+    max-width: min(90vw, 740px) !important;
+    margin: 0 auto !important;
+    text-align: center !important;
     pointer-events: none;
     z-index: 5;
   }
@@ -149,6 +125,7 @@ const milestone = MILESTONES[1];
     left: 0;
     right: 0;
     top: 0;
+    width: 100% !important;
   }
 
   .beat.is-active {
@@ -159,154 +136,56 @@ const milestone = MILESTONES[1];
 
   .scene-kicker {
     font-family: var(--font-mono);
-    font-size: 0.7rem;
+    font-size: 0.72rem;
     letter-spacing: 0.18em;
-    color: #ffd000;
+    color: #e63946;
     display: inline-block;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
   }
 
   .scene-title {
     font-family: var(--font-serif);
-    font-size: clamp(2rem, 4vw, 3rem);
+    font-size: clamp(1.8rem, 3.8vw, 2.8rem);
     font-weight: 400;
     color: #fff;
-    margin: 0 0 12px;
+    margin: 0 0 10px;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9);
   }
 
   .beat-text {
     font-family: var(--font-sans);
-    font-size: clamp(0.95rem, 1.8vw, 1.15rem);
-    color: rgba(255, 255, 255, 0.7);
-    line-height: 1.6;
+    font-size: clamp(0.95rem, 1.8vw, 1.12rem);
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.65;
     margin: 0;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
   }
 
-  .unroll-rig {
-    position: relative;
-    width: min(90vw, 560px);
+  .sword-quote {
+    font-family: var(--font-serif);
+    font-size: clamp(1.3rem, 2.8vw, 1.9rem);
+    font-style: italic;
+    color: #ffd700;
+    line-height: 1.5;
+    margin: 0;
+    text-shadow: 0 0 25px rgba(230, 57, 70, 0.6);
+  }
+
+  .sword-quote cite {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-style: normal;
+    color: #e63946;
+    margin-top: 10px;
+    letter-spacing: 0.08em;
+  }
+
+  .rig-wrapper {
     margin-top: 18vh;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .distance-badge {
-    align-self: center;
-    margin-bottom: 24px;
-    background: rgba(18, 22, 30, 0.75);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 20px;
-    padding: 6px 18px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    backdrop-filter: blur(8px);
-  }
-
-  .d-label {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    color: rgba(255, 255, 255, 0.4);
-    letter-spacing: 0.1em;
-  }
-
-  .d-val {
-    font-family: var(--font-mono);
-    font-size: 0.9rem;
-    color: #ffd000;
-  }
-
-  .track-area {
-    position: relative;
-    width: 480px;
-    height: 160px;
-  }
-
-  /* Wheel translated by calc(var(--p) * 314.159px) and rotated by 1turn */
-  .wheel-assembly {
-    position: absolute;
-    left: 0;
-    bottom: 40px;
-    width: 100px;
-    height: 100px;
-    margin-left: -50px;
-    will-change: transform;
-    transform: 
-      translate3d(calc(var(--p) * 314.16px), 0, 0)
-      rotate(calc(var(--p) * 360deg));
-    filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.35));
-  }
-
-  .wheel-svg {
     width: 100%;
-    height: 100%;
-  }
-
-  /* Unrolled luminous trail: exactly 314.16px width at scaleX(1) */
-  .unrolled-trail {
-    position: absolute;
-    left: 0;
-    bottom: 39px;
-    width: 314.16px;
-    height: 4px;
-    background: linear-gradient(90deg, #ff3366 0%, #ffd000 70%, #00ffcc 100%);
-    border-radius: 2px;
-    box-shadow: 0 0 12px rgba(255, 208, 0, 0.6);
-    transform-origin: left center;
-    will-change: transform;
-    transform: scaleX(var(--p));
-  }
-
-  .ruler {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 40px;
-    height: 1px;
-    background: rgba(255, 255, 255, 0.15);
-  }
-
-  .ruler-tick {
-    position: absolute;
-    bottom: 0;
-    transform: translateX(-50%);
     display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .tick-mark {
-    width: 1px;
-    height: 10px;
-    background: rgba(255, 255, 255, 0.3);
-  }
-
-  .tick-label {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    color: rgba(255, 255, 255, 0.5);
-    margin-top: 6px;
-  }
-
-  .pi-mark {
-    height: 16px;
-    width: 2px;
-    background: #00ffcc;
-    box-shadow: 0 0 8px #00ffcc;
-  }
-
-  .pi-label {
-    color: #00ffcc;
-    font-weight: 700;
-    text-shadow: 0 0 10px rgba(0, 255, 204, 0.5);
-    white-space: nowrap;
-  }
-
-  @media (max-width: 600px) {
-    .track-area {
-      transform: scale(0.75);
-      transform-origin: left center;
-    }
+    justify-content: center;
+    z-index: 2;
   }
 </style>

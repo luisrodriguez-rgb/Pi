@@ -14,45 +14,60 @@ const t = UI_STRINGS[locale];
 <section 
   id="scene-10" 
   class="scene" 
-  data-scene="library" 
+  data-scene="infinity" 
   data-year={milestone.year}
-  data-pi-value={milestone.piApproximation}
+  data-pi-value={milestone.precisionValue}
   data-theme={milestone.theme}
   data-scene-title={milestone.title[locale]}
 >
   <div class="stage">
-    <!-- Narrative beats -->
+    <!-- Cosmic Digits Earthrise Curvature Backdrop -->
+    <div class="earthrise-curvature">
+      <svg viewBox="0 0 1000 400" class="curvature-svg" preserveAspectRatio="none">
+        <defs>
+          <radialGradient id="earth-glow" cx="50%" cy="100%" r="70%">
+            <stop offset="0%" stop-color="#00e5ff" stop-opacity="0.25" />
+            <stop offset="70%" stop-color="#ffd700" stop-opacity="0.08" />
+            <stop offset="100%" stop-color="#000000" stop-opacity="0" />
+          </radialGradient>
+        </defs>
+        <!-- The Horizon of Infinity Curve -->
+        <path d="M -100,400 Q 500,160 1100,400" fill="url(#earth-glow)" stroke="#00e5ff" stroke-width="1.5" stroke-dasharray="3,3" opacity="0.6"/>
+      </svg>
+    </div>
+
+    <!-- Narrative Center (Uncollapsible, balanced typography) -->
     <div class="narrative">
       <div class="beat" data-beat="0.05-0.35">
-        <span class="scene-kicker">10 // EL HORIZONTE DEL INFINITO</span>
+        <span class="scene-kicker">10 // EL HORIZONTE DEL INFINITO · PRESENTE</span>
         <h2 class="scene-title">{milestone.title[locale]}</h2>
         <p class="beat-text">
           {locale === 'es'
-            ? 'Si π es un número normal —como todos los indicios matemáticos sugieren—, contiene en su secuencia infinita cualquier combinación finita de dígitos que puedas concebir.'
-            : 'If π is a normal number —as all mathematical evidence strongly suggests—, it harbors somewhere within its infinite stream every finite sequence of digits you can conceive.'}
+            ? 'Desde los cálculos de Emma Haruka Iwao en la nube hasta los récords actuales con el algoritmo Chudnovsky (más de 105 billones de decimales calculados), la humanidad ha empujado la frontera como nunca antes.'
+            : 'From Emma Haruka Iwao’s cloud computations to modern records with the Chudnovsky algorithm (over 105 trillion decimals computed), humanity has driven the frontier into unfathomable depths.'}
         </p>
       </div>
 
       <div class="beat" data-beat="0.38-0.75">
-        <span class="scene-kicker">10 // TU EXISTENCIA CODIFICADA</span>
+        <span class="scene-kicker">10 // TU HUELLA ETERNA</span>
         <h2 class="scene-title">{t.searchTitle}</h2>
         <p class="beat-text">
           {locale === 'es'
-            ? 'Tu fecha de nacimiento, el número de teléfono de tu infancia, el año en que nació la persona que amas. Todo ya estaba esperando en el tejido de π antes de que existieran las estrellas.'
-            : 'Your birthday, your childhood phone number, the year your loved one was born. All were already etched into the fabric of π before the stars ever shone.'}
+            ? 'Si π es un número normal, dentro de su secuencia infinita están codificadas todas las fechas de nacimiento, todos los números de teléfono de tu infancia y las historias de amor que han existido. Todo ya estaba esperando en el tejido de π antes de que existieran las estrellas.'
+            : 'If π is normal, within its infinite stream lies inscribed every birthday, every phone number from childhood, and every love story ever told. All was already waiting in the fabric of π before the first star was born.'}
         </p>
       </div>
 
       <div class="beat beat-closing" data-beat="0.80-0.98">
         <div class="closing-card">
           <blockquote class="closing-quote">
-            «{t.closingQuote}»
+            «No había opción salvo medir lo inconmensurable. El círculo nunca se cierra; solo aumenta nuestra resolución.»
           </blockquote>
           <div class="closing-author">— pi-tribute.dev</div>
           <p class="closing-sub">
             {locale === 'es' 
-              ? 'De medir cuerdas en la arena de Babilonia a calcular 105 billones de decimales con supercomputadoras. El viaje del ser humano contra el infinito apenas comienza.'
-              : 'From measuring ropes in Babylonian sands to calculating 105 trillion decimals with supercomputers. Humanity’s quest against infinity has only just begun.'}
+              ? 'De medir cuerdas en la arena de Egipto a estrellar supercomputadoras contra el infinito. El círculo sigue abierto.'
+              : 'From measuring ropes in Egyptian sand to hurtling supercomputers against infinity. The circle remains open.'}
           </p>
           <div class="closing-actions">
             <a href="#scene-1" class="btn-restart">
@@ -115,7 +130,6 @@ const t = UI_STRINGS[locale];
     try {
       const res = await fetch('/digits/pi-1m.txt');
       const text = await res.text();
-      // Remove any whitespace or header
       piDigits = text.replace(/[^0-9]/g, '');
     } catch (e) {
       console.error('Failed to load pi digits:', e);
@@ -124,10 +138,9 @@ const t = UI_STRINGS[locale];
     }
   }
 
-  // Preload digits when user scrolls near scene 10 or focuses input
   input?.addEventListener('focus', loadDigits);
   window.addEventListener('pi-scene-change', (e: any) => {
-    if (e.detail?.sceneId === 'library' || e.detail?.sceneNumber >= 8) {
+    if (e.detail?.sceneId === 'infinity' || e.detail?.sceneNumber >= 8) {
       loadDigits();
     }
   });
@@ -150,14 +163,12 @@ const t = UI_STRINGS[locale];
       return;
     }
 
-    // Search query in pi stream (after 3.)
     const idx = piDigits.indexOf(query);
 
     resultBox.style.display = 'block';
     if (idx !== -1) {
       soundEngine.playFeynmanResolution();
 
-      // Show context
       const start = Math.max(0, idx - 15);
       const end = Math.min(piDigits.length, idx + query.length + 15);
 
@@ -167,7 +178,7 @@ const t = UI_STRINGS[locale];
 
       resultStatus.innerHTML = `
         <span class="status-success">
-          ★ ¡ENCONTRADO EN LA POSICIÓN <strong>#${idx.toLocaleString()}</strong> de π!
+          ★ Tu fecha ya estaba escrita en π desde el origen del universo. Aparece en el decimal <strong>#${idx.toLocaleString()}</strong>:
         </span>
       `;
 
@@ -212,15 +223,30 @@ const t = UI_STRINGS[locale];
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    background: radial-gradient(circle at 50% 50%, #151322 0%, #090710 100%);
+    background: radial-gradient(circle at 50% 50%, #0d121c 0%, #040608 100%);
     padding: 0 20px;
   }
 
+  .earthrise-curvature {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .curvature-svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Uncollapsible Narrative Box */
   .narrative {
     position: absolute;
-    top: 10vh;
-    max-width: 680px;
-    text-align: center;
+    top: 9vh;
+    width: 100% !important;
+    max-width: min(90vw, 740px) !important;
+    margin: 0 auto !important;
+    text-align: center !important;
     pointer-events: none;
     z-index: 5;
   }
@@ -233,6 +259,7 @@ const t = UI_STRINGS[locale];
     left: 0;
     right: 0;
     top: 0;
+    width: 100% !important;
   }
 
   .beat.is-active {
@@ -243,27 +270,29 @@ const t = UI_STRINGS[locale];
 
   .scene-kicker {
     font-family: var(--font-mono);
-    font-size: 0.7rem;
+    font-size: 0.72rem;
     letter-spacing: 0.18em;
-    color: #a78bfa;
+    color: #ffd700;
     display: inline-block;
     margin-bottom: 6px;
   }
 
   .scene-title {
     font-family: var(--font-serif);
-    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-size: clamp(1.8rem, 3.8vw, 2.8rem);
     font-weight: 400;
     color: #fff;
     margin: 0 0 10px;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9);
   }
 
   .beat-text {
     font-family: var(--font-sans);
-    font-size: clamp(0.9rem, 1.6vw, 1.05rem);
-    color: rgba(255, 255, 255, 0.75);
-    line-height: 1.5;
+    font-size: clamp(0.95rem, 1.8vw, 1.12rem);
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.65;
     margin: 0;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
   }
 
   .search-rig {
@@ -274,12 +303,12 @@ const t = UI_STRINGS[locale];
   }
 
   .search-box {
-    background: rgba(18, 16, 30, 0.85);
-    border: 1px solid rgba(167, 139, 250, 0.25);
+    background: rgba(14, 18, 28, 0.85);
+    border: 1px solid rgba(0, 229, 255, 0.25);
     border-radius: 16px;
     padding: 24px;
     backdrop-filter: blur(14px);
-    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.8), inset 0 0 20px rgba(167, 139, 250, 0.05);
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.85), inset 0 0 20px rgba(0, 229, 255, 0.05);
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -328,7 +357,7 @@ const t = UI_STRINGS[locale];
 
   .search-result {
     padding: 14px;
-    background: rgba(0, 0, 0, 0.35);
+    background: rgba(0, 0, 0, 0.4);
     border-radius: 8px;
     border: 1px solid rgba(255, 255, 255, 0.08);
   }
@@ -386,8 +415,8 @@ const t = UI_STRINGS[locale];
 
   /* Closing card */
   .closing-card {
-    background: rgba(14, 16, 22, 0.9);
-    border: 1px solid rgba(255, 215, 0, 0.2);
+    background: rgba(14, 18, 28, 0.9);
+    border: 1px solid rgba(255, 215, 0, 0.25);
     border-radius: 20px;
     padding: 32px 30px;
     box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9);

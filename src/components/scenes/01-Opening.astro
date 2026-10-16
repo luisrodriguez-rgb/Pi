@@ -14,51 +14,102 @@ const t = UI_STRINGS[locale];
 <section 
   id="scene-1" 
   class="scene" 
-  data-scene="opening" 
+  data-scene="rhind" 
   data-year={milestone.year}
-  data-pi-value={milestone.piApproximation}
+  data-pi-value={milestone.precisionValue}
   data-theme={milestone.theme}
   data-scene-title={milestone.title[locale]}
 >
   <div class="stage">
-    <!-- Canvas for particle circle morphing -->
-    <canvas id="circle-morph-canvas" class="morph-canvas"></canvas>
+    <!-- Papyrus Artifact Texture & Hieroglyphic Backdrop -->
+    <div class="papyrus-backdrop">
+      <svg viewBox="0 0 800 600" class="papyrus-svg" preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <filter id="papyrus-filter">
+            <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="4" result="noise"/>
+            <feDiffuseLighting in="noise" lighting-color="#e8cf9b" surfaceScale="2">
+              <feDistantLight azimuth="45" elevation="60" />
+            </feDiffuseLighting>
+            <feBlend mode="multiply" in="SourceGraphic" />
+          </filter>
+        </defs>
+        <!-- Ancient Papyrus Geometry: Rhind Problem 48 Octagon Grid -->
+        <g class="rhind-diagram" opacity="0.35">
+          <!-- 9x9 Grid Lines -->
+          <rect x="250" y="150" width="300" height="300" fill="none" stroke="#d97736" stroke-width="2" stroke-dasharray="6,4"/>
+          <!-- Octagon corners cut by 1/9 -->
+          <polygon points="350,150 450,150 550,250 550,350 450,450 350,450 250,350 250,250" fill="rgba(217,119,54,0.06)" stroke="#f4a261" stroke-width="2"/>
+        </g>
+      </svg>
+    </div>
 
-    <!-- Center Narrative Overlay -->
-    <div class="narrative-center">
-      <div class="beat beat-initial" data-beat="0.00-0.35">
-        <span class="scene-kicker">01 // INTRODUCCIÓN</span>
+    <!-- The Hemp Rope Compass & Circumference Canvas -->
+    <div class="rope-compass-stage">
+      <svg viewBox="0 0 500 500" class="compass-svg">
+        <!-- Pinned Center Peg (Bronze/Wood) -->
+        <circle cx="250" cy="250" r="6" fill="#f4a261" stroke="#3d2314" stroke-width="2"/>
+        
+        <!-- Rotating Tensed Hemp Rope -->
+        <g class="rope-arm">
+          <line x1="250" y1="250" x2="420" y2="250" stroke="#c29b62" stroke-width="4" stroke-dasharray="3,2" stroke-linecap="round"/>
+          <!-- Scribe stylus pin at tip -->
+          <circle cx="420" cy="250" r="5" fill="#e76f51" stroke="#fff" stroke-width="1.5"/>
+        </g>
+
+        <!-- Traced Golden Circle with stroke-dashoffset tied to --p -->
+        <circle cx="250" cy="250" r="170" class="traced-circle"/>
+
+        <!-- 9x9 Stone Grid Boundary appearing at p > 0.7 -->
+        <rect x="80" y="80" width="340" height="340" class="stone-quad"/>
+      </svg>
+    </div>
+
+    <!-- Narrative Center (Guaranteed wide container, zero vertical text collapse) -->
+    <div class="narrative-layer">
+      <!-- Beat 1: Initial Hook -->
+      <div class="beat beat-1" data-beat="0.00-0.30">
+        <span class="scene-kicker">01 // TEBAS, 1650 a.C. · EGIPTO</span>
         <h1 class="hero-title">{milestone.title[locale]}</h1>
-        <p class="hero-subtitle">{milestone.subtitle[locale]}</p>
+        <p class="hero-desc">
+          {locale === 'es'
+            ? 'En las orillas del Nilo, el escriba real Ahmes toma una cuerda de cáñamo con dos estacas. Para calcular la cebada que cabe en los graneros cilíndricos del Faraón, clava una punta en la arena y hace girar la otra.'
+            : 'Upon the banks of the Nile, royal scribe Ahmes grips a hemp rope tied between two stakes. To measure the barley within the Pharaoh’s cylindrical granaries, he pins one stake into the sand and sweeps the other.'}
+        </p>
         <div class="scroll-cue">
           <span class="mouse-icon"></span>
           <span class="cue-text">{t.scrollPrompt}</span>
         </div>
       </div>
 
-      <div class="beat beat-quote" data-beat="0.45-0.95">
-        <blockquote class="galileo-quote">
-          <p>«{milestone.quote?.[locale]}»</p>
-          <cite>— {milestone.quote?.author}</cite>
+      <!-- Beat 2: Rhind Papyrus Emergence -->
+      <div class="beat beat-2" data-beat="0.35-0.70">
+        <span class="scene-kicker">01 // EL PAPIRO DE RHIND (PROBLEMA 48)</span>
+        <h2 class="scene-title">«Quita 1/9 del diámetro»</h2>
+        <p class="hero-desc">
+          {locale === 'es'
+            ? '«Corta un noveno del diámetro y construye un cuadrado con el resto: su área será casi igual a la del círculo». Sin saberlo, Ahmes acaba de aproximar la constante más misteriosa del cosmos a (16/9)².'
+            : '«Take away 1/9 of the diameter and construct a square upon the remainder: its area shall equal the circle». Without knowing it, Ahmes approximated the cosmos’s deepest constant to (16/9)².'}
+        </p>
+        <div class="formula-pill">
+          <span class="pill-formula">π ≈ (16/9)² = 256/81</span>
+          <strong class="pill-val">3.16049</strong>
+        </div>
+      </div>
+
+      <!-- Beat 3: Culmination of Egypt -->
+      <div class="beat beat-3" data-beat="0.75-0.98">
+        <blockquote class="climax-quote">
+          <p>«Por primera vez en la historia, la humanidad intenta atrapar una curva perfecta dentro de líneas rectas.»</p>
+          <cite>— Papiro Matemático de Rhind (Museo Británico)</cite>
         </blockquote>
-        <div class="pi-symbol-large">π</div>
       </div>
     </div>
   </div>
 </section>
 
-<script>
-  import { CircleMorphVisualizer } from '../../scripts/circle-morph';
-
-  const canvas = document.getElementById('circle-morph-canvas') as HTMLCanvasElement | null;
-  if (canvas) {
-    new CircleMorphVisualizer(canvas);
-  }
-</script>
-
 <style>
   .scene {
-    height: 350vh;
+    height: 380vh;
     position: relative;
     --p: 0;
   }
@@ -68,39 +119,95 @@ const t = UI_STRINGS[locale];
     top: 0;
     height: 100vh;
     width: 100%;
-    display: grid;
-    place-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     overflow: hidden;
-    background: radial-gradient(circle at center, #11141c 0%, #08090c 100%);
+    background: radial-gradient(circle at 50% 50%, #201712 0%, #0d0a08 100%);
+    padding: 0 20px;
   }
 
-  .morph-canvas {
+  .papyrus-backdrop {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
     pointer-events: none;
     z-index: 1;
+    opacity: 0.8;
   }
 
-  .narrative-center {
-    position: relative;
+  .papyrus-svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .rope-compass-stage {
+    position: absolute;
+    width: min(85vw, 500px);
+    aspect-ratio: 1;
     z-index: 2;
-    text-align: center;
-    max-width: 680px;
-    padding: 0 24px;
+    pointer-events: none;
+  }
+
+  .compass-svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  /* Rotating Hemp Rope: turns 360deg based on --p */
+  .rope-arm {
+    transform-origin: 250px 250px;
+    will-change: transform;
+    transform: rotate(calc(var(--p) * 360deg));
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.7));
+  }
+
+  /* Circumference stroke-dashoffset tied to --p */
+  .traced-circle {
+    fill: none;
+    stroke: #f4a261;
+    stroke-width: 3.5px;
+    stroke-dasharray: 1068; /* 2 * PI * 170 ≈ 1068 */
+    stroke-dashoffset: calc(1068 * (1 - var(--p)));
+    filter: drop-shadow(0 0 12px rgba(244, 162, 97, 0.6));
+    will-change: stroke-dashoffset;
+  }
+
+  /* 9x9 Stone Granary Grid appearing at p > 0.7 */
+  .stone-quad {
+    fill: rgba(217, 119, 54, 0.04);
+    stroke: #d97736;
+    stroke-width: 2px;
+    stroke-dasharray: 6, 6;
+    opacity: calc(clamp(0, (var(--p) - 0.6) * 3, 1));
+    transition: opacity 0.3s ease;
+  }
+
+  /* Robust, Uncollapsible Narrative Layer */
+  .narrative-layer {
+    position: relative;
+    z-index: 5;
+    width: 100% !important;
+    max-width: min(90vw, 740px) !important;
+    margin: 0 auto !important;
+    padding: 0 24px !important;
+    text-align: center !important;
     pointer-events: none;
   }
 
   .beat {
     opacity: 0;
-    transform: translate3d(0, 20px, 0);
+    transform: translate3d(0, 18px, 0);
     transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     position: absolute;
     left: 0;
     right: 0;
     top: 50%;
-    transform: translateY(-50%) translate3d(0, 20px, 0);
+    transform: translateY(-50%) translate3d(0, 18px, 0);
+    width: 100% !important;
   }
 
   .beat.is-active {
@@ -113,27 +220,80 @@ const t = UI_STRINGS[locale];
     font-family: var(--font-mono);
     font-size: 0.75rem;
     letter-spacing: 0.2em;
-    color: #ffd000;
+    color: #f4a261;
     display: inline-block;
     margin-bottom: 12px;
   }
 
   .hero-title {
     font-family: var(--font-serif);
-    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-size: clamp(2.4rem, 5.5vw, 4.2rem);
     font-weight: 400;
-    line-height: 1.1;
-    color: #f7f9fa;
+    line-height: 1.15;
+    color: #fdfaf7;
     margin: 0 0 16px;
-    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+    text-shadow: 0 4px 25px rgba(0, 0, 0, 0.9);
   }
 
-  .hero-subtitle {
+  .scene-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 400;
+    color: #fdfaf7;
+    margin: 0 0 14px;
+  }
+
+  .hero-desc {
     font-family: var(--font-sans);
-    font-size: clamp(1rem, 2vw, 1.25rem);
-    color: rgba(255, 255, 255, 0.65);
-    margin: 0 0 32px;
-    line-height: 1.5;
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: rgba(253, 250, 247, 0.85);
+    line-height: 1.7;
+    margin: 0 0 28px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+  }
+
+  .formula-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(24, 19, 15, 0.9);
+    border: 1px solid rgba(244, 162, 97, 0.35);
+    border-radius: 30px;
+    padding: 8px 24px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+  }
+
+  .pill-formula {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: rgba(253, 250, 247, 0.75);
+  }
+
+  .pill-val {
+    font-family: var(--font-mono);
+    font-size: 1.15rem;
+    color: #f4a261;
+    text-shadow: 0 0 10px rgba(244, 162, 97, 0.4);
+  }
+
+  .climax-quote {
+    font-family: var(--font-serif);
+    font-size: clamp(1.3rem, 2.6vw, 1.85rem);
+    font-style: italic;
+    color: #f4a261;
+    line-height: 1.6;
+    margin: 0;
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.9);
+  }
+
+  .climax-quote cite {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-style: normal;
+    color: rgba(253, 250, 247, 0.6);
+    margin-top: 14px;
+    letter-spacing: 0.05em;
   }
 
   .scroll-cue {
@@ -141,14 +301,14 @@ const t = UI_STRINGS[locale];
     flex-direction: column;
     align-items: center;
     gap: 8px;
-    opacity: 0.8;
+    opacity: 0.85;
     animation: bounce 2s infinite;
   }
 
   .mouse-icon {
     width: 22px;
     height: 36px;
-    border: 2px solid rgba(255, 255, 255, 0.4);
+    border: 2px solid rgba(244, 162, 97, 0.6);
     border-radius: 12px;
     position: relative;
   }
@@ -161,48 +321,20 @@ const t = UI_STRINGS[locale];
     transform: translateX(-50%);
     width: 3px;
     height: 6px;
-    background: #ffd000;
+    background: #f4a261;
     border-radius: 2px;
   }
 
   .cue-text {
     font-family: var(--font-mono);
-    font-size: 0.7rem;
-    color: rgba(255, 255, 255, 0.5);
-    letter-spacing: 0.05em;
+    font-size: 0.75rem;
+    color: rgba(253, 250, 247, 0.65);
+    letter-spacing: 0.06em;
   }
 
   @keyframes bounce {
     0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
     40% { transform: translateY(6px); }
     60% { transform: translateY(3px); }
-  }
-
-  .galileo-quote {
-    font-family: var(--font-serif);
-    font-size: clamp(1.2rem, 2.5vw, 1.8rem);
-    font-style: italic;
-    color: #e2e8f0;
-    line-height: 1.6;
-    margin: 0;
-  }
-
-  .galileo-quote cite {
-    display: block;
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    font-style: normal;
-    color: #ffd700;
-    margin-top: 16px;
-    letter-spacing: 0.05em;
-  }
-
-  .pi-symbol-large {
-    font-family: var(--font-serif);
-    font-size: clamp(5rem, 12vw, 8rem);
-    color: rgba(255, 208, 0, 0.15);
-    margin-top: 20px;
-    user-select: none;
-    text-shadow: 0 0 30px rgba(255, 208, 0, 0.2);
   }
 </style>
