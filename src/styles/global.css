@@ -8,35 +8,67 @@
   --bg-primary: #08090c;
   --bg-secondary: #0f1118;
   --text-primary: #f8fafc;
-  --text-secondary: rgba(248, 250, 252, 0.7);
-  --text-muted: rgba(248, 250, 252, 0.4);
+  --text-secondary: rgba(248, 250, 252, 0.78);
+  --text-muted: rgba(248, 250, 252, 0.45);
 
   --accent-gold: #ffd700;
   --accent-gold-glow: rgba(255, 215, 0, 0.4);
   --accent-cyan: #00ffcc;
   --accent-cyan-glow: rgba(0, 255, 204, 0.4);
   --accent-amber: #ff9d00;
-  --accent-crimson: #ff3366;
+  --accent-crimson: #e63946;
   --accent-emerald: #00ffaa;
+  --accent-terracotta: #d97736;
 }
 
-[data-theme="obsidian"] {
-  --bg-primary: #08090c;
+/* Atmospheric era themes */
+[data-theme="egypt"] {
+  --bg-primary: #18130f;
+  --accent-gold: #f4a261;
+  --accent-gold-glow: rgba(244, 162, 97, 0.4);
 }
-[data-theme="gold"] {
-  --bg-primary: #0d0f12;
+[data-theme="syracuse"] {
+  --bg-primary: #16100d;
+  --accent-gold: #d4af37;
+  --accent-crimson: #e63946;
 }
-[data-theme="parchment"] {
-  --bg-primary: #0a0b0e;
+[data-theme="china"] {
+  --bg-primary: #0f1210;
+  --accent-gold: #e76f51;
+  --accent-cyan: #2a9d8f;
 }
-[data-theme="emerald"] {
-  --bg-primary: #070d0b;
+[data-theme="leiden"] {
+  --bg-primary: #111315;
+  --accent-gold: #e6c280;
 }
-[data-theme="amber"] {
-  --bg-primary: #0c0a07;
+[data-theme="london"] {
+  --bg-primary: #121110;
+  --accent-gold: #d4af37;
+}
+[data-theme="paris"] {
+  --bg-primary: #141210;
+  --accent-gold: #d4a373;
+  --accent-cyan: #00ffcc;
+}
+[data-theme="shanks"] {
+  --bg-primary: #160e10;
+  --accent-crimson: #e63946;
+  --accent-gold: #ffd700;
+}
+[data-theme="eniac"] {
+  --bg-primary: #09140e;
+  --accent-gold: #33ff33;
+  --accent-cyan: #33ff33;
 }
 [data-theme="cyber"] {
   --bg-primary: #050a10;
+  --accent-gold: #ffb703;
+  --accent-cyan: #00e5ff;
+}
+[data-theme="infinity"] {
+  --bg-primary: #050608;
+  --accent-gold: #ffd700;
+  --accent-cyan: #ffffff;
 }
 
 *, *::before, *::after {
@@ -58,7 +90,27 @@ html {
 body {
   overflow-x: hidden;
   background-color: var(--bg-primary);
-  transition: background-color 0.5s ease;
+  transition: background-color 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Global Narrative & Beat Typography Rules (Zero-collapse guarantees) */
+.narrative, .narrative-center {
+  width: 100% !important;
+  max-width: min(90vw, 760px) !important;
+  margin: 0 auto !important;
+  padding: 0 24px !important;
+  box-sizing: border-box !important;
+  text-align: center !important;
+}
+
+.beat {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  text-wrap: balance !important;
+  word-break: normal !important;
+  overflow-wrap: break-word !important;
+  white-space: normal !important;
 }
 
 /* Noise overlay for cinematic grain aesthetic */
