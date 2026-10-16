@@ -128,6 +128,12 @@ body {
   box-sizing: border-box !important;
 }
 
+/* Ensure interactive UI, narrative and museum plaques float above video */
+.stage > *:not(.scene-video-rig) {
+  position: relative;
+  z-index: 2;
+}
+
 /* Ensure Scene 10 inherits alabaster theme completely */
 [data-theme="infinite"] .stage,
 [data-theme="infinity"] .stage,
@@ -149,7 +155,12 @@ body {
 }
 
 /* Museum Catalog Technical Labels */
-.museum-plate {
+.museum-plate,
+.museum-plaque {
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  transform: none !important;
   font-family: var(--font-mono);
   font-size: 0.68rem;
   letter-spacing: 0.14em;
@@ -160,9 +171,8 @@ body {
   gap: 8px;
   padding: 4px 10px;
   border: 1px solid var(--grid-line);
-  background: color-mix(in srgb, var(--bg-surface) 90%, transparent);
+  background: color-mix(in srgb, var(--bg-surface) 85%, transparent);
   margin-bottom: 12px;
-  position: relative;
   z-index: 6;
 }
 
