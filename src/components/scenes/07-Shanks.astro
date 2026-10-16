@@ -20,41 +20,7 @@ const milestone = MILESTONES[6];
   data-scene-title={milestone.title[locale]}
 >
   <div class="stage">
-    <!-- Museum Catalog Technical Plate -->
-    <div class="museum-plate shanks-plate">
-      [ FIG. 07 // HOUGHTON, 1873 — BÓVEDA PALAIS DE LA DÉCOUVERTE — ERROR #528 ]
-    </div>
-
-    <!-- Dome Spiral Rig (Palais de la Découverte 707 digits) -->
-    <div class="dome-stage" id="shanks-dome">
-      <div class="dome-circle-track">
-        <!-- Visual segment around digit 528 -->
-        <div class="digits-spiral">
-          <span class="d-chunk d-valid">...525: 4 9 3 0</span>
-          <!-- THE FATAL DIGIT 528 -->
-          <span class="d-fatal" id="shanks-fatal-528">
-            <span class="fatal-index">#528</span>
-            <strong class="fatal-digit">4</strong>
-            <span class="fatal-correct-hint">era 5</span>
-          </span>
-          <!-- The 180 crumbling digits that collapse into ash -->
-          <div class="crumbling-ash-stream" id="crumbling-stream">
-            <span class="d-crumb c-1">3</span>
-            <span class="d-crumb c-2">8</span>
-            <span class="d-crumb c-3">1</span>
-            <span class="d-crumb c-4">9</span>
-            <span class="d-crumb c-5">5</span>
-            <span class="d-crumb c-6">2</span>
-            <span class="d-crumb c-7">8</span>
-            <span class="d-crumb c-8">4</span>
-            <span class="d-crumb c-9">7</span>
-            <span class="d-crumb c-10">5... [180 dígitos destruidos]</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Narrative Center (Uncollapsible, balanced typography) -->
+    <!-- Narrative Header (Non-collapsible, elegant typography positioned cleanly above dome) -->
     <div class="narrative">
       <div class="beat" data-beat="0.05-0.38">
         <span class="scene-kicker">07 // HOUGHTON-LE-SPRING, 1873 · INGLATERRA</span>
@@ -67,20 +33,99 @@ const milestone = MILESTONES[6];
       </div>
 
       <div class="beat" data-beat="0.42-0.80">
-        <span class="scene-kicker">07 // EL DÍGITO #528 Y LA CENIZA</span>
-        <h2 class="scene-title">El Cortocircuito de 1946</h2>
+        <span class="scene-kicker">07 // LA CATÁSTROFE DEL DÍGITO 528</span>
+        <h2 class="scene-title">El Derrumbe de la Cúpula</h2>
         <p class="beat-text">
           {locale === 'es'
-            ? 'En 1946, el matemático D.F. Ferguson utilizó una calculadora mecánica y detectó una tragedia: Shanks se equivocó en el decimal 528. Como una fila de fichas de dominó, los últimos 180 dígitos que le costaron años de vida —y que brillaban en el techo de París— eran pura ceniza errónea.'
-            : 'In 1946, mathematician D.F. Ferguson deployed a mechanical desk calculator and uncovered a tragedy: Shanks had stumbled at decimal 528. Like a collapsing domino run, the final 180 digits that cost decades of his mortal life —and glowed on the Paris ceiling— were false ash.'}
+            ? 'En 1944, D. F. Ferguson utilizó una calculadora mecánica y detectó la tragedia: Shanks había cometido un error en el decimal 528 (escribió un 4 donde iba un 5). A partir de ese número, las restantes 180 cifras no eran más que escombros y polvo.'
+            : 'In 1944, D. F. Ferguson used a mechanical desktop calculator and discovered the tragedy: Shanks erred at the 528th decimal (writing a 4 instead of a 5). From that single fracture, the remaining 180 digits collapsed into ash.'}
         </p>
       </div>
 
       <div class="beat beat-climax" data-beat="0.84-0.98">
         <blockquote class="shanks-quote">
-          <p>«Veinte años de cálculo manual se desmoronaron por un solo desliz en la tinta. La era de la mente humana sola ante el infinito llegaba a su fin.»</p>
-          <cite>— D.F. Ferguson (1946)</cite>
+          <p>«Veinte años de vigilia y tinta consumidos por el desliz de una sola pluma.»</p>
+          <cite>— D. F. Ferguson (1944) corrigiendo a William Shanks (1873)</cite>
         </blockquote>
+      </div>
+    </div>
+
+    <!-- Architectural Dome of Palais de la Découverte Rig (Fully Visible, Zero Cut-offs) -->
+    <div class="dome-stage" id="shanks-dome">
+      <!-- Museum Catalog Technical Plate (In-Flow) -->
+      <div class="museum-plate">
+        [ FIG. 07 // HOUGHTON, 1873 — BÓVEDA PALAIS DE LA DÉCOUVERTE — ERROR #528 ]
+      </div>
+
+      <div class="dome-display blueprint-panel">
+        <!-- Dome Architectural SVG -->
+        <div class="dome-svg-wrap">
+          <svg viewBox="0 0 320 160" class="dome-svg" aria-label="Bóveda del Palais de la Découverte">
+            <defs>
+              <radialGradient id="oculus-glow" cx="50%" cy="100%" r="90%">
+                <stop offset="0%" stop-color="#e63946" stop-opacity="0.35" />
+                <stop offset="60%" stop-color="#c59b27" stop-opacity="0.12" />
+                <stop offset="100%" stop-color="#0a0607" stop-opacity="0" />
+              </radialGradient>
+            </defs>
+
+            <!-- Dome Arches / Ribs -->
+            <path d="M 20 150 A 140 130 0 0 1 300 150" fill="none" stroke="rgba(197, 155, 39, 0.25)" stroke-width="1.5" />
+            <path d="M 50 150 A 110 105 0 0 1 270 150" fill="none" stroke="rgba(197, 155, 39, 0.4)" stroke-width="1.2" />
+            <path d="M 80 150 A 80 80 0 0 1 240 150" fill="url(#oculus-glow)" stroke="rgba(230, 57, 70, 0.5)" stroke-width="1.5" />
+            
+            <!-- Radial Dome Meridians -->
+            <line x1="160" y1="20" x2="160" y2="150" stroke="rgba(197, 155, 39, 0.3)" stroke-width="1" stroke-dasharray="3,3" />
+            <line x1="80" y1="55" x2="160" y2="150" stroke="rgba(197, 155, 39, 0.2)" stroke-width="1" />
+            <line x1="240" y1="55" x2="160" y2="150" stroke="rgba(197, 155, 39, 0.2)" stroke-width="1" />
+
+            <!-- Oculus Spotlight -->
+            <circle cx="160" cy="150" r="18" fill="rgba(230, 57, 70, 0.4)" stroke="#e63946" stroke-width="1.5" />
+            <text x="160" y="154" fill="#fff" font-family="var(--font-mono)" font-size="9" text-anchor="middle">528</text>
+          </svg>
+        </div>
+
+        <!-- The Focal Point: Digit 528 vs the Collapsed 180 Digits -->
+        <div class="dome-inspection">
+          <div class="digits-sequence">
+            <span class="d-chunk d-valid">...525: 4 9 3 0</span>
+            
+            <!-- THE FATAL DIGIT 528 -->
+            <button type="button" class="d-fatal" id="shanks-fatal-528" title="Clic para inspeccionar el error">
+              <span class="fatal-index">#528</span>
+              <strong class="fatal-digit">4</strong>
+              <span class="fatal-correct-hint">era 5</span>
+            </button>
+
+            <!-- The 180 crumbling digits that collapse into ash -->
+            <div class="crumbling-ash-stream" id="crumbling-stream">
+              <span class="d-crumb c-1">3</span>
+              <span class="d-crumb c-2">8</span>
+              <span class="d-crumb c-3">1</span>
+              <span class="d-crumb c-4">9</span>
+              <span class="d-crumb c-5">5</span>
+              <span class="d-crumb c-6">2</span>
+              <span class="d-crumb c-7">8</span>
+              <span class="d-crumb c-8">4</span>
+              <span class="d-crumb c-9">7</span>
+              <span class="d-crumb c-10">5...</span>
+              <span class="ash-label">[180 CIFRAS DERRUMBADAS]</span>
+            </div>
+          </div>
+
+          <!-- Interactive Fracture Switch -->
+          <div class="shanks-controls">
+            <button type="button" id="toggle-shanks-btn" class="shanks-btn">
+              <span class="shanks-btn-dot"></span>
+              <span id="shanks-btn-text">INSPECCIONAR COLAPSO #528</span>
+            </button>
+            <span class="shanks-status-note" id="shanks-note">
+              {locale === 'es' 
+                ? 'El desliz en el decimal 528 convirtió las siguientes 180 cifras en números sin valor.'
+                : 'The slip at decimal 528 turned the following 180 figures into meaningless dust.'}
+            </span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -90,16 +135,37 @@ const milestone = MILESTONES[6];
   const dome = document.getElementById('shanks-dome');
   const fatalEl = document.getElementById('shanks-fatal-528');
   const streamEl = document.getElementById('crumbling-stream');
+  const toggleBtn = document.getElementById('toggle-shanks-btn');
+  const btnText = document.getElementById('shanks-btn-text');
+
+  let manuallyToggled = false;
+
+  function setFractureState(isFailed: boolean) {
+    fatalEl?.classList.toggle('is-error', isFailed);
+    streamEl?.classList.toggle('is-fallen', isFailed);
+    if (btnText) {
+      btnText.textContent = isFailed ? 'RESTAURAR CÚPULA' : 'INSPECCIONAR COLAPSO #528';
+    }
+  }
+
+  toggleBtn?.addEventListener('click', () => {
+    manuallyToggled = true;
+    const isNowFailed = !fatalEl?.classList.contains('is-error');
+    setFractureState(isNowFailed);
+  });
+
+  fatalEl?.addEventListener('click', () => {
+    manuallyToggled = true;
+    const isNowFailed = !fatalEl?.classList.contains('is-error');
+    setFractureState(isNowFailed);
+  });
 
   if (dome) {
     const scene = dome.closest('[data-scene]') as HTMLElement | null;
     window.addEventListener('scroll', () => {
-      if (!scene) return;
+      if (!scene || manuallyToggled) return;
       const p = parseFloat(getComputedStyle(scene).getPropertyValue('--p')) || 0;
-      const isFailed = p > 0.55;
-
-      fatalEl?.classList.toggle('is-error', isFailed);
-      streamEl?.classList.toggle('is-fallen', isFailed);
+      setFractureState(p > 0.48);
     }, { passive: true });
   }
 </script>
@@ -119,45 +185,25 @@ const milestone = MILESTONES[6];
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     overflow: hidden;
     background: radial-gradient(circle at 50% 50%, #1e1114 0%, #0a0607 100%);
-    padding: 0 20px;
-  }
-
-  .shanks-plate {
-    position: absolute;
-    top: 6vh;
-    z-index: 6;
+    padding: calc(var(--hud-height, 68px) + 12px) 20px 16px;
+    box-sizing: border-box;
+    gap: 10px;
   }
 
   /* Uncollapsible Narrative Box */
   .narrative {
-    position: absolute;
-    top: 10vh;
+    position: relative;
     width: 100% !important;
     max-width: min(90vw, 740px) !important;
+    min-height: 120px;
     margin: 0 auto !important;
     text-align: center !important;
     pointer-events: none;
     z-index: 5;
-  }
-
-  .beat {
-    opacity: 0;
-    transform: translate3d(0, 16px, 0);
-    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    width: 100% !important;
-  }
-
-  .beat.is-active {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-    pointer-events: auto;
+    flex-shrink: 0;
   }
 
   .scene-kicker {
@@ -166,118 +212,147 @@ const milestone = MILESTONES[6];
     letter-spacing: 0.18em;
     color: #e63946;
     display: inline-block;
-    margin-bottom: 6px;
+    margin-bottom: 4px;
   }
 
   .scene-title {
-    font-family: var(--font-serif);
-    font-size: clamp(1.8rem, 3.8vw, 2.8rem);
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 3.4vw, 2.4rem);
     font-weight: 400;
+    font-style: italic;
     color: #fff;
-    margin: 0 0 10px;
-    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9);
+    margin: 0 0 8px;
+    filter: url(#ink-displacement);
   }
 
   .beat-text {
-    font-family: var(--font-sans);
-    font-size: clamp(0.95rem, 1.8vw, 1.12rem);
-    color: rgba(255, 255, 255, 0.8);
-    line-height: 1.65;
+    font-family: var(--font-editorial);
+    font-size: clamp(0.92rem, 1.7vw, 1.05rem);
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.6;
     margin: 0;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
   }
 
   .shanks-quote {
-    font-family: var(--font-serif);
-    font-size: clamp(1.3rem, 2.8vw, 1.9rem);
+    font-family: var(--font-display);
+    font-size: clamp(1.2rem, 2.5vw, 1.7rem);
     font-style: italic;
     color: #e63946;
-    line-height: 1.5;
+    line-height: 1.45;
     margin: 0;
-    text-shadow: 0 0 25px rgba(230, 57, 70, 0.5);
   }
 
   .shanks-quote cite {
     display: block;
     font-family: var(--font-mono);
-    font-size: 0.8rem;
+    font-size: 0.76rem;
     font-style: normal;
     color: rgba(255, 255, 255, 0.6);
-    margin-top: 10px;
+    margin-top: 8px;
     letter-spacing: 0.05em;
   }
 
-  /* Dome Spiral Rig */
+  /* Dome Stage: Compact, elegant, 100% visible */
   .dome-stage {
-    margin-top: 20vh;
-    width: min(92vw, 740px);
-    background: rgba(20, 12, 14, 0.9);
-    border: 1px solid rgba(230, 57, 70, 0.3);
-    border-radius: 16px;
-    padding: 24px;
-    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.85);
-    backdrop-filter: blur(12px);
+    position: relative;
+    width: 100%;
+    max-width: 740px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2px;
     z-index: 2;
   }
 
-  .dome-circle-track {
+  .dome-display {
+    width: 100%;
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    background: rgba(18, 12, 14, 0.95) !important;
+    border: 1px solid rgba(230, 57, 70, 0.35) !important;
+  }
+
+  .dome-svg-wrap {
+    width: 100%;
+    max-width: 320px;
+    height: 110px;
     display: flex;
     justify-content: center;
   }
 
-  .digits-spiral {
+  .dome-svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  .dome-inspection {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .digits-sequence {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 12px;
+    justify-content: center;
+    gap: 10px;
     font-family: var(--font-mono);
   }
 
   .d-valid {
-    font-size: 1.2rem;
-    color: #ffd700;
+    font-size: 1.05rem;
+    color: #c59b27;
   }
 
-  /* Fatal 528 Digit */
+  /* Fatal 528 Digit Button */
   .d-fatal {
     position: relative;
     display: inline-flex;
     flex-direction: column;
     align-items: center;
-    padding: 6px 14px;
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    border-radius: 8px;
-    background: rgba(0, 0, 0, 0.5);
+    padding: 4px 12px;
+    border: 1px solid rgba(197, 155, 39, 0.5);
+    background: rgba(0, 0, 0, 0.6);
+    cursor: pointer;
     transition: all 0.3s ease;
   }
 
   .fatal-index {
-    font-size: 0.65rem;
-    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.6rem;
+    color: rgba(255, 255, 255, 0.6);
+    letter-spacing: 0.08em;
   }
 
   .fatal-digit {
-    font-size: 2rem;
-    color: #ffd700;
+    font-size: 1.6rem;
+    color: #c59b27;
+    line-height: 1.1;
     transition: all 0.3s ease;
   }
 
   .fatal-correct-hint {
-    font-size: 0.6rem;
-    color: #00ffcc;
+    font-size: 0.58rem;
+    color: #39ff88;
     opacity: 0;
     transition: opacity 0.3s ease;
   }
 
   .d-fatal.is-error {
     border-color: #e63946;
-    background: rgba(230, 57, 70, 0.2);
-    box-shadow: 0 0 25px rgba(230, 57, 70, 0.6);
+    background: rgba(230, 57, 70, 0.25);
+    box-shadow: 0 0 20px rgba(230, 57, 70, 0.5);
   }
 
   .d-fatal.is-error .fatal-digit {
     color: #e63946;
-    text-shadow: 0 0 15px #e63946;
+    text-shadow: 0 0 10px #e63946;
   }
 
   .d-fatal.is-error .fatal-correct-hint {
@@ -287,15 +362,82 @@ const milestone = MILESTONES[6];
   /* Crumbling Ash Stream */
   .crumbling-ash-stream {
     display: inline-flex;
-    gap: 8px;
-    font-size: 1.15rem;
-    color: #ffd700;
-    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    font-size: 1.05rem;
+    color: #c59b27;
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .ash-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin-left: 6px;
   }
 
   .crumbling-ash-stream.is-fallen {
-    transform: translateY(80px) rotate(8deg);
-    opacity: 0.15;
-    filter: grayscale(1) blur(2px);
+    transform: translateY(12px);
+    opacity: 0.22;
+    filter: grayscale(1) blur(1.5px);
+  }
+
+  .crumbling-ash-stream.is-fallen .d-crumb {
+    color: #888;
+  }
+
+  .shanks-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .shanks-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    border: 1px solid rgba(230, 57, 70, 0.5);
+    color: #fff;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    padding: 6px 14px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+
+  .shanks-btn:hover {
+    background: rgba(230, 57, 70, 0.2);
+    border-color: #e63946;
+    color: #e63946;
+  }
+
+  .shanks-btn-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #e63946;
+    box-shadow: 0 0 6px #e63946;
+  }
+
+  .shanks-status-note {
+    font-family: var(--font-editorial);
+    font-size: 0.82rem;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.65);
+    text-align: center;
+    max-width: 580px;
+  }
+
+  @media (max-height: 750px) {
+    .dome-svg-wrap {
+      height: 80px;
+    }
+    .narrative {
+      min-height: 95px;
+    }
   }
 </style>
