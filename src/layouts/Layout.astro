@@ -1,5 +1,7 @@
 ---
 import Hud from '../components/Hud.astro';
+import Astrolabe from '../components/Astrolabe.astro';
+import DecimalRiver from '../components/DecimalRiver.astro';
 import { UI_STRINGS, type Locale } from '../i18n';
 import '../styles/global.css';
 
@@ -12,7 +14,7 @@ const t = UI_STRINGS[locale];
 ---
 
 <!doctype html>
-<html lang={locale} data-theme="obsidian">
+<html lang={locale} data-theme="egypt">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -27,16 +29,32 @@ const t = UI_STRINGS[locale];
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={t.siteTitle} />
     <meta name="twitter:description" content={t.siteDescription} />
-    <meta name="theme-color" content="#08090c" />
+    <meta name="theme-color" content="#120e0a" />
   </head>
   <body>
-    <!-- Cinematic noise grain overlay -->
+    <!-- SVG Filter for Organic Ink / Chiseled Edge Displacement -->
+    <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" aria-hidden="true">
+      <defs>
+        <filter id="ink-displacement" x="-5%" y="-5%" width="110%" height="110%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.08" numOctaves="3" result="noise" />
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="0.8" xChannelSelector="R" yChannelSelector="G" />
+        </filter>
+      </defs>
+    </svg>
+
+    <!-- GPU Static 35mm Analog Film Grain -->
     <div class="film-grain" aria-hidden="true"></div>
 
-    <!-- Persistent Navigation HUD -->
+    <!-- Left Book Spine Decimal River -->
+    <DecimalRiver />
+
+    <!-- Persistent Astronomical Instrument HUD -->
     <Hud locale={locale} />
 
-    <!-- Scrollytelling Scenes -->
+    <!-- Right-Edge Astrolabe Angular Gauge -->
+    <Astrolabe />
+
+    <!-- Scrollytelling Historical Scenes -->
     <main id="main-content">
       <slot />
     </main>

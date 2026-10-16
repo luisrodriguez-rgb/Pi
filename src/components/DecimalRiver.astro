@@ -1,0 +1,142 @@
+---
+// DecimalRiver.astro - Left book spine streaming digits evolving across eras
+const digitsSeed = '314159265358979323846264338327950288419716939937510582097494459230781640628620899862803482534211706798214808651328230664709384460955058223172535940812848111745028410270193852110555964462294895493038196';
+const items = digitsSeed.slice(0, 120).split('');
+---
+
+<aside class="decimal-river" id="decimal-river" aria-hidden="true">
+  <div class="river-header">π</div>
+  <div class="river-track" id="river-track">
+    {items.map((char, index) => (
+      <span 
+        class="river-digit" 
+        data-index={index}
+      >
+        {char}
+      </span>
+    ))}
+  </div>
+  <div class="river-footer">∞</div>
+</aside>
+
+<script>
+  const riverTrack = document.getElementById('river-track');
+  const digits = riverTrack?.querySelectorAll<HTMLElement>('.river-digit');
+
+  window.addEventListener('pi-scene-change', (e: any) => {
+    if (!digits) return;
+    const sceneNum = e.detail?.sceneNumber || 1;
+
+    digits.forEach((el, idx) => {
+      // Remove era classes
+      el.classList.remove('is-sharp', 'is-gold-35', 'is-matrix', 'is-klein');
+
+      if (sceneNum <= 3) {
+        // Scene 1-3: only first 3 digits sharp (3.16)
+        if (idx < 3) {
+          el.classList.add('is-sharp');
+          el.textContent = idx === 0 ? '3' : idx === 1 ? '1' : '6';
+        } else {
+          el.textContent = '?';
+        }
+      } else if (sceneNum >= 4 && sceneNum < 8) {
+        // Scene 4-7: 35 digits in gold
+        const orig = digitsSeedChar(idx);
+        el.textContent = orig;
+        if (idx < 35) {
+          el.classList.add('is-gold-35');
+        }
+      } else if (sceneNum >= 8 && sceneNum < 10) {
+        // Scene 8-9: ENIAC / Hacker phosphor green matrix cascade
+        el.textContent = digitsSeedChar(idx);
+        el.classList.add('is-matrix');
+      } else {
+        // Scene 10: Klein blue full clarity
+        el.textContent = digitsSeedChar(idx);
+        el.classList.add('is-klein');
+      }
+    });
+  });
+
+  const fullStr = '314159265358979323846264338327950288419716939937510582097494459230781640628620899862803482534211706798214808651328230664709384460955058223172535940812848111745028410270193852110555964462294895493038196';
+  function digitsSeedChar(idx: number) {
+    return fullStr[idx % fullStr.length];
+  }
+</script>
+
+<style>
+  .decimal-river {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 24px;
+    z-index: 990;
+    background: color-mix(in srgb, var(--bg-surface) 92%, transparent);
+    border-right: 1px solid var(--grid-line);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 12px 0;
+    user-select: none;
+    pointer-events: none;
+    backdrop-filter: blur(4px);
+  }
+
+  .river-header, .river-footer {
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    color: var(--accent);
+    margin: 4px 0;
+  }
+
+  .river-track {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    overflow: hidden;
+    padding: 4px 0;
+  }
+
+  .river-digit {
+    font-family: var(--font-mono);
+    font-size: 8.5px;
+    line-height: 1;
+    font-variant-numeric: tabular-nums slashed-zero;
+    color: var(--fg-ink);
+    opacity: 0.18;
+    transition: all 0.3s ease;
+  }
+
+  .river-digit.is-sharp {
+    opacity: 0.95;
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  .river-digit.is-gold-35 {
+    opacity: 0.95;
+    color: #c59b27;
+    text-shadow: 0 0 4px rgba(197, 155, 39, 0.5);
+  }
+
+  .river-digit.is-matrix {
+    opacity: 0.85;
+    color: #39ff88;
+    text-shadow: 0 0 5px rgba(57, 255, 136, 0.6);
+  }
+
+  .river-digit.is-klein {
+    opacity: 0.95;
+    color: #002fa7;
+    font-weight: 700;
+  }
+
+  @media (max-width: 600px) {
+    .decimal-river {
+      display: none;
+    }
+  }
+</style>
