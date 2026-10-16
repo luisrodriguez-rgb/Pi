@@ -27,11 +27,16 @@ const vanCeulenDigits = '3.14159265358979323846264338327950288'.split('');
       <div class="rapier rapier-right"></div>
     </div>
 
+    <!-- Museum Catalog Technical Plate -->
+    <div class="museum-plate tomb-plate">
+      [ FIG. 04 // LEIDEN, 1610 — LOSA PIETERSKERK — ESCALA 1:1 — PRECISIÓN: 10⁻³⁵ ]
+    </div>
+
     <!-- Narrative Center (Uncollapsible, balanced typography) -->
     <div class="narrative">
       <div class="beat" data-beat="0.05-0.35">
         <span class="scene-kicker">04 // LEIDEN, 1610 d.C. · PAÍSES BAJOS</span>
-        <h2 class="scene-title">{milestone.title[locale]}</h2>
+        <h2 class="scene-title chiseled-title">{milestone.title[locale]}</h2>
         <p class="beat-text">
           {locale === 'es'
             ? 'El maestro de esgrima e ingeniería militar Ludolph van Ceulen dedicó la mayor parte de su vida a un duelo implacable contra el infinito: un polígono de 2⁶² lados (más de cuatro trillones de caras). A mano limpia, sin calculadoras, obtuvo 35 cifras exactas.'
@@ -44,8 +49,8 @@ const vanCeulenDigits = '3.14159265358979323846264338327950288'.split('');
         <h2 class="scene-title">El Epitafio de la Iglesia de San Pedro</h2>
         <p class="beat-text">
           {locale === 'es'
-            ? 'Estaba tan orgulloso de su sacrificio que ordenó en su testamento que aquellos 35 números fueran cincelados sobre su lápida sepulcral en la Pieterskerk de Leiden. Cada golpe de cincel grabó su vida en la roca.'
-            : 'He took such fierce pride in his sacrifice that he ordered in his final will that those 35 numbers be chiseled upon his tombstone in the Pieterskerk of Leiden. Each chisel strike carved his lifetime into the bedrock.'}
+            ? 'Estaba tan orgulloso de su sacrificio que ordenó en su testamento que aquellos 35 números fueran cincelados sobre su lápida sepulcral en la Pieterskerk de Leiden. Mueve el ratón para iluminar la piedra con tu vela.'
+            : 'He took such fierce pride in his sacrifice that he ordered in his final will that those 35 numbers be chiseled upon his tombstone in the Pieterskerk of Leiden. Move your cursor to light the dark stone with your candle.'}
         </p>
       </div>
 
@@ -57,8 +62,11 @@ const vanCeulenDigits = '3.14159265358979323846264338327950288'.split('');
       </div>
     </div>
 
-    <!-- The Ancient Tombstone Monument with Chiseled Digits -->
+    <!-- The Ancient Tombstone Monument with Candlelight Physics -->
     <div class="tombstone-slab" id="tombstone-slab">
+      <!-- Candlelight Torch Glow Layer -->
+      <div class="candlelight-glow" id="candlelight-layer"></div>
+
       <div class="slab-arch">
         <span class="cross-ornament">✠</span>
         <span class="slab-heading">LUDOLPHUS VAN CEULEN</span>
@@ -67,7 +75,7 @@ const vanCeulenDigits = '3.14159265358979323846264338327950288'.split('');
 
       <div class="slab-divider"></div>
 
-      <!-- The 35 Chiseled Digits Grid -->
+      <!-- The 35 Chiseled Digits Grid with Dynamic Shadow Projection -->
       <div class="chiseled-grid">
         {vanCeulenDigits.map((char, index) => {
           const threshold = 0.15 + (index / vanCeulenDigits.length) * 0.70;
@@ -84,7 +92,7 @@ const vanCeulenDigits = '3.14159265358979323846264338327950288'.split('');
 
       <div class="slab-footer">
         <span class="slab-counter-label">DÍGITOS CINCELADOS EN LA CRIPTA:</span>
-        <strong id="chiseled-count" class="slab-counter-num">0 / 35</strong>
+        <strong id="chiseled-count" class="slab-counter-num tabular">0 / 35</strong>
       </div>
     </div>
   </div>
@@ -123,6 +131,29 @@ const vanCeulenDigits = '3.14159265358979323846264338327950288'.split('');
 
     window.addEventListener('scroll', updateTombstone, { passive: true });
     updateTombstone();
+
+    // ==========================================================
+    // Micro-UX: Directional Candlelight / Torchlight Physics
+    // ==========================================================
+    slab.addEventListener('mousemove', (e) => {
+      const rect = slab.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      slab.style.setProperty('--mouse-x', `${x}px`);
+      slab.style.setProperty('--mouse-y', `${y}px`);
+
+      // Dynamic shadow projection: vector from mouse to slab center
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const dx = (centerX - x) * 0.08;
+      const dy = (centerY - y) * 0.08;
+
+      glyphs.forEach((glyph) => {
+        if (glyph.classList.contains('is-chiseled')) {
+          glyph.style.textShadow = `${dx.toFixed(1)}px ${dy.toFixed(1)}px 8px rgba(0,0,0,0.95), 0 0 10px rgba(230,194,128,0.5)`;
+        }
+      });
+    });
   }
 </script>
 
@@ -175,6 +206,12 @@ const vanCeulenDigits = '3.14159265358979323846264338327950288'.split('');
     transform: translate(-50%, -50%) rotate(40deg);
   }
 
+  .tomb-plate {
+    position: absolute;
+    top: 6vh;
+    z-index: 6;
+  }
+
   /* Uncollapsible Narrative Box */
   .narrative {
     position: absolute;
@@ -214,7 +251,7 @@ const vanCeulenDigits = '3.14159265358979323846264338327950288'.split('');
   }
 
   .scene-title {
-    font-family: var(--font-serif);
+    font-family: var(--font-display);
     font-size: clamp(1.8rem, 3.8vw, 2.8rem);
     font-weight: 400;
     color: #fff;
@@ -223,16 +260,16 @@ const vanCeulenDigits = '3.14159265358979323846264338327950288'.split('');
   }
 
   .beat-text {
-    font-family: var(--font-sans);
-    font-size: clamp(0.95rem, 1.8vw, 1.12rem);
-    color: rgba(255, 255, 255, 0.8);
+    font-family: var(--font-editorial);
+    font-size: clamp(1rem, 1.8vw, 1.15rem);
+    color: rgba(255, 255, 255, 0.82);
     line-height: 1.65;
     margin: 0;
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
   }
 
   .tomb-latin-quote {
-    font-family: var(--font-serif);
+    font-family: var(--font-display);
     font-size: clamp(1.3rem, 2.8vw, 1.9rem);
     font-style: italic;
     color: #e6c280;
@@ -251,18 +288,19 @@ const vanCeulenDigits = '3.14159265358979323846264338327950288'.split('');
     letter-spacing: 0.05em;
   }
 
-  /* Dark Granite Stone Tombstone */
+  /* Dark Granite Stone Tombstone with Candlelight Physics */
   .tombstone-slab {
     position: relative;
     margin-top: 18vh;
     width: min(90vw, 560px);
     background: #13151a;
     background-image: 
+      radial-gradient(circle 380px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(230, 194, 128, 0.12) 0%, transparent 100%),
       radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
       linear-gradient(180deg, #1c1f26 0%, #0f1115 100%);
-    background-size: 16px 16px, 100% 100%;
+    background-size: 100% 100%, 16px 16px, 100% 100%;
     border: 2px solid rgba(230, 194, 128, 0.25);
-    border-radius: 40px 40px 12px 12px;
+    border-radius: 40px 40px 0 0;
     padding: 30px 28px 22px;
     box-shadow: 
       0 30px 80px rgba(0, 0, 0, 0.9),
@@ -271,6 +309,15 @@ const vanCeulenDigits = '3.14159265358979323846264338327950288'.split('');
     flex-direction: column;
     align-items: center;
     z-index: 2;
+    cursor: grab;
+  }
+
+  .candlelight-glow {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background: radial-gradient(circle 280px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(230, 194, 128, 0.08) 0%, transparent 70%);
   }
 
   .slab-arch {
@@ -287,7 +334,7 @@ const vanCeulenDigits = '3.14159265358979323846264338327950288'.split('');
   }
 
   .slab-heading {
-    font-family: var(--font-serif);
+    font-family: var(--font-display);
     font-size: 1.15rem;
     letter-spacing: 0.15em;
     color: #f0ebe1;
@@ -316,14 +363,14 @@ const vanCeulenDigits = '3.14159265358979323846264338327950288'.split('');
     max-width: 480px;
     padding: 16px;
     background: rgba(0, 0, 0, 0.4);
-    border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--grid-line);
   }
 
   .chiseled-glyph {
     font-family: var(--font-mono);
     font-size: clamp(1rem, 2.5vw, 1.4rem);
     font-weight: 600;
+    font-variant-numeric: tabular-nums slashed-zero;
     width: 24px;
     height: 32px;
     display: grid;
@@ -351,11 +398,11 @@ const vanCeulenDigits = '3.14159265358979323846264338327950288'.split('');
     gap: 8px;
     margin-top: 18px;
     font-family: var(--font-mono);
-    font-size: 0.75rem;
+    font-size: 0.72rem;
   }
 
   .slab-counter-label {
-    color: rgba(255, 255, 255, 0.4);
+    color: var(--muted);
     letter-spacing: 0.08em;
   }
 
