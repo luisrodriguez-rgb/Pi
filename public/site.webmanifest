@@ -1,0 +1,24 @@
+{
+  "name": "π — Homenaje Cinematográfico al Infinito",
+  "short_name": "pi-tribute",
+  "description": "Una experiencia interactiva de scrollytelling a 60 FPS sobre la historia, geometría y misterio de Pi.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#120e0a",
+  "theme_color": "#120e0a",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon.ico",
+      "sizes": "48x48 32x32 16x16",
+      "type": "image/x-icon"
+    }
+  ]
+}
