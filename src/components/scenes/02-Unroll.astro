@@ -21,13 +21,13 @@ const milestone = MILESTONES[1];
   data-theme={milestone.theme}
   data-scene-title={milestone.title[locale]}
 >
-  <div class="stage">
+  <div class="stage layout-cinema-bottom">
     <!-- Cinematic Atmospheric Video Background (Google Flow / Veo) -->
     <SceneVideo 
       src="/videos/02-syracuse.mp4" 
       poster="/images/02-syracuse.jpg" 
       blend="screen" 
-      opacity={0.45} 
+      opacity={0.55} 
     />
 
     <!-- Bloodied Sand and Halftone Stone Backdrop -->
@@ -35,8 +35,15 @@ const milestone = MILESTONES[1];
       <div class="roman-sword-slash"></div>
     </div>
 
-    <!-- Narrative Center (Zero-collapse, high aesthetic typography) -->
-    <div class="narrative choreo-header">
+    <!-- Center/Right Visualizer: Archimedes Hydraulic Rig -->
+    <div class="cinema-stage-visual choreo-artifact">
+      <div class="rig-wrapper">
+        <ArchimedesRig />
+      </div>
+    </div>
+
+    <!-- Cinema Bottom-Left Narrative (16mm Movie Subtitle Style) -->
+    <div class="cinema-bottom-text choreo-header">
       <div class="beat" data-beat="0.05-0.38">
         <span class="scene-kicker">02 // SIRACUSA, 212 a.C. · MAGNA GRECIA</span>
         <h2 class="scene-title">{milestone.title[locale]}</h2>
@@ -63,11 +70,6 @@ const milestone = MILESTONES[1];
           <cite>— 223/71 &lt; π &lt; 22/7 (3.1418)</cite>
         </blockquote>
       </div>
-    </div>
-
-    <!-- Archimedes Hydraulic Rig Visualizer -->
-    <div class="rig-wrapper choreo-artifact">
-      <ArchimedesRig />
     </div>
   </div>
 </section>

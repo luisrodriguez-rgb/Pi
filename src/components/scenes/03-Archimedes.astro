@@ -21,20 +21,30 @@ const milestone = MILESTONES[2];
   data-theme={milestone.theme}
   data-scene-title={milestone.title[locale]}
 >
-  <div class="stage">
-    <!-- Cinematic Atmospheric Video Background (Google Flow / Veo) -->
+  <div class="stage layout-zigzag">
+    <!-- Atmospheric Video Background with Paper Blend -->
     <SceneVideo 
       src="/videos/03-bamboo.mp4" 
       poster="/images/03-bamboo.jpg" 
-      blend="lighten" 
-      opacity={0.50} 
+      blend="luminosity" 
+      opacity={0.30} 
     />
 
-    <!-- Narrative Header (Positioned cleanly above the Chinese calculation rig) -->
-    <div class="narrative choreo-header">
+    <!-- Left Column: Giant Editorial Narrative & Archival Photo Card -->
+    <div class="editorial-col choreo-header">
       <div class="beat" data-beat="0.05-0.38">
-        <span class="scene-kicker">03 // JIANKANG, 480 d.C. · CHINA</span>
+        <span class="scene-kicker">03 // JIANKANG, 480 d.C. · DINASTÍA LIU SONG</span>
         <h2 class="scene-title">{milestone.title[locale]}</h2>
+
+        <!-- Archival Photo Card: Varillas Su Chóu y Matemáticos Han -->
+        <div class="archival-photo-card tilt-left" style="margin: 16px 0 18px 0;">
+          <img src="/images/03-bamboo.jpg" alt="Varillas de bambú Su Chóu y tratados chinos" loading="eager" />
+          <div class="photo-caption">
+            <span>SU CHÓU · VARILLAS DE BAMBÚ Y HUESO</span>
+            <span class="photo-badge">480 d.C.</span>
+          </div>
+        </div>
+
         <p class="beat-text">
           {locale === 'es'
             ? 'Mientras Europa se sumía en las sombras tras la caída de Roma, el astrónomo chino Zu Chongzhi y su hijo se encerraron durante años en una habitación con miles de varillas de bambú y hueso (su chóu) esparcidas por el suelo. Si cometían un solo error al mover una varilla, debían reiniciar meses de cálculo.'
@@ -60,7 +70,7 @@ const milestone = MILESTONES[2];
       </div>
     </div>
 
-    <!-- Archimedes Gold Standard Technical Panel (Zero SaaS border-radius) -->
+    <!-- Right Column: Su Chóu Bamboo Rods Rig & Sacred Milü Breakdown -->
     <div class="china-rig choreo-artifact">
       <!-- Museum Catalog Technical Plate -->
       <div class="museum-plate">
@@ -75,7 +85,7 @@ const milestone = MILESTONES[2];
         <div class="math-col">
           <span class="col-title">FRACCIÓN SAGRADA MILÜ (密率)</span>
           <span class="col-formula tabular">355 / 113</span>
-          <strong class="col-val tabular">355 / 113</strong>
+          <strong class="col-val tabular" style="color: #b91c1c;">355 / 113</strong>
         </div>
 
         <div class="math-divider"></div>
@@ -83,7 +93,7 @@ const milestone = MILESTONES[2];
         <div class="math-col">
           <span class="col-title">VALOR DECIMAL OBTENIDO</span>
           <span class="col-formula tabular">7 cifras exactas</span>
-          <strong class="col-val col-accent tabular">3.14159292...</strong>
+          <strong class="col-val col-accent tabular" style="color: #b91c1c;">3.14159292...</strong>
         </div>
 
         <div class="math-divider"></div>
@@ -110,28 +120,97 @@ const milestone = MILESTONES[2];
     top: 0;
     height: 100vh;
     width: 100%;
+    overflow: hidden;
+    background: #f4efe6 !important;
+    color: #1c1917 !important;
+  }
+
+  .editorial-col {
+    position: relative;
+    width: 100%;
+    max-width: 540px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .scene-kicker {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    color: #b91c1c;
+    display: inline-block;
+    margin-bottom: 4px;
+    font-weight: 700;
+  }
+
+  .scene-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 3.4vw, 2.6rem);
+    font-weight: 600;
+    font-style: normal;
+    color: #1c1917;
+    margin: 0 0 8px;
+    line-height: 1.15;
+  }
+
+  .beat-text {
+    font-family: var(--font-editorial);
+    font-size: clamp(0.95rem, 1.7vw, 1.08rem);
+    color: #292524;
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  .milu-quote {
+    font-family: var(--font-display);
+    font-size: clamp(1.2rem, 2.4vw, 1.7rem);
+    font-style: italic;
+    color: #b91c1c;
+    line-height: 1.45;
+    margin: 0;
+  }
+
+  .milu-quote cite {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    font-style: normal;
+    color: #78716c;
+    margin-top: 8px;
+    letter-spacing: 0.08em;
+  }
+
+  /* China Rig Architecture */
+  .china-rig {
+    width: 100%;
+    max-width: 620px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
-    overflow: hidden;
-    background: radial-gradient(circle at 50% 50%, #151b18 0%, #070908 100%);
-    padding: calc(var(--hud-height, 68px) + 12px) 20px 16px;
-    box-sizing: border-box;
-    gap: 10px;
+    gap: 14px;
+    z-index: 2;
   }
 
-  /* Uncollapsible Narrative Box */
-  .narrative {
-    position: relative;
-    width: 100% !important;
-    max-width: min(90vw, 740px) !important;
-    min-height: 120px;
-    margin: 0 auto !important;
-    text-align: center !important;
-    pointer-events: none;
-    z-index: 5;
-    flex-shrink: 0;
+  .china-rig .museum-plate {
+    background: rgba(255, 255, 255, 0.85);
+    color: #44403c;
+    border-color: rgba(28, 25, 23, 0.15);
+  }
+
+  .china-rig .blueprint-panel {
+    background: rgba(255, 255, 255, 0.9) !important;
+    border-color: rgba(28, 25, 23, 0.18) !important;
+    color: #1c1917 !important;
+  }
+
+  .math-panel {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    padding: 16px 20px;
+    box-sizing: border-box;
   }
 
   .scene-kicker {
