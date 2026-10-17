@@ -293,6 +293,52 @@ src/
 
 ---
 
+---
+
+## Despliegue en Cloudflare Workers y Pages
+
+El proyecto está diseñado y optimizado para ejecutarse en la red perimetral global de **Cloudflare Pages**, aprovechando CDN Anycast, HTTP/3 y almacenamiento en caché inmutable para activos estáticos pesados.
+
+### Arquitectura en Producción
+* **Directorio de salida:** `dist/` generado mediante compilación estática de Astro (`npm run build`).
+* **Cabeceras HTTP (`public/_headers`):**
+  * Políticas de seguridad: `Content-Security-Policy`, `Strict-Transport-Security`, `X-Content-Type-Options: nosniff`, `X-Frame-Options: DENY`, `Referrer-Policy: strict-origin-when-cross-origin` y `Permissions-Policy`.
+  * Reglas de caché: `public, max-age=31536000, immutable` para `/videos/*`, `/images/*`, `/screenshots/*` y activos compilados en `/_astro/*`.
+  * Cabecera `Accept-Ranges: bytes` habilitada en vídeos para permitir peticiones por rangos parciales durante el scrubbing.
+* **Redirecciones y Normalización (`public/_redirects`):**
+  * Redirección 301 de `/en` hacia la ruta canónica `/en/`.
+  * Alias retrocompatible de `/data/pi-1m.txt` hacia `/digits/pi-1m.txt`.
+* **Configuración Wrangler (`wrangler.json`):**
+  * Especifica el nombre de la aplicación `pi-tribute` y el directorio de publicación `dist` con observabilidad perimetral activa.
+
+### Opciones de Despliegue
+
+#### 1. Despliegue Directo vía CLI (Wrangler)
+```bash
+# Compilar y publicar directamente en Cloudflare Pages
+npm run deploy
+
+# O ejecutar paso a paso con el CLI de Wrangler:
+npm run build
+npx wrangler pages deploy dist --project-name=pi-tribute
+```
+
+#### 2. Previsualización Local con el Runtime de Cloudflare
+Para verificar las cabeceras HTTP, directivas CSP y reglas de redirección en un entorno idéntico al borde de Cloudflare:
+```bash
+npm run preview:cf
+```
+
+#### 3. Integración Continua (Git en Cloudflare Dashboard)
+1. Conectar el repositorio de GitHub en el panel de **Cloudflare Dashboard > Workers & Pages > Create application > Pages > Connect to Git**.
+2. Parámetros de compilación:
+   * **Framework preset:** `Astro`
+   * **Build command:** `npm run build`
+   * **Build output directory:** `dist`
+   * **Node.js Version:** `22` o superior (`NODE_VERSION = 22.22.0` en variables de entorno).
+
+---
+
 ## Licencia
 
 Distribuido bajo licencia MIT. Desarrollado con dedicación a la historia de la ciencia y a los estándares de desarrollo web artesanal de alto rendimiento.
