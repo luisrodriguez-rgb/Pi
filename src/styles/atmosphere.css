@@ -8,7 +8,7 @@
   --font-editorial: 'Newsreader', 'Instrument Serif', Georgia, serif;
   --font-mono: 'B612 Mono', monospace;
 
-  /* I. Era Arcaica (Egipto, Siracusa, China - Default) */
+  /* I. Era Arcaica (Egipto y Siracusa - Tierra oscura y terracota) */
   --bg-surface: #120e0a;
   --fg-ink: #e6d7b9;
   --accent: #d94e28;
@@ -19,43 +19,94 @@
   --glow-accent: rgba(217, 78, 40, 0.4);
 }
 
-/* II. Era de Hierro e Imprenta (Leiden, Londres, París, Shanks) */
+/* Siracusa Terracota */
+[data-theme="syracuse"] {
+  --bg-surface: #140d09;
+  --fg-ink: #ede2d1;
+  --accent: #d9532f;
+  --muted: #8c6e54;
+  --grid-line: rgba(237, 226, 209, 0.1);
+  --glow-accent: rgba(217, 83, 47, 0.45);
+}
+
+/* III. Era China: Papel Arroz Editorial Luminoso (#F4EFE6) */
+[data-theme="china"] {
+  --bg-surface: #f4efe6 !important;
+  --fg-ink: #1c1917 !important;
+  --accent: #b91c1c !important; /* Rojo bermellón tradicional */
+  --muted: #78716c !important;
+  --grid-line: rgba(28, 25, 23, 0.09) !important;
+  --glow-accent: rgba(185, 28, 28, 0.25) !important;
+}
+
+/* IV. Lápida de Leiden: Negro Cripta (#090a0c) */
 [data-theme="stone"],
-[data-theme="leiden"],
-[data-theme="london"],
-[data-theme="paris"],
-[data-theme="shanks"] {
-  --bg-surface: #161816;
+[data-theme="leiden"] {
+  --bg-surface: #090a0c;
   --fg-ink: #ede8dc;
-  --accent: #c59b27;
-  --muted: #848c82;
-  --grid-line: color-mix(in srgb, var(--fg-ink) 10%, transparent);
-  --glow-accent: rgba(197, 155, 39, 0.45);
+  --accent: #e5b94c; /* Oro viejo cincelado */
+  --muted: #7c8585;
+  --grid-line: rgba(237, 232, 220, 0.08);
+  --glow-accent: rgba(229, 185, 76, 0.45);
 }
 
-/* Shanks specific carmine error */
+/* V. William Jones 1706: Blanco Imprenta Antiguo (#F5F2EB) */
+[data-theme="london"] {
+  --bg-surface: #f5f2eb !important;
+  --fg-ink: #111111 !important;
+  --accent: #d94e28 !important;
+  --muted: #57534e !important;
+  --grid-line: rgba(17, 17, 17, 0.1) !important;
+  --glow-accent: rgba(217, 78, 40, 0.3) !important;
+}
+
+/* VI. Buffon: Parquet de Versalles y Cera de Abeja (#17120c) */
+[data-theme="paris"] {
+  --bg-surface: #17120c;
+  --fg-ink: #f0e6d6;
+  --accent: #d4a34b; /* Bronce pulido */
+  --muted: #8f7f6a;
+  --grid-line: rgba(240, 230, 214, 0.09);
+  --glow-accent: rgba(212, 163, 75, 0.4);
+}
+
+/* VII. William Shanks: Azul Noche a Rojo Alarma (#110e18) */
 [data-theme="shanks"] {
-  --accent: #e63946;
-  --glow-accent: rgba(230, 57, 70, 0.5);
+  --bg-surface: #110e18;
+  --fg-ink: #fdfaf3;
+  --accent: #e5a93c; /* Dorado Bóveda */
+  --error-ink: #ff2a2a;
+  --muted: #948679;
+  --grid-line: rgba(253, 250, 243, 0.08);
+  --glow-accent: rgba(229, 169, 60, 0.4);
 }
 
-/* III. Era Termoiónica (Ramanujan y ENIAC, Culto Hacker) */
-[data-theme="eniac"],
-[data-theme="cyber"] {
+/* VIII. Era Termoiónica (Ramanujan y ENIAC) */
+[data-theme="eniac"] {
   --bg-surface: #0a110d;
   --fg-ink: #dfd3b9;
   --accent: #39ff88;
-  --muted: #2e4a36;
+  --muted: #4e6353;
   --grid-line: rgba(57, 255, 136, 0.12);
-  --glow-accent: rgba(57, 255, 136, 0.5);
+  --glow-accent: rgba(57, 255, 136, 0.45);
 }
 
-/* IV. Era Cuántica / Infinito (Inversión Brutalista Alabastro / Klein) */
+/* IX. Culto Hacker & Feynman: Azul Ingeniería (#002FA7 / #0A1E3F) */
+[data-theme="cyber"] {
+  --bg-surface: #002fa7 !important; /* Azul Klein Internacional / Blueprint */
+  --fg-ink: #ffffff !important;
+  --accent: #00f0ff !important; /* Cian fósforo terminal */
+  --muted: #94b9ff !important;
+  --grid-line: rgba(255, 255, 255, 0.14) !important;
+  --glow-accent: rgba(0, 240, 255, 0.45) !important;
+}
+
+/* X. Era Cuántica / Infinito (Inversión Brutalista Alabastro / Klein) */
 [data-theme="infinite"],
 [data-theme="infinity"] {
   --bg-surface: #f4f1ea !important;
   --fg-ink: #090a0f !important;
-  --accent: #002fa7 !important; /* Azul Ultramar Internacional Klein */
+  --accent: #002fa7 !important;
   --muted: #5b6272 !important;
   --grid-line: rgba(9, 10, 15, 0.12) !important;
   --glow-accent: rgba(0, 47, 167, 0.35) !important;
@@ -202,14 +253,193 @@ body {
   top: 0; left: 3px; width: 1px; height: 7px;
 }
 
-/* Uncollapsible Narrative Rules */
-.narrative, .narrative-center {
+/* Uncollapsible Narrative Rules & Alignments */
+.narrative {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.narrative-center {
+  max-width: min(90vw, 760px);
+  margin: 0 auto;
+  padding: 0 24px;
+  text-align: center;
+}
+
+.narrative-left {
+  max-width: min(92vw, 560px);
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+
+.narrative-right {
+  max-width: min(92vw, 560px);
+  margin: 0 0 0 auto;
+  padding: 0;
+  text-align: right;
+}
+
+/* ============================================================
+   SISTEMA DE LAYOUTS ASIMÉTRICOS CINEMATOGRÁFICOS
+   Rompe la monotonía vertical de tótem centrado
+   ============================================================ */
+
+/* 1. Layout Split 50/50 / Asimétrico */
+.layout-split {
+  display: grid !important;
+  grid-template-columns: 1fr 1.15fr !important;
+  gap: clamp(24px, 4.5vw, 64px) !important;
+  align-items: center !important;
   width: 100% !important;
-  max-width: min(90vw, 760px) !important;
+  max-width: 1440px !important;
   margin: 0 auto !important;
-  padding: 0 24px !important;
+  height: 100vh !important;
+  padding: calc(var(--hud-height, 68px) + 20px) clamp(20px, 4vw, 56px) 24px !important;
   box-sizing: border-box !important;
-  text-align: center !important;
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+.layout-split.split-reverse {
+  grid-template-columns: 1.15fr 1fr !important;
+}
+
+@media (max-width: 960px) {
+  .layout-split,
+  .layout-split.split-reverse {
+    grid-template-columns: 1fr !important;
+    overflow-y: auto !important;
+    gap: 20px !important;
+    padding: calc(var(--hud-height, 68px) + 12px) 16px 20px !important;
+  }
+}
+
+/* 2. Layout Cinema Bottom (16mm Movie Subtitle Style) */
+.layout-cinema-bottom {
+  position: relative !important;
+  width: 100% !important;
+  height: 100vh !important;
+  overflow: hidden !important;
+  display: block !important;
+  padding: 0 !important;
+}
+
+.cinema-bottom-text {
+  position: absolute !important;
+  bottom: clamp(36px, 7vh, 80px) !important;
+  left: clamp(24px, 5vw, 72px) !important;
+  max-width: min(92vw, 540px) !important;
+  text-align: left !important;
+  z-index: 20 !important;
+  background: color-mix(in srgb, var(--bg-surface) 75%, transparent);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 20px 24px !important;
+  border-left: 2px solid var(--accent);
+  border-top: 1px solid var(--grid-line);
+  border-right: 1px solid var(--grid-line);
+  border-bottom: 1px solid var(--grid-line);
+}
+
+@media (max-width: 768px) {
+  .cinema-bottom-text {
+    bottom: 20px !important;
+    left: 16px !important;
+    right: 16px !important;
+    max-width: none !important;
+    padding: 14px 16px !important;
+  }
+}
+
+.cinema-stage-visual {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  padding-right: clamp(20px, 6vw, 100px) !important;
+  z-index: 5 !important;
+}
+
+/* 3. Layout Zig-Zag (Revista Editorial / Documental) */
+.layout-zigzag {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: clamp(28px, 4vw, 64px) !important;
+  align-items: center !important;
+  width: 100% !important;
+  max-width: 1400px !important;
+  margin: 0 auto !important;
+  height: 100vh !important;
+  padding: calc(var(--hud-height, 68px) + 20px) clamp(24px, 4vw, 56px) 24px !important;
+  box-sizing: border-box !important;
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+@media (max-width: 960px) {
+  .layout-zigzag {
+    grid-template-columns: 1fr !important;
+    overflow-y: auto !important;
+  }
+}
+
+/* 4. Tarjetas Fotográficas Archival Táctiles (Estilo Margaret Hamilton) */
+.archival-photo-card {
+  position: relative;
+  background: #ffffff;
+  color: #1a1a1a;
+  padding: 10px 10px 14px 10px;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45), 0 2px 8px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.45s ease;
+  max-width: 440px;
+  width: 100%;
+}
+
+.archival-photo-card:hover {
+  transform: scale(1.02) rotate(0deg) !important;
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.55);
+}
+
+.archival-photo-card.tilt-left {
+  transform: rotate(-2.8deg);
+}
+
+.archival-photo-card.tilt-right {
+  transform: rotate(2.4deg);
+}
+
+.archival-photo-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  filter: contrast(1.04) saturate(0.92);
+}
+
+.archival-photo-card .photo-caption {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  color: #4b5563;
+  margin-top: 10px;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #e5e7eb;
+  padding-top: 6px;
+}
+
+.archival-photo-card .photo-badge {
+  font-size: 0.6rem;
+  color: #b91c1c;
+  font-weight: 700;
 }
 
 .beat {
