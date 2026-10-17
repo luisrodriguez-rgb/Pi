@@ -21,7 +21,7 @@ const milestone = MILESTONES[4];
 >
   <div class="stage">
     <!-- Narrative Header (In-flow, balanced typography, zero collision with catalog plate) -->
-    <div class="narrative">
+    <div class="narrative choreo-header">
       <div class="beat" data-beat="0.05-0.38">
         <span class="scene-kicker">05 // LONDRES, 1706 d.C. · WILLIAM JONES</span>
         <h2 class="scene-title">{milestone.title[locale]}</h2>
@@ -51,7 +51,7 @@ const milestone = MILESTONES[4];
     </div>
 
     <!-- Symbol Transformation Stage (Positioned below narrative, zero empty void) -->
-    <div class="symbol-stage" id="symbol-stage">
+    <div class="symbol-stage choreo-artifact" id="symbol-stage">
       <!-- Museum Catalog Technical Plate (In-Flow) -->
       <div class="museum-plate">
         [ FIG. 05 // LONDRES, 1706 — SYNOPSIS PALMARIORUM — PÁGINA 263 ]
@@ -81,7 +81,7 @@ const milestone = MILESTONES[4];
         </div>
 
         <!-- William Jones 1706 Original Facsimile Card (Zero SaaS Border-Radius) -->
-        <div class="jones-facsimile">
+        <div class="jones-facsimile choreo-metrics">
           <div class="facsimile-header">
             <span class="facsimile-badge">SYNOPSIS PALMARIORUM MATHESEOS · PÁGINA 263</span>
             <button type="button" id="toggle-collapse-btn" class="collapse-btn">
