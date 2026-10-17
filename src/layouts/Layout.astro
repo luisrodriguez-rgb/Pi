@@ -11,6 +11,27 @@ interface Props {
 
 const { locale = 'es' } = Astro.props;
 const t = UI_STRINGS[locale];
+const canonicalUrl = locale === 'es' ? 'https://pi-tribute.dev/' : 'https://pi-tribute.dev/en/';
+const ogImageUrl = 'https://pi-tribute.dev/screenshots/scene-02-syracuse.jpg';
+
+const schemaData = {
+  "@context": "https://schema.org",
+  "@type": "EducationalWebPage",
+  "name": t.siteTitle,
+  "description": t.siteDescription,
+  "url": canonicalUrl,
+  "inLanguage": locale,
+  "educationalLevel": "Intermediate",
+  "about": {
+    "@type": "Thing",
+    "name": "Mathematical Constant Pi (π)",
+    "description": "Historical evolution, geometric derivation, and computational records of Pi."
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Luis Rodriguez"
+  }
+};
 ---
 
 <!doctype html>
@@ -18,20 +39,55 @@ const t = UI_STRINGS[locale];
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{t.siteTitle}</title>
     <meta name="description" content={t.siteDescription} />
 
-    <!-- Open Graph / Meta -->
+    <!-- Resource Hints & DNS Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+
+    <!-- Canonical & Alternate Locales -->
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="alternate" hreflang="es" href="https://pi-tribute.dev/" />
+    <link rel="alternate" hreflang="en" href="https://pi-tribute.dev/en/" />
+    <link rel="alternate" hreflang="x-default" href="https://pi-tribute.dev/" />
+
+    <!-- Favicon & PWA Webmanifest -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#120e0a" />
+
+    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="pi-tribute" />
+    <meta property="og:url" content={canonicalUrl} />
     <meta property="og:title" content={t.siteTitle} />
     <meta property="og:description" content={t.siteDescription} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1920" />
+    <meta property="og:image:height" content="1080" />
+    <meta property="og:image:alt" content="Visualización geométrica y cinematográfica de la constante Pi" />
+    <meta property="og:locale" content={locale === 'es' ? 'es_ES' : 'en_US'} />
+    <meta property="og:locale:alternate" content={locale === 'es' ? 'en_US' : 'es_ES'} />
+
+    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalUrl} />
     <meta name="twitter:title" content={t.siteTitle} />
     <meta name="twitter:description" content={t.siteDescription} />
-    <meta name="theme-color" content="#120e0a" />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
   </head>
   <body>
+    <!-- Skip Link for Keyboard & Screen Reader Accessibility -->
+    <a href="#main-content" class="skip-link">
+      {locale === 'es' ? 'Saltar al contenido principal' : 'Skip to main content'}
+    </a>
     <!-- SVG Filter for Organic Ink / Chiseled Edge Displacement -->
     <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" aria-hidden="true">
       <defs>
