@@ -20,7 +20,7 @@ const milestone = MILESTONES[5];
   data-theme={milestone.theme}
   data-scene-title={milestone.title[locale]}
 >
-  <div class="stage buffon-cinema-stage">
+  <div class="stage">
     <!-- Cinematic Fullscreen Video: Bronze Needles on Versailles Oak Parquet -->
     <SceneVideo 
       src="/videos/06-buffon.mp4" 
@@ -29,65 +29,69 @@ const milestone = MILESTONES[5];
       opacity={0.82} 
     />
 
-    <!-- Top-Right Narrative Subtitle Block -->
-    <div class="buffon-narrative-right choreo-header">
-      <div class="museum-plate">
-        [ FIG. 06 // PARÍS, 1777 — PARQUET DEL CONDE DE BUFFON — MONTE CARLO ]
-      </div>
-
-      <div class="beat" data-beat="0.05-0.38">
-        <span class="scene-kicker">06 // PARÍS, 1777 d.C. · CONDE DE BUFFON</span>
-        <h2 class="scene-title">{milestone.title[locale]}</h2>
-        <p class="beat-text">
-          {locale === 'es'
-            ? 'En su salón parisino, Georges-Louis Leclerc, Conde de Buffon, descubrió algo casi sobrenatural: arroja agujas de coser al azar sobre un suelo de tablas de madera y cuenta cuántas cruzan las juntas. π emerge de la nada sin un solo círculo a la vista.'
-            : 'In his Parisian salon, Georges-Louis Leclerc, Count of Buffon, discovered something almost supernatural: toss sewing needles at random upon a wooden parquet and count how many cross the seams. π emerges out of nowhere with not a single circle in sight.'}
-        </p>
-      </div>
-
-      <div class="beat" data-beat="0.42-0.80">
-        <span class="scene-kicker">06 // LA PROBABILIDAD GEOMÉTRICA</span>
-        <h2 class="scene-title">El Teorema del Parquet</h2>
-        <p class="beat-text">
-          {locale === 'es'
-            ? 'La probabilidad exacta de cruce es 2L / (π · D). Con agujas de longitud L = D/2, basta dividir el total de agujas entre las que cruzan la junta para ver a π converger en vivo delante de tus ojos conforme avanzas en el scroll.'
-            : 'The exact probability of crossing is 2L / (π · D). With needles of length L = D/2, simply dividing total needles by crossings reveals π converging live before your eyes as you scroll.'}
-        </p>
-      </div>
-
-      <div class="beat beat-climax" data-beat="0.84-0.98">
-        <blockquote class="buffon-quote">
-          <p>«π ya no pertenecía solo a los círculos. Estaba escondido en el tejido mismo del azar.»</p>
-          <cite>— Essai d’arithmétique morale (1777)</cite>
-        </blockquote>
-      </div>
-    </div>
-
-    <!-- Bottom-Left Live Typographic Monte Carlo Counter (Floating over video) -->
-    <div class="buffon-live-hud choreo-metrics">
-      <div class="hud-header">
-        <span class="hud-dot"></span>
-        <span class="hud-title">MONTE CARLO // CONVERGENCIA EN VIVO</span>
-      </div>
-
-      <div class="hud-grid">
-        <div class="hud-metric">
-          <span class="metric-label">AGUJAS EN EL SUELO (N)</span>
-          <strong id="buffon-total" class="metric-val tabular">0</strong>
+    <div class="stage-content">
+      <!-- Top-Right Narrative Subtitle Block -->
+      <div class="buffon-narrative-right choreo-header">
+        <div class="museum-plate">
+          [ FIG. 06 // PARÍS, 1777 — PARQUET DEL CONDE DE BUFFON — MONTE CARLO ]
         </div>
 
-        <div class="hud-sep"></div>
+        <div class="narrative-layer">
+          <div class="beat beat-1" data-beat="0.00-0.40">
+            <span class="scene-kicker">06 // PARÍS, 1777 d.C. · CONDE DE BUFFON</span>
+            <h2 class="scene-title">{milestone.title[locale]}</h2>
+            <p class="beat-text">
+              {locale === 'es'
+                ? 'En su salón parisino, Georges-Louis Leclerc, Conde de Buffon, descubrió algo casi sobrenatural: arroja agujas de coser al azar sobre un suelo de tablas de madera y cuenta cuántas cruzan las juntas. π emerge de la nada sin un solo círculo a la vista.'
+                : 'In his Parisian salon, Georges-Louis Leclerc, Count of Buffon, discovered something almost supernatural: toss sewing needles at random upon a wooden parquet and count how many cross the seams. π emerges out of nowhere with not a single circle in sight.'}
+            </p>
+          </div>
 
-        <div class="hud-metric">
-          <span class="metric-label">CRUCES DE JUNTA (C)</span>
-          <strong id="buffon-cross" class="metric-val metric-accent tabular">0</strong>
+          <div class="beat beat-2" data-beat="0.38-0.78">
+            <span class="scene-kicker">06 // LA PROBABILIDAD GEOMÉTRICA</span>
+            <h2 class="scene-title">El Teorema del Parquet</h2>
+            <p class="beat-text">
+              {locale === 'es'
+                ? 'La probabilidad exacta de cruce es 2L / (π · D). Con agujas de longitud L = D/2, basta dividir el total de agujas entre las que cruzan la junta para ver a π converger en vivo delante de tus ojos conforme avanzas en el scroll.'
+                : 'The exact probability of crossing is 2L / (π · D). With needles of length L = D/2, simply dividing total needles by crossings reveals π converging live before your eyes as you scroll.'}
+            </p>
+          </div>
+
+          <div class="beat beat-climax" data-beat="0.75-1.00">
+            <blockquote class="buffon-quote">
+              <p>«π ya no pertenecía solo a los círculos. Estaba escondido en el tejido mismo del azar.»</p>
+              <cite>— Essai d’arithmétique morale (1777)</cite>
+            </blockquote>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom-Left Live Typographic Monte Carlo Counter (Floating over video) -->
+      <div class="buffon-live-hud choreo-metrics">
+        <div class="hud-header">
+          <span class="hud-dot"></span>
+          <span class="hud-title">MONTE CARLO // CONVERGENCIA EN VIVO</span>
         </div>
 
-        <div class="hud-sep"></div>
+        <div class="hud-grid">
+          <div class="hud-metric">
+            <span class="metric-label">AGUJAS EN EL SUELO (N)</span>
+            <strong id="buffon-total" class="metric-val tabular">0</strong>
+          </div>
 
-        <div class="hud-metric">
-          <span class="metric-label">ESTIMACIÓN π ≈ N / C</span>
-          <strong id="buffon-pi-val" class="metric-val metric-gold tabular">---</strong>
+          <div class="hud-sep"></div>
+
+          <div class="hud-metric">
+            <span class="metric-label">CRUCES DE JUNTA (C)</span>
+            <strong id="buffon-cross" class="metric-val metric-accent tabular">0</strong>
+          </div>
+
+          <div class="hud-sep"></div>
+
+          <div class="hud-metric">
+            <span class="metric-label">ESTIMACIÓN π ≈ N / C</span>
+            <strong id="buffon-pi-val" class="metric-val metric-gold tabular">---</strong>
+          </div>
         </div>
       </div>
     </div>
@@ -131,14 +135,18 @@ const milestone = MILESTONES[5];
     --p: 0;
   }
 
-  .buffon-cinema-stage {
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    width: 100%;
-    overflow: hidden;
-    display: block;
+  .stage {
     background: #17120c;
+  }
+
+  .stage-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    display: block !important;
   }
 
   /* Top-Right Narrative Subtitle */
@@ -149,7 +157,7 @@ const milestone = MILESTONES[5];
     max-width: min(90vw, 540px);
     text-align: right;
     z-index: 20;
-    background: rgba(23, 18, 12, 0.72);
+    background: rgba(23, 18, 12, 0.78);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     padding: 22px 26px;
@@ -214,21 +222,21 @@ const milestone = MILESTONES[5];
     font-style: normal;
     color: rgba(240, 230, 214, 0.65);
     margin-top: 8px;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.08em;
   }
 
-  /* Bottom-Left Live Typographic Monte Carlo Counter */
+  /* Live HUD Counter */
   .buffon-live-hud {
     position: absolute;
-    bottom: clamp(32px, 6vh, 68px);
+    bottom: clamp(36px, 7vh, 80px);
     left: clamp(24px, 5vw, 80px);
     z-index: 20;
-    background: rgba(18, 14, 10, 0.82);
+    background: rgba(23, 18, 12, 0.85);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(212, 163, 75, 0.35);
-    padding: 16px 24px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+    padding: 18px 24px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
   }
 
   @media (max-width: 768px) {
@@ -245,33 +253,36 @@ const milestone = MILESTONES[5];
     align-items: center;
     gap: 8px;
     margin-bottom: 12px;
-    border-bottom: 1px solid rgba(212, 163, 75, 0.2);
-    padding-bottom: 6px;
   }
 
   .hud-dot {
     width: 6px;
     height: 6px;
-    border-radius: 50%;
     background: #d4a34b;
+    border-radius: 50%;
     box-shadow: 0 0 8px #d4a34b;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.85); }
   }
 
   .hud-title {
     font-family: var(--font-mono);
-    font-size: 0.64rem;
+    font-size: 0.65rem;
     letter-spacing: 0.16em;
-    color: #d4a34b;
-    font-weight: 700;
+    color: rgba(240, 230, 214, 0.7);
   }
 
   .hud-grid {
     display: flex;
     align-items: center;
-    gap: clamp(16px, 3vw, 32px);
+    gap: 20px;
   }
 
-  @media (max-width: 640px) {
+  @media (max-width: 600px) {
     .hud-grid {
       flex-direction: column;
       align-items: flex-start;
@@ -285,35 +296,35 @@ const milestone = MILESTONES[5];
   .hud-metric {
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 4px;
   }
 
   .metric-label {
     font-family: var(--font-mono);
-    font-size: 0.64rem;
-    letter-spacing: 0.1em;
-    color: rgba(240, 230, 214, 0.6);
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    color: rgba(240, 230, 214, 0.55);
   }
 
   .metric-val {
     font-family: var(--font-mono);
-    font-size: clamp(1.3rem, 2.5vw, 1.9rem);
-    color: #f0e6d6;
-    font-variant-numeric: tabular-nums;
+    font-size: 1.25rem;
+    color: #ffffff;
+    font-weight: 700;
   }
 
   .metric-accent {
-    color: #d4a34b;
+    color: #e07a5f;
   }
 
   .metric-gold {
-    color: #ffd700;
-    text-shadow: 0 0 16px rgba(255, 215, 0, 0.5);
+    color: #d4a34b;
+    text-shadow: 0 0 12px rgba(212, 163, 75, 0.5);
   }
 
   .hud-sep {
     width: 1px;
-    height: 36px;
-    background: rgba(212, 163, 75, 0.2);
+    height: 32px;
+    background: rgba(212, 163, 75, 0.25);
   }
 </style>

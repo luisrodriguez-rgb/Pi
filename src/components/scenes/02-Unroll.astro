@@ -21,13 +21,13 @@ const milestone = MILESTONES[1];
   data-theme={milestone.theme}
   data-scene-title={milestone.title[locale]}
 >
-  <div class="stage layout-cinema-bottom">
+  <div class="stage">
     <!-- Cinematic Atmospheric Video Background (Google Flow / Veo) -->
     <SceneVideo 
       src="/videos/02-syracuse.mp4" 
       poster="/images/02-syracuse.jpg" 
       blend="screen" 
-      opacity={0.55} 
+      opacity={0.65} 
     />
 
     <!-- Bloodied Sand and Halftone Stone Backdrop -->
@@ -35,40 +35,48 @@ const milestone = MILESTONES[1];
       <div class="roman-sword-slash"></div>
     </div>
 
-    <!-- Center/Right Visualizer: Archimedes Hydraulic Rig -->
-    <div class="cinema-stage-visual choreo-artifact">
-      <div class="rig-wrapper">
-        <ArchimedesRig />
-      </div>
-    </div>
+    <!-- Inner Content: Split Architecture (Narrative Left, Hydraulic Rig Right) -->
+    <div class="stage-content layout-split">
+      <div class="narrative-left choreo-header">
+        <div class="museum-plate">
+          [ FIG. 02 // SIRACUSA, 212 a.C. — PRENSA GEOMÉTRICA DE 96 LADOS ]
+        </div>
 
-    <!-- Cinema Bottom-Left Narrative (16mm Movie Subtitle Style) -->
-    <div class="cinema-bottom-text choreo-header">
-      <div class="beat" data-beat="0.05-0.38">
-        <span class="scene-kicker">02 // SIRACUSA, 212 a.C. · MAGNA GRECIA</span>
-        <h2 class="scene-title">{milestone.title[locale]}</h2>
-        <p class="beat-text">
-          {locale === 'es'
-            ? 'Los legionarios romanos asaltan Siracusa. Un soldado irrumpe en el patio de Arquímedes. El anciano de 75 años está arrodillado dibujando en la arena con una vara. Al ver la sombra del soldado sobre su dibujo, susurra sus últimas palabras: «Noli turbare circulos meos».'
-            : 'Roman legionaries sack Syracuse. A soldier storms into Archimedes’ courtyard. The 75-year-old mathematician is kneeling in the dirt, tracing curves with a rod. Seeing the soldier’s shadow cast over his diagrams, he whispers his final words: «Noli turbare circulos meos».'}
-        </p>
+        <div class="narrative-layer">
+          <div class="beat beat-1" data-beat="0.00-0.40">
+            <span class="scene-kicker">02 // SIRACUSA, 212 a.C. · MAGNA GRECIA</span>
+            <h2 class="scene-title">{milestone.title[locale]}</h2>
+            <p class="beat-text">
+              {locale === 'es'
+                ? 'Los legionarios romanos asaltan Siracusa. Un soldado irrumpe en el patio de Arquímedes. El anciano de 75 años está arrodillado dibujando en la arena con una vara. Al ver la sombra del soldado sobre su dibujo, susurra sus últimas palabras: «Noli turbare circulos meos».'
+                : 'Roman legionaries sack Syracuse. A soldier storms into Archimedes’ courtyard. The 75-year-old mathematician is kneeling in the dirt, tracing curves with a rod. Seeing the soldier’s shadow cast over his diagrams, he whispers his final words: «Noli turbare circulos meos».'}
+            </p>
+          </div>
+
+          <div class="beat beat-2" data-beat="0.38-0.78">
+            <span class="scene-kicker">02 // LA PRENSA HIDRÁULICA GEOMÉTRICA</span>
+            <h2 class="scene-title">La Trampa de los 96 Lados</h2>
+            <p class="beat-text">
+              {locale === 'es'
+                ? 'Dos polígonos —uno por dentro y otro por fuera— se cierran sobre el círculo como una prensa. Con cada duplicación (6 → 12 → 24 → 48 → 96 lados), el espacio se asfixia. π queda atrapado sin escapatoria entre 223/71 y 22/7.'
+                : 'Two regular polygons —one within and one without— clamp shut around the circle like a hydraulic press. With each doubling (6 → 12 → 24 → 48 → 96 sides), the margins suffocate. π is trapped without escape between 223/71 and 22/7.'}
+            </p>
+          </div>
+
+          <div class="beat beat-climax" data-beat="0.75-1.00">
+            <blockquote class="sword-quote">
+              <p>«Mataron al hombre en la arena. Su trampa geométrica sobrevivió dos mil años.»</p>
+              <cite>— 223/71 &lt; π &lt; 22/7 (3.1418)</cite>
+            </blockquote>
+          </div>
+        </div>
       </div>
 
-      <div class="beat" data-beat="0.42-0.80">
-        <span class="scene-kicker">02 // LA PRENSA HIDRÁULICA GEOMÉTRICA</span>
-        <h2 class="scene-title">La Trampa de los 96 Lados</h2>
-        <p class="beat-text">
-          {locale === 'es'
-            ? 'Dos polígonos —uno por dentro y otro por fuera— se cierran sobre el círculo como una prensa. Con cada duplicación (6 → 12 → 24 → 48 → 96 lados), el espacio se asfixia. π queda atrapado sin escapatoria entre 223/71 y 22/7.'
-            : 'Two regular polygons —one within and one without— clamp shut around the circle like a hydraulic press. With each doubling (6 → 12 → 24 → 48 → 96 sides), the margins suffocate. π is trapped without escape between 223/71 and 22/7.'}
-        </p>
-      </div>
-
-      <div class="beat beat-climax" data-beat="0.84-0.98">
-        <blockquote class="sword-quote">
-          <p>«Mataron al hombre en la arena. Su trampa geométrica sobrevivió dos mil años.»</p>
-          <cite>— 223/71 &lt; π &lt; 22/7 (3.1418)</cite>
-        </blockquote>
+      <!-- Right Column: Archimedes Hydraulic Rig -->
+      <div class="syracuse-rig choreo-artifact">
+        <div class="rig-wrapper">
+          <ArchimedesRig />
+        </div>
       </div>
     </div>
   </div>
@@ -82,19 +90,7 @@ const milestone = MILESTONES[1];
   }
 
   .stage {
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    overflow: hidden;
     background: radial-gradient(circle at 50% 50%, #1e1410 0%, #0d0807 100%);
-    padding: calc(var(--hud-height, 68px) + 12px) 20px 16px;
-    box-sizing: border-box;
-    gap: 8px;
   }
 
   .syracuse-bg {
@@ -118,37 +114,6 @@ const milestone = MILESTONES[1];
     will-change: transform, opacity;
   }
 
-  /* Non-overlapping Narrative Box Positioned Above Rig */
-  .narrative {
-    position: relative;
-    width: 100% !important;
-    max-width: min(90vw, 740px) !important;
-    min-height: 110px;
-    margin: 0 auto !important;
-    text-align: center !important;
-    pointer-events: none;
-    z-index: 5;
-    flex-shrink: 0;
-  }
-
-  .beat {
-    opacity: 0;
-    transform: translate3d(0, 14px, 0);
-    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    width: 100% !important;
-  }
-
-  .beat.is-active {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-    pointer-events: auto;
-    position: relative;
-  }
-
   .scene-kicker {
     font-family: var(--font-mono);
     font-size: 0.72rem;
@@ -170,7 +135,7 @@ const milestone = MILESTONES[1];
   .beat-text {
     font-family: var(--font-sans);
     font-size: clamp(0.95rem, 1.8vw, 1.12rem);
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 0.85);
     line-height: 1.65;
     margin: 0;
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
@@ -196,12 +161,17 @@ const milestone = MILESTONES[1];
     letter-spacing: 0.08em;
   }
 
-  .rig-wrapper {
-    margin-top: 4px;
+  .syracuse-rig {
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 2;
+  }
+
+  .rig-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 </style>

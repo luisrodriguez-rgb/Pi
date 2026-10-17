@@ -21,7 +21,7 @@ const t = UI_STRINGS[locale];
   data-theme="infinite"
   data-scene-title={milestone.title[locale]}
 >
-  <div class="stage layout-split" id="scene-10-stage">
+  <div class="stage" id="scene-10-stage">
     <!-- Cinematic Atmospheric Video Background (Alabaster White & Klein Blue Infinite Horizon) -->
     <SceneVideo 
       src="/videos/10-horizon.mp4" 
@@ -47,86 +47,88 @@ const t = UI_STRINGS[locale];
       </svg>
     </div>
 
-    <!-- Left Column: Narrative & Final Cosmic Reveal -->
-    <div class="library-narrative-col choreo-header">
-      <div class="museum-plate">
-        [ FIG. 10 // COSMOS, PRESENTE — CHUDNOVSKY // 105 BILLONES DE DÍGITOS ]
-      </div>
+    <!-- Inner Content: Split Architecture (Narrative Left, 1-Million Search Rig Right) -->
+    <div class="stage-content layout-split">
+      <!-- Left Column: Narrative & Final Cosmic Reveal -->
+      <div class="library-narrative-col choreo-header">
+        <div class="museum-plate">
+          [ FIG. 10 // COSMOS, PRESENTE — CHUDNOVSKY // 105 BILLONES DE DÍGITOS ]
+        </div>
 
-      <div class="beat" data-beat="0.05-0.35">
-        <span class="scene-kicker">10 // EL HORIZONTE DEL INFINITO · PRESENTE</span>
-        <h2 class="scene-title">{milestone.title[locale]}</h2>
-        <p class="beat-text">
-          {locale === 'es'
-            ? 'Desde los cálculos de Emma Haruka Iwao en la nube hasta los récords actuales con el algoritmo Chudnovsky (más de 105 billones de decimales calculados), la humanidad ha empujado la frontera como nunca antes.'
-            : 'From Emma Haruka Iwao’s cloud computations to modern records with the Chudnovsky algorithm (over 105 trillion decimals computed), humanity has driven the frontier into unfathomable depths.'}
-        </p>
-      </div>
-
-      <div class="beat" data-beat="0.38-0.75">
-        <span class="scene-kicker">10 // TU HUELLA ETERNA</span>
-        <h2 class="scene-title">{t.searchTitle}</h2>
-        <p class="beat-text">
-          {locale === 'es'
-            ? 'Si π es un número normal, dentro de su secuencia infinita están codificadas todas las fechas de nacimiento, todos los números de teléfono de tu infancia y las historias de amor que han existido. Todo ya estaba esperando en el tejido de π antes de que existieran las estrellas.'
-            : 'If π is normal, within its infinite stream lies inscribed every birthday, every phone number from childhood, and every love story ever told. All was already waiting in the fabric of π before the first star was born.'}
-        </p>
-      </div>
-
-      <div class="beat beat-closing" data-beat="0.78-0.98">
-        <div class="closing-card blueprint-panel choreo-metrics">
-          <blockquote class="closing-quote">
-            «No había opción salvo medir lo inconmensurable. El círculo nunca se cierra; solo aumenta nuestra resolución.»
-          </blockquote>
-
-          <!-- Final Whispered Cosmic Reveal -->
-          <div class="final-infinite-thanks">
-            <span class="thanks-line">« Gracias por medir el infinito. »</span>
+        <div class="narrative-layer">
+          <div class="beat beat-1" data-beat="0.00-0.40">
+            <span class="scene-kicker">10 // EL HORIZONTE DEL INFINITO · PRESENTE</span>
+            <h2 class="scene-title">{milestone.title[locale]}</h2>
+            <p class="beat-text">
+              {locale === 'es'
+                ? 'Desde los cálculos de Emma Haruka Iwao en la nube hasta los récords actuales con el algoritmo Chudnovsky (más de 105 billones de decimales calculados), la humanidad ha empujado la frontera como nunca antes.'
+                : 'From Emma Haruka Iwao’s cloud computations to modern records with the Chudnovsky algorithm (over 105 trillion decimals computed), humanity has driven the frontier into unfathomable depths.'}
+            </p>
           </div>
 
-          <div class="closing-author">— pi-tribute.dev</div>
-          <p class="closing-sub">
-            {locale === 'es' 
-              ? 'De medir cuerdas en la arena de Egipto a estrellar supercomputadoras contra el infinito. El círculo sigue abierto.'
-              : 'From measuring ropes in Egyptian sand to hurtling supercomputers against infinity. The circle remains open.'}
-          </p>
-          <div class="closing-actions">
-            <a href="#scene-1" class="btn-restart">
-              <span>↑</span> {locale === 'es' ? 'Volver al principio' : 'Return to beginning'}
-            </a>
+          <div class="beat beat-2" data-beat="0.38-0.78">
+            <span class="scene-kicker">10 // TU HUELLA ETERNA</span>
+            <h2 class="scene-title">{t.searchTitle}</h2>
+            <p class="beat-text">
+              {locale === 'es'
+                ? 'Si π es un número normal, dentro de su secuencia infinita están codificadas todas las fechas de nacimiento, todos los números de teléfono de tu infancia y las historias de amor que han existido. Todo ya estaba esperando en el tejido de π antes de que existieran las estrellas.'
+                : 'If π is normal, within its infinite stream lies inscribed every birthday, every phone number from childhood, and every love story ever told. All was already waiting in the fabric of π before the first star was born.'}
+            </p>
           </div>
-          <footer class="closing-credits">
-            <span>{t.credits}</span>
-          </footer>
+
+          <div class="beat beat-closing" data-beat="0.75-1.00">
+            <div class="closing-card blueprint-panel choreo-metrics">
+              <blockquote class="closing-quote">
+                «No había opción salvo medir lo inconmensurable. El círculo nunca se cierra; solo aumenta nuestra resolución.»
+              </blockquote>
+
+              <!-- Final Whispered Cosmic Reveal -->
+              <div class="final-infinite-thanks">
+                <span class="thanks-line">« Gracias por medir el infinito. »</span>
+              </div>
+
+              <div class="closing-author">— pi-tribute.dev</div>
+              <p class="closing-sub">
+                {locale === 'es' 
+                  ? 'De medir cuerdas en la arena de Egipto a estrellar supercomputadoras contra el infinito. El círculo sigue abierto.'
+                  : 'From measuring ropes in Egyptian sand to hurtling supercomputers against infinity. The circle remains open.'}
+              </p>
+              <div class="closing-actions">
+                <a href="#scene-1" class="btn-restart">
+                  <span>↑</span> {locale === 'es' ? 'Volver al principio' : 'Return to beginning'}
+                </a>
+              </div>
+              <footer class="closing-credits">
+                <span>{t.credits}</span>
+              </footer>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- Right Column: The 1-Million Digits Scientific Search Rig -->
-    <div class="search-rig choreo-artifact" id="search-rig">
-      <div class="search-box blueprint-panel">
-        <div class="search-input-wrap">
-          <input 
-            type="text" 
-            id="pi-search-input" 
-            placeholder="Ej: 14031992 o cualquier secuencia"
-            maxlength="16"
-            autocomplete="off"
-            class="pi-input tabular"
-          />
-          <button type="button" id="pi-search-btn" class="pi-btn">
-            {locale === 'es' ? 'BUSCAR EN π' : 'SEARCH IN π'}
-          </button>
-        </div>
+      <!-- Right Column: The 1-Million Digits Scientific Search Rig -->
+      <div class="search-rig choreo-artifact" id="search-rig">
+        <div class="search-box blueprint-panel">
+          <div class="search-input-wrap">
+            <input 
+              type="text" 
+              id="pi-search-input" 
+              placeholder="Ej: 14031992 o cualquier secuencia"
+              maxlength="16"
+              autocomplete="off"
+              class="pi-input tabular"
+            />
+            <button type="button" id="pi-search-btn" class="pi-btn">
+              {locale === 'es' ? 'BUSCAR EN π' : 'SEARCH IN π'}
+            </button>
+          </div>
 
-        <!-- Result Card (Technical Terminal Output) -->
-        <div class="search-result" id="search-result" style="display: none;">
-          <div class="result-status" id="result-status"></div>
-          <div class="result-snippet" id="result-snippet"></div>
-        </div>
-
-        <div class="search-hint">
-          <span class="tabular">{locale === 'es' ? 'Dataset cargado: 1,000,000 de dígitos reales de π' : 'Dataset loaded: 1,000,000 actual digits of π'}</span>
+          <!-- Result Card (Technical Terminal Output) -->
+          <div class="search-result" id="search-result" style="display: none;">
+            <div class="result-status" id="result-status"></div>
+            <div class="result-snippet" id="result-snippet"></div>
+            <div class="result-details" id="result-details"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -137,90 +139,74 @@ const t = UI_STRINGS[locale];
   import { soundEngine } from '../../scripts/audio';
 
   const input = document.getElementById('pi-search-input') as HTMLInputElement | null;
-  const btn = document.getElementById('pi-search-btn');
-  const resultBox = document.getElementById('search-result');
-  const resultStatus = document.getElementById('result-status');
-  const resultSnippet = document.getElementById('result-snippet');
+  const btn = document.getElementById('pi-search-btn') as HTMLButtonElement | null;
+  const resultCard = document.getElementById('search-result');
+  const statusEl = document.getElementById('result-status');
+  const snippetEl = document.getElementById('result-snippet');
+  const detailsEl = document.getElementById('result-details');
 
-  let piDigits: string | null = null;
-  let isLoading = false;
+  let piDigits = '';
 
   async function loadDigits() {
-    if (piDigits || isLoading) return;
-    isLoading = true;
     try {
-      const res = await fetch('/digits/pi-1m.txt');
-      const text = await res.text();
-      piDigits = text.replace(/[^0-9]/g, '');
-    } catch (e) {
-      console.error('Failed to load pi digits:', e);
-    } finally {
-      isLoading = false;
+      const res = await fetch('/data/pi-1m.txt');
+      if (res.ok) {
+        piDigits = await res.text();
+      }
+    } catch {
+      // Fallback
     }
   }
 
-  input?.addEventListener('focus', loadDigits);
-  window.addEventListener('pi-scene-change', (e: any) => {
-    if (e.detail?.sceneId === 'infinity' || e.detail?.sceneNumber >= 8) {
-      loadDigits();
-    }
-  });
+  loadDigits();
 
-  function performSearch() {
-    if (!input || !resultBox || !resultStatus || !resultSnippet) return;
-    const query = input.value.replace(/[^0-9]/g, '');
+  function doSearch() {
+    if (!input || !resultCard) return;
+    const query = input.value.trim().replace(/\D/g, '');
+    if (!query) return;
 
-    if (!query || query.length < 2) {
-      resultBox.style.display = 'block';
-      resultStatus.innerHTML = '<span class="status-warn">Por favor ingresa al menos 2 números.</span>';
-      resultSnippet.innerHTML = '';
-      return;
-    }
+    resultCard.style.display = 'block';
 
     if (!piDigits) {
-      resultBox.style.display = 'block';
-      resultStatus.innerHTML = '<span class="status-loading">Cargando 1M de dígitos...</span>';
-      loadDigits().then(() => performSearch());
+      if (statusEl) statusEl.textContent = 'Cargando biblioteca de dígitos...';
       return;
     }
 
-    const idx = piDigits.indexOf(query);
-    resultBox.style.display = 'block';
+    const index = piDigits.indexOf(query);
+    if (index !== -1) {
+      soundEngine.playSearchFound();
+      if (statusEl) {
+        statusEl.innerHTML = `<span class="found-tag">LOCALIZADO</span> Encontrado en el decimal <strong class="tabular">#${index.toLocaleString()}</strong>`;
+      }
+      const start = Math.max(0, index - 8);
+      const end = Math.min(piDigits.length, index + query.length + 8);
+      const before = piDigits.slice(start, index);
+      const matched = piDigits.slice(index, index + query.length);
+      const after = piDigits.slice(index + query.length, end);
 
-    if (idx !== -1) {
-      soundEngine.playEniacHum();
-      const start = Math.max(0, idx - 6);
-      const end = Math.min(piDigits.length, idx + query.length + 6);
-      const before = piDigits.substring(start, idx);
-      const match = piDigits.substring(idx, idx + query.length);
-      const after = piDigits.substring(idx + query.length, end);
-
-      resultStatus.innerHTML = `
-        <span class="status-success">
-          ✓ ¡Encontrado en la posición <strong>${idx.toLocaleString()}</strong> de los decimales de π!
-        </span>
-      `;
-
-      resultSnippet.innerHTML = `
-        <div class="snippet-box tabular">
-          <span class="snip-dim">...${before}</span>
-          <span class="snip-match">${match}</span>
-          <span class="snip-dim">${after}...</span>
-        </div>
-      `;
+      if (snippetEl) {
+        snippetEl.innerHTML = `...${before}<mark class="match-mark">${matched}</mark>${after}...`;
+      }
+      if (detailsEl) {
+        detailsEl.textContent = `Esta secuencia exacta estaba grabada en la curvatura de la realidad miles de millones de años antes del origen del universo.`;
+      }
     } else {
-      resultStatus.innerHTML = `
-        <span class="status-not-found">
-          ✗ No apareció en el primer millón de dígitos. (Prueba con una secuencia más corta).
-        </span>
-      `;
-      resultSnippet.innerHTML = '';
+      soundEngine.playSearchNotFound();
+      if (statusEl) {
+        statusEl.innerHTML = `<span class="not-found-tag">NO ENCONTRADO</span> No está en el primer millón`;
+      }
+      if (snippetEl) {
+        snippetEl.textContent = 'π es infinito. Si calculáramos suficientes billones de decimales más, tu secuencia aparecería con certeza del 100%.';
+      }
+      if (detailsEl) {
+        detailsEl.textContent = '';
+      }
     }
   }
 
-  btn?.addEventListener('click', performSearch);
+  btn?.addEventListener('click', doSearch);
   input?.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') performSearch();
+    if (e.key === 'Enter') doSearch();
   });
 </script>
 
@@ -232,11 +218,6 @@ const t = UI_STRINGS[locale];
   }
 
   #scene-10-stage {
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    width: 100%;
-    overflow: hidden;
     background: var(--bg-surface) !important;
     color: var(--fg-ink) !important;
   }
@@ -249,6 +230,22 @@ const t = UI_STRINGS[locale];
     background: radial-gradient(circle at 50% 50%, #080c18 0%, #020306 100%);
     opacity: clamp(0, calc((var(--p, 0) - 0.72) * 4), 0.96);
     transition: opacity 0.4s ease;
+  }
+
+  .earthrise-curvature {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 30vh;
+    pointer-events: none;
+    z-index: 2;
+    opacity: 0.75;
+  }
+
+  .curvature-svg {
+    width: 100%;
+    height: 100%;
   }
 
   .library-narrative-col {
@@ -274,24 +271,6 @@ const t = UI_STRINGS[locale];
     text-shadow: 0 0 20px rgba(255, 215, 0, 0.7), 0 0 40px rgba(255, 215, 0, 0.3);
     display: inline-block;
     letter-spacing: 0.04em;
-  }
-
-  .beat {
-    opacity: 0;
-    transform: translate3d(0, 14px, 0);
-    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    width: 100% !important;
-  }
-
-  .beat.is-active {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-    pointer-events: auto;
-    position: relative;
   }
 
   .scene-kicker {
@@ -320,185 +299,195 @@ const t = UI_STRINGS[locale];
     margin: 0;
   }
 
-  /* Search Rig Architecture */
-  .search-rig {
-    position: relative;
-    margin-top: 4px;
-    width: 100%;
-    max-width: 680px;
-    z-index: 6;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .search-box {
-    width: 100%;
-    padding: 20px 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    border-radius: 0;
-  }
-
-  .search-input-wrap {
-    display: flex;
-    gap: 0;
-    border: 1px solid var(--grid-line);
-  }
-
-  .pi-input {
-    flex: 1;
-    background: color-mix(in srgb, var(--bg-surface) 96%, black 4%);
-    border: none;
-    border-radius: 0;
-    padding: 12px 16px;
-    font-family: var(--font-mono);
-    font-size: 0.95rem;
-    color: var(--fg-ink);
-    outline: none;
-  }
-
-  .pi-input:focus {
-    box-shadow: inset 0 0 0 1px var(--accent);
-  }
-
-  .pi-btn {
-    background: var(--accent);
-    border: none;
-    border-radius: 0;
-    padding: 12px 22px;
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    color: #fff;
-    cursor: pointer;
-    transition: opacity 0.15s ease;
-  }
-
-  .pi-btn:hover {
-    opacity: 0.9;
-  }
-
-  .search-result {
-    padding: 12px 16px;
-    background: color-mix(in srgb, var(--bg-surface) 95%, black 5%);
-    border: 1px solid var(--grid-line);
-    border-radius: 0;
-  }
-
-  .result-status {
-    font-family: var(--font-mono);
-    font-size: 0.82rem;
-    margin-bottom: 6px;
-  }
-
-  :global(.status-success) {
-    color: var(--accent);
-    font-weight: 700;
-  }
-  :global(.status-warn) {
-    color: #d97706;
-  }
-  :global(.status-not-found) {
-    color: #dc2626;
-  }
-  :global(.status-loading) {
-    color: var(--accent);
-  }
-
-  :global(.snippet-box) {
-    font-family: var(--font-mono);
-    font-size: 1.05rem;
-    padding: 8px;
-    background: color-mix(in srgb, var(--bg-surface) 92%, black 8%);
-    border: 1px solid var(--grid-line);
-    border-radius: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 4px;
-  }
-
-  :global(.snip-dim) {
-    color: var(--muted);
-  }
-
-  :global(.snip-match) {
-    color: #fff;
-    background: var(--accent);
-    font-weight: 700;
-    padding: 2px 6px;
-  }
-
-  .search-hint {
-    font-family: var(--font-mono);
-    font-size: 0.68rem;
-    color: var(--muted);
-    text-align: center;
-    letter-spacing: 0.06em;
-  }
-
-  /* Closing card */
   .closing-card {
-    padding: 28px 24px;
-    border-radius: 0;
-    text-align: center;
+    padding: 24px 28px;
+    background: color-mix(in srgb, var(--bg-surface) 90%, transparent) !important;
+    border: 1px solid var(--grid-line) !important;
   }
 
   .closing-quote {
     font-family: var(--font-display);
-    font-size: clamp(1.3rem, 2.8vw, 1.8rem);
+    font-size: clamp(1.15rem, 2.2vw, 1.55rem);
     font-style: italic;
-    color: var(--accent);
-    line-height: 1.4;
+    line-height: 1.45;
+    color: var(--fg-ink);
     margin: 0 0 12px;
   }
 
   .closing-author {
     font-family: var(--font-mono);
-    font-size: 0.8rem;
-    color: var(--muted);
-    margin-bottom: 12px;
+    font-size: 0.76rem;
+    letter-spacing: 0.16em;
+    color: var(--accent);
+    text-transform: uppercase;
   }
 
   .closing-sub {
     font-family: var(--font-editorial);
-    font-size: 1.05rem;
-    color: var(--fg-ink);
-    margin: 0 0 20px;
+    font-size: 0.92rem;
+    color: var(--muted);
     line-height: 1.5;
+    margin: 12px 0 18px;
   }
 
   .closing-actions {
-    margin-bottom: 20px;
+    margin-bottom: 16px;
   }
 
   .btn-restart {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 10px 22px;
+    padding: 8px 16px;
     background: var(--accent);
     color: #fff;
     text-decoration: none;
     font-family: var(--font-mono);
-    font-size: 0.82rem;
+    font-size: 0.74rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
     font-weight: 700;
-    letter-spacing: 0.08em;
-    border-radius: 0;
-    transition: opacity 0.15s ease;
+    transition: all 0.2s ease;
   }
 
   .btn-restart:hover {
-    opacity: 0.9;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 47, 167, 0.4);
   }
 
   .closing-credits {
+    border-top: 1px solid var(--grid-line);
+    padding-top: 12px;
     font-family: var(--font-mono);
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     color: var(--muted);
+    letter-spacing: 0.08em;
+  }
+
+  /* Right Column: Search Rig */
+  .search-rig {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+  }
+
+  .search-box {
+    width: 100%;
+    padding: 24px;
+    background: color-mix(in srgb, var(--bg-surface) 92%, transparent) !important;
+    border: 1px solid var(--grid-line) !important;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.15) !important;
+  }
+
+  .search-input-wrap {
+    display: flex;
+    gap: 12px;
+  }
+
+  @media (max-width: 600px) {
+    .search-input-wrap {
+      flex-direction: column;
+    }
+  }
+
+  .pi-input {
+    flex: 1;
+    padding: 12px 16px;
+    background: transparent;
+    border: 1px solid var(--grid-line);
+    color: var(--fg-ink);
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s ease;
+  }
+
+  .pi-input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 12px rgba(0, 47, 167, 0.25);
+  }
+
+  .pi-btn {
+    padding: 12px 20px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    letter-spacing: 0.12em;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .pi-btn:hover {
+    opacity: 0.9;
+    transform: scale(1.02);
+  }
+
+  .search-result {
+    margin-top: 20px;
+    padding: 16px;
+    background: color-mix(in srgb, var(--bg-surface) 60%, transparent);
+    border: 1px solid var(--grid-line);
+  }
+
+  .found-tag {
+    display: inline-block;
+    padding: 2px 8px;
+    background: #10b981;
+    color: #fff;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    margin-right: 8px;
+  }
+
+  .not-found-tag {
+    display: inline-block;
+    padding: 2px 8px;
+    background: #ef4444;
+    color: #fff;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    margin-right: 8px;
+  }
+
+  .result-status {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--fg-ink);
+    margin-bottom: 10px;
+  }
+
+  .result-snippet {
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    word-break: break-all;
+    line-height: 1.5;
+  }
+
+  .match-mark {
+    background: var(--accent);
+    color: #fff;
+    padding: 2px 4px;
+    font-weight: 700;
+  }
+
+  .result-details {
+    margin-top: 10px;
+    font-family: var(--font-editorial);
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.45;
   }
 </style>

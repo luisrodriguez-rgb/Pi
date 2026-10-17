@@ -21,76 +21,82 @@ const milestone = MILESTONES[7];
   data-theme={milestone.theme}
   data-scene-title={milestone.title[locale]}
 >
-  <div class="stage layout-split">
+  <div class="stage">
     <!-- Cinematic Atmospheric Video Background (Aberdeen 1949 Vacuum Tubes & Silicon Dawn) -->
     <SceneVideo 
       src="/videos/08-eniac.mp4" 
       poster="/images/08-eniac.jpg" 
       blend="screen" 
-      opacity={0.45} 
+      opacity={0.50} 
     />
 
-    <!-- Left Column: Ramanujan Mystic Notebook & Archival Photo Card -->
-    <div class="ramanujan-col choreo-header">
-      <div class="beat" data-beat="0.05-0.38">
-        <span class="scene-kicker">08 // MADRAS Y CAMBRIDGE, 1914 · RAMANUJAN</span>
-        <h2 class="scene-title">El Sueño de Namagiri</h2>
+    <!-- Inner Content: Split Architecture (Ramanujan Left, ENIAC Right) -->
+    <div class="stage-content layout-split">
+      <!-- Left Column: Ramanujan Mystic Notebook & Archival Photo Card -->
+      <div class="ramanujan-col choreo-header">
+        <div class="narrative-layer">
+          <div class="beat beat-1" data-beat="0.00-0.40">
+            <span class="scene-kicker">08 // MADRAS Y CAMBRIDGE, 1914 · RAMANUJAN</span>
+            <h2 class="scene-title">El Sueño de Namagiri</h2>
 
-        <!-- Archival Photo Card: Ramanujan at Cambridge Notebook -->
-        <div class="archival-photo-card tilt-left" style="margin: 14px 0 16px 0;">
-          <img src="/images/08-ramanujan.jpg" alt="Srinivasa Ramanujan con sus cuadernos matemáticos en Cambridge" loading="eager" />
+            <!-- Archival Photo Card: Ramanujan at Cambridge Notebook -->
+            <div class="archival-photo-card tilt-left" style="margin: 12px 0 14px 0;">
+              <img src="/images/08-ramanujan.jpg" alt="Srinivasa Ramanujan con sus cuadernos matemáticos en Cambridge" loading="eager" />
+              <div class="photo-caption">
+                <span>S. RAMANUJAN · CUADERNO MODULAR</span>
+                <span class="photo-badge">1914</span>
+              </div>
+            </div>
+
+            <p class="beat-text">
+              {locale === 'es'
+                ? 'Srinivasa Ramanujan afirmaba que la diosa Namagiri escribía fórmulas en su lengua mientras dormía. Entre ellas, una serie infinita con el factor 2√2/9801 que destroza la lentitud: con un solo término de cálculo clava 8 decimales exactos de golpe.'
+                : 'Srinivasa Ramanujan declared the goddess Namagiri inscribed equations upon his tongue in dreams. Among them was an infinite series with prefactor 2√2/9801 that obliterated slowness: in a single step, it nails 8 exact decimals.'}
+            </p>
+
+            <div class="formula-blueprint blueprint-panel choreo-metrics" style="margin-top: 10px;">
+              <span class="pill-formula">1/π = (2√2/9801) ∑ [(4k)!(1103 + 26390k)] / [(k!)⁴ 396⁴ᵏ]</span>
+              <strong class="pill-val tabular">+8 dígitos / término</strong>
+            </div>
+          </div>
+
+          <div class="beat beat-2" data-beat="0.38-0.78">
+            <span class="scene-kicker">08 // ABERDEEN, 1949 · LA ERA DEL SILICIO</span>
+            <h2 class="scene-title">ENIAC: 70 Horas para 2,037 Dígitos</h2>
+            <p class="beat-text">
+              {locale === 'es'
+                ? 'En 1949, John von Neumann introdujo las fórmulas modulares dentro de una bestia militar de 30 toneladas y 17,468 tubos de vacío. Durante el fin de semana del 4 de julio, las tarjetas perforadas devoraron 2,037 decimales en 70 horas continuas.'
+                : 'In 1949, John von Neumann fed modular formulas into a 30-ton colossus of 17,468 vacuum tubes. Over the July 4th weekend, 80-column punch cards chewed out 2,037 exact decimals in 70 continuous hours.'}
+            </p>
+          </div>
+
+          <div class="beat beat-climax" data-beat="0.75-1.00">
+            <blockquote class="eniac-quote">
+              <p>«El cálculo manual había muerto. La era del silicio abría las compuertas del infinito.»</p>
+              <cite>— George Reitwiesner &amp; John von Neumann (1949)</cite>
+            </blockquote>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: ENIAC Programmers & Tactical Punched Card Rig -->
+      <div class="eniac-col choreo-artifact">
+        <!-- Archival Photo Card: ENIAC Programmers -->
+        <div class="archival-photo-card tilt-right" style="margin-bottom: 12px;">
+          <img src="/images/08-eniac.jpg" alt="Programadoras del ENIAC en Aberdeen 1949" loading="eager" />
           <div class="photo-caption">
-            <span>S. RAMANUJAN · CUADERNO MODULAR</span>
-            <span class="photo-badge">1914</span>
+            <span>KAY MCNULTY &amp; FRANCES BILAS · ENIAC</span>
+            <span class="photo-badge">1949</span>
           </div>
         </div>
 
-        <p class="beat-text">
-          {locale === 'es'
-            ? 'Srinivasa Ramanujan afirmaba que la diosa Namagiri escribía fórmulas en su lengua mientras dormía. Entre ellas, una serie infinita con el factor 2√2/9801 que destroza la lentitud: con un solo término de cálculo clava 8 decimales exactos de golpe.'
-            : 'Srinivasa Ramanujan declared the goddess Namagiri inscribed equations upon his tongue in dreams. Among them was an infinite series with prefactor 2√2/9801 that obliterated slowness: in a single step, it nails 8 exact decimals.'}
-        </p>
-
-        <div class="formula-blueprint blueprint-panel choreo-metrics" style="margin-top: 12px;">
-          <span class="pill-formula">1/π = (2√2/9801) ∑ [(4k)!(1103 + 26390k)] / [(k!)⁴ 396⁴ᵏ]</span>
-          <strong class="pill-val tabular">+8 dígitos / término</strong>
+        <div class="museum-plate">
+          [ FIG. 08 // ABERDEEN, 1949 — IBM 80-COL // 17,468 TUBOS — 2,037 DÍGITOS ]
         </div>
-      </div>
 
-      <div class="beat beat-climax" data-beat="0.84-0.98">
-        <blockquote class="eniac-quote">
-          <p>«El cálculo manual había muerto. La era del silicio abría las compuertas del infinito.»</p>
-          <cite>— George Reitwiesner &amp; John von Neumann (1949)</cite>
-        </blockquote>
+        <!-- Realtime IBM 80-Col PunchCard Hardware Rig -->
+        <PunchCard />
       </div>
-    </div>
-
-    <!-- Right Column: ENIAC Programmers & Tactical Punched Card Rig -->
-    <div class="eniac-col choreo-artifact">
-      <!-- Archival Photo Card: ENIAC Programmers -->
-      <div class="archival-photo-card tilt-right" style="margin-bottom: 14px;">
-        <img src="/images/08-eniac.jpg" alt="Programadoras del ENIAC en Aberdeen 1949" loading="eager" />
-        <div class="photo-caption">
-          <span>KAY MCNULTY &amp; FRANCES BILAS · ENIAC</span>
-          <span class="photo-badge">1949</span>
-        </div>
-      </div>
-
-      <div class="museum-plate">
-        [ FIG. 08 // ABERDEEN, 1949 — IBM 80-COL // 17,468 TUBOS — 2,037 DÍGITOS ]
-      </div>
-
-      <div class="beat beat-eniac" data-beat="0.40-0.80">
-        <h3 class="sub-scene-title">ENIAC: 70 Horas para 2,037 Dígitos</h3>
-        <p class="beat-text" style="font-size: 0.94rem;">
-          {locale === 'es'
-            ? 'En 1949, John von Neumann introdujo a π dentro de una bestia de 30 toneladas y 17,468 tubos de vacío. Durante el fin de semana del 4 de julio, las tarjetas perforadas devoraron 2,037 decimales en 70 horas continuas.'
-            : 'In 1949, John von Neumann fed π into a 30-ton colossus of 17,468 vacuum tubes. Over the July 4th weekend, 80-column punch cards chewed out 2,037 exact decimals in 70 continuous hours.'}
-        </p>
-      </div>
-
-      <!-- Realtime IBM 80-Col PunchCard Hardware Rig -->
-      <PunchCard />
     </div>
   </div>
 </section>
@@ -103,18 +109,13 @@ const milestone = MILESTONES[7];
   }
 
   .stage {
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    width: 100%;
-    overflow: hidden;
     background: radial-gradient(circle at 50% 50%, #0d1a12 0%, #050a07 100%);
   }
 
   .ramanujan-col {
     position: relative;
     width: 100%;
-    max-width: 520px;
+    max-width: 540px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -123,7 +124,7 @@ const milestone = MILESTONES[7];
   .eniac-col {
     position: relative;
     width: 100%;
-    max-width: 560px;
+    max-width: 580px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -148,14 +149,6 @@ const milestone = MILESTONES[7];
     color: #fff;
     margin: 0 0 8px;
     text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9);
-  }
-
-  .sub-scene-title {
-    font-family: var(--font-display);
-    font-size: 1.25rem;
-    color: #39ff88;
-    margin: 0 0 6px;
-    font-weight: 400;
   }
 
   .beat-text {

@@ -19,73 +19,82 @@ const milestone = MILESTONES[4];
   data-theme={milestone.theme}
   data-scene-title={milestone.title[locale]}
 >
-  <div class="stage layout-split">
-    <!-- Left Column: Brutalist Typographic Compression Column -->
-    <div class="symbol-left-col choreo-header">
-      <div class="museum-plate">
-        [ FIG. 05 // LONDRES, 1706 — SYNOPSIS PALMARIORUM — PÁGINA 263 ]
-      </div>
-
-      <div class="beat" data-beat="0.05-0.38">
-        <span class="scene-kicker">05 // LONDRES, 1706 d.C. · WILLIAM JONES</span>
-        <h2 class="scene-title">{milestone.title[locale]}</h2>
-        <p class="beat-text">
-          {locale === 'es'
-            ? 'Durante cuatro milenios, el número no tuvo nombre. Los sabios lo llamaban con pesadas frases en latín: «La cantidad que, cuando el diámetro es 1, representa la circunferencia». Hasta que un profesor galés autodidacta abrió un libro y cambió la historia.'
-            : 'For four thousand years, the number had no name. Sages denoted it with cumbersome Latin circumlocutions: «The quantity which, when diameter is 1, defines the circumference». Until a self-taught Welsh tutor opened a book and changed mathematics forever.'}
-        </p>
-      </div>
-
-      <!-- Compression Arena: Latin prose collapsing into 280px Colossal Pi -->
-      <div class="compression-arena choreo-artifact">
-        <div class="latin-words" id="latin-stream">
-          <span class="w">Quantitas</span>
-          <span class="w">in</span>
-          <span class="w">circulo</span>
-          <span class="w">quae</span>
-          <span class="w">cum</span>
-          <span class="w">diametro</span>
-          <span class="w">inscripta</span>
-          <span class="w">peripheriam</span>
-          <span class="w">definit</span>
+  <div class="stage">
+    <!-- Inner Content: Split Architecture (Compression Left, Facsimile 1706 Right) -->
+    <div class="stage-content layout-split">
+      <!-- Left Column: Brutalist Typographic Compression Column -->
+      <div class="symbol-left-col choreo-header">
+        <div class="museum-plate">
+          [ FIG. 05 // LONDRES, 1706 — SYNOPSIS PALMARIORUM — PÁGINA 263 ]
         </div>
 
-        <!-- Colossal 280px Ink Pi Glyph -->
-        <div class="colossal-pi-box" id="pi-monolith">
-          <span class="colossal-pi">π</span>
-          <span class="pi-sub">PERIPHERIA · WILLIAM JONES 1706</span>
-        </div>
-      </div>
+        <div class="narrative-layer">
+          <div class="beat beat-1" data-beat="0.00-0.40">
+            <span class="scene-kicker">05 // LONDRES, 1706 d.C. · WILLIAM JONES</span>
+            <h2 class="scene-title">{milestone.title[locale]}</h2>
+            <p class="beat-text">
+              {locale === 'es'
+                ? 'Durante cuatro milenios, el número no tuvo nombre. Los sabios lo llamaban con pesadas frases en latín: «La cantidad que, cuando el diámetro es 1, representa la circunferencia». Hasta que un profesor galés autodidacta abrió un libro y cambió la historia.'
+                : 'For four thousand years, the number had no name. Sages denoted it with cumbersome Latin circumlocutions: «The quantity which, when diameter is 1, defines the circumference». Until a self-taught Welsh tutor opened a book and changed mathematics forever.'}
+            </p>
+          </div>
 
-      <div class="beat beat-climax" data-beat="0.84-0.98">
-        <blockquote class="symbol-quote">
-          <p>«El lenguaje matemático del universo por fin encontró su glifo inmortal.»</p>
-          <cite>— William Jones (1706) &amp; Leonhard Euler (1737)</cite>
-        </blockquote>
-      </div>
-    </div>
+          <!-- Compression Arena: Latin prose collapsing into 280px Colossal Pi -->
+          <div class="beat beat-2" data-beat="0.38-0.78">
+            <span class="scene-kicker">05 // DE 68 LETRAS A 1 SOLO GLIFO</span>
+            <h2 class="scene-title">El Bautismo de la Peripheria</h2>
+            <div class="compression-arena choreo-artifact">
+              <div class="latin-words" id="latin-stream">
+                <span class="w">Quantitas</span>
+                <span class="w">in</span>
+                <span class="w">circulo</span>
+                <span class="w">quae</span>
+                <span class="w">cum</span>
+                <span class="w">diametro</span>
+                <span class="w">inscripta</span>
+                <span class="w">peripheriam</span>
+                <span class="w">definit</span>
+              </div>
 
-    <!-- Right Column: Archival Facsimile of Page 263 -->
-    <div class="facsimile-col choreo-metrics">
-      <div class="archival-photo-card tilt-right">
-        <img src="/images/05-jones-facsimile.jpg" alt="Facsímil de Synopsis Palmariorum Matheseos página 263 (1706)" loading="eager" />
-        <div class="photo-caption">
-          <span>SYNOPSIS PALMARIORUM · PÁG. 263</span>
-          <span class="photo-badge">1706</span>
+              <!-- Colossal 280px Ink Pi Glyph -->
+              <div class="colossal-pi-box" id="pi-monolith">
+                <span class="colossal-pi">π</span>
+                <span class="pi-sub">PERIPHERIA · WILLIAM JONES 1706</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="beat beat-climax" data-beat="0.75-1.00">
+            <blockquote class="symbol-quote">
+              <p>«El lenguaje matemático del universo por fin encontró su glifo inmortal.»</p>
+              <cite>— William Jones (1706) &amp; Leonhard Euler (1737)</cite>
+            </blockquote>
+          </div>
         </div>
       </div>
 
-      <div class="facsimile-text-card blueprint-panel">
-        <div class="facsimile-header">
-          <span class="facsimile-badge">DEFINICIÓN HISTÓRICA ORIGINAL (1706)</span>
-          <button type="button" id="toggle-collapse-btn" class="collapse-btn">
-            <span class="btn-indicator"></span>
-            <span id="collapse-btn-label">SIMULAR COMPRESIÓN (68 LETRAS → 1 GLIFO)</span>
-          </button>
+      <!-- Right Column: Archival Facsimile of Page 263 -->
+      <div class="facsimile-col choreo-metrics">
+        <div class="archival-photo-card tilt-right">
+          <img src="/images/05-jones-facsimile.jpg" alt="Facsímil de Synopsis Palmariorum Matheseos página 263 (1706)" loading="eager" />
+          <div class="photo-caption">
+            <span>SYNOPSIS PALMARIORUM · PÁG. 263</span>
+            <span class="photo-badge">1706</span>
+          </div>
         </div>
-        <p class="facsimile-extract">
-          «...There are various other ways of approximating the Ratio of the Diameter to the Circumference; one of the most remarkable is that by the celebrated Series... = 3.14159 &amp;c. = <strong>π</strong>»
-        </p>
+
+        <div class="facsimile-text-card blueprint-panel">
+          <div class="facsimile-header">
+            <span class="facsimile-badge">DEFINICIÓN HISTÓRICA ORIGINAL (1706)</span>
+            <button type="button" id="toggle-collapse-btn" class="collapse-btn">
+              <span class="btn-indicator"></span>
+              <span id="collapse-btn-label">SIMULAR COMPRESIÓN (68 LETRAS → 1 GLIFO)</span>
+            </button>
+          </div>
+          <p class="facsimile-extract">
+            «...There are various other ways of approximating the Ratio of the Diameter to the Circumference; one of the most remarkable is that by the celebrated Series... = 3.14159 &amp;c. = <strong>π</strong>»
+          </p>
+        </div>
       </div>
     </div>
   </div>
@@ -118,10 +127,9 @@ const milestone = MILESTONES[4];
   if (scene) {
     window.addEventListener('scroll', () => {
       const p = parseFloat(getComputedStyle(scene).getPropertyValue('--p')) || 0;
-      // Smooth automatic transition when scrolling through beats 2 and 3
-      if (p > 0.38 && !isCollapsed) {
+      if (p >= 0.40 && !isCollapsed) {
         updateCollapseState(true);
-      } else if (p < 0.25 && isCollapsed) {
+      } else if (p < 0.35 && isCollapsed) {
         updateCollapseState(false);
       }
     }, { passive: true });
@@ -136,11 +144,6 @@ const milestone = MILESTONES[4];
   }
 
   .stage {
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    width: 100%;
-    overflow: hidden;
     background: #f5f2eb !important;
     color: #111111 !important;
   }
@@ -222,146 +225,146 @@ const milestone = MILESTONES[4];
   .latin-words {
     display: flex;
     flex-wrap: wrap;
+    gap: 8px 12px;
     justify-content: center;
-    gap: 12px 18px;
-    max-width: 540px;
-    padding: 10px;
-    transition: all 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+    align-items: center;
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity: 1;
+    transform: scale(1);
   }
 
   .latin-words.is-compressed {
-    transform: scale(0.55);
-    opacity: 0.04;
-    filter: blur(5px);
+    opacity: 0;
+    transform: scale(0.2) rotate(-8deg);
     pointer-events: none;
+    position: absolute;
   }
 
-  .w {
+  .latin-words .w {
     font-family: var(--font-display);
-    font-size: clamp(1.2rem, 2.2vw, 1.6rem);
+    font-size: clamp(1.1rem, 2.2vw, 1.5rem);
     font-style: italic;
-    color: #2d3748;
-    letter-spacing: 0.04em;
-    transition: color 0.3s ease;
+    color: #374151;
+    background: rgba(0, 0, 0, 0.04);
+    padding: 3px 8px;
+    border: 1px dashed rgba(0, 0, 0, 0.15);
   }
 
-  /* Colossal 280px Black Ink Pi Glyph */
   .colossal-pi-box {
     position: absolute;
+    inset: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    transform: scale(0.3);
     opacity: 0;
-    pointer-events: none;
+    transform: scale(0.4) rotate(6deg);
     transition: all 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
   }
 
   .colossal-pi-box.is-revealed {
-    transform: scale(1);
     opacity: 1;
+    transform: scale(1) rotate(0deg);
     pointer-events: auto;
   }
 
   .colossal-pi {
     font-family: var(--font-display);
-    font-size: clamp(140px, 18vw, 280px);
-    font-weight: 700;
-    color: #111111;
+    font-size: clamp(120px, 20vw, 220px);
     line-height: 0.85;
-    text-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    color: #111111;
+    text-shadow: 0 4px 18px rgba(0, 0, 0, 0.15);
   }
 
   .pi-sub {
     font-family: var(--font-mono);
     font-size: 0.72rem;
-    letter-spacing: 0.18em;
-    color: #6b7280;
+    letter-spacing: 0.22em;
+    color: #b91c1c;
     margin-top: 8px;
-    text-transform: uppercase;
-    font-weight: 600;
+    font-weight: 700;
   }
 
-  /* Right Column: Facsimile Presentation */
+  /* Right Column: Facsimile & Definition Card */
   .facsimile-col {
+    width: 100%;
+    max-width: 560px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 18px;
-    width: 100%;
-    max-width: 520px;
+    gap: 16px;
+    z-index: 2;
   }
 
   .facsimile-text-card {
     width: 100%;
-    padding: 16px 20px;
-    background: rgba(255, 255, 255, 0.95) !important;
-    border: 1px solid rgba(17, 17, 17, 0.18) !important;
+    max-width: 440px;
+    background: #ffffff !important;
     color: #111111 !important;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.15) !important;
+    padding: 16px 20px;
+    box-sizing: border-box;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08) !important;
   }
 
   .facsimile-header {
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 8px;
-    border-bottom: 1px solid rgba(17, 17, 17, 0.1);
-    padding-bottom: 8px;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 12px;
   }
 
   .facsimile-badge {
     font-family: var(--font-mono);
-    font-size: 0.64rem;
+    font-size: 0.65rem;
     letter-spacing: 0.12em;
-    color: #b91c1c;
-    font-weight: 700;
+    color: #6b7280;
+    text-transform: uppercase;
   }
 
   .collapse-btn {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    background: #111111;
-    border: 1px solid #111111;
-    color: #ffffff;
+    gap: 8px;
     font-family: var(--font-mono);
-    font-size: 0.65rem;
-    letter-spacing: 0.08em;
-    padding: 5px 12px;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    color: #b91c1c;
+    background: #fef2f2;
+    border: 1px solid rgba(185, 28, 28, 0.3);
+    padding: 6px 12px;
     cursor: pointer;
     transition: all 0.2s ease;
   }
 
   .collapse-btn:hover {
-    background: #b91c1c;
+    background: #fee2e2;
     border-color: #b91c1c;
   }
 
   .btn-indicator {
-    width: 5px;
-    height: 5px;
+    width: 6px;
+    height: 6px;
+    background: #b91c1c;
     border-radius: 50%;
-    background: #ff5555;
   }
 
   .facsimile-extract {
     font-family: var(--font-editorial);
-    font-size: 0.94rem;
-    font-style: italic;
+    font-size: 0.95rem;
+    line-height: 1.6;
     color: #374151;
-    line-height: 1.55;
+    font-style: italic;
+    border-left: 2px solid #b91c1c;
+    padding-left: 12px;
     margin: 0;
   }
 
   .facsimile-extract strong {
-    color: #111111;
-    font-size: 1.15rem;
     font-family: var(--font-display);
-    font-weight: 700;
+    font-size: 1.35rem;
+    color: #b91c1c;
+    font-style: normal;
   }
 </style>

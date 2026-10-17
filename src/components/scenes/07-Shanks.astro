@@ -19,106 +19,111 @@ const milestone = MILESTONES[6];
   data-theme={milestone.theme}
   data-scene-title={milestone.title[locale]}
 >
-  <div class="stage layout-split" id="shanks-stage">
-    <!-- Left Column: Historical Narrative Left-Aligned -->
-    <div class="narrative-left choreo-header">
-      <div class="museum-plate">
-        [ FIG. 07 // HOUGHTON, 1873 — BÓVEDA PALAIS DE LA DÉCOUVERTE — ERROR #528 ]
+  <div class="stage" id="shanks-stage">
+    <!-- Inner Content: Split Architecture (Narrative Left, Gilded Dome Right) -->
+    <div class="stage-content layout-split">
+      <!-- Left Column: Historical Narrative Left-Aligned -->
+      <div class="narrative-left choreo-header">
+        <div class="museum-plate">
+          [ FIG. 07 // HOUGHTON, 1873 — BÓVEDA PALAIS DE LA DÉCOUVERTE — ERROR #528 ]
+        </div>
+
+        <div class="narrative-layer">
+          <div class="beat beat-1" data-beat="0.00-0.40">
+            <span class="scene-kicker">07 // HOUGHTON-LE-SPRING, 1873 · INGLATERRA</span>
+            <h2 class="scene-title">{milestone.title[locale]}</h2>
+            <p class="beat-text">
+              {locale === 'es'
+                ? 'William Shanks dedicó veinte años de su existencia a calcular a mano, con pluma y tintero, 707 cifras de π. En 1937, la Exposición Universal de París rindió homenaje a su hazaña tallando sus 707 números en madera dorada alrededor de la cúpula del Palais de la Découverte.'
+                : 'William Shanks surrendered twenty years of his life calculating by hand, with ink and quill, 707 decimal places of π. In 1937, the Paris Universal Exposition honored his titan sacrifice by carving all 707 numerals in gilded wood around the dome of the Palais de la Découverte.'}
+            </p>
+          </div>
+
+          <div class="beat beat-2" data-beat="0.38-0.78">
+            <span class="scene-kicker">07 // LA CATÁSTROFE DEL DÍGITO 528</span>
+            <h2 class="scene-title">El Derrumbe de la Cúpula</h2>
+            <p class="beat-text">
+              {locale === 'es'
+                ? 'En 1944, D. F. Ferguson utilizó una calculadora mecánica y detectó la tragedia: Shanks había cometido un error en el decimal 528 (escribió un 4 donde iba un 5). A partir de ese número, las restantes 180 cifras talladas en oro se convirtieron en escombros sin valor.'
+                : 'In 1944, D. F. Ferguson used a mechanical desktop calculator and discovered the tragedy: Shanks erred at the 528th decimal (writing a 4 instead of a 5). From that single fracture, the remaining 180 digits collapsed into ash.'}
+            </p>
+          </div>
+
+          <div class="beat beat-climax" data-beat="0.75-1.00">
+            <blockquote class="shanks-quote">
+              <p>«Veinte años de vigilia y tinta consumidos por el desliz de una sola pluma.»</p>
+              <cite>— D. F. Ferguson (1944) corrigiendo a William Shanks (1873)</cite>
+            </blockquote>
+          </div>
+        </div>
       </div>
 
-      <div class="beat" data-beat="0.05-0.38">
-        <span class="scene-kicker">07 // HOUGHTON-LE-SPRING, 1873 · INGLATERRA</span>
-        <h2 class="scene-title">{milestone.title[locale]}</h2>
-        <p class="beat-text">
-          {locale === 'es'
-            ? 'William Shanks dedicó veinte años de su existencia a calcular a mano, con pluma y tintero, 707 cifras de π. En 1937, la Exposición Universal de París rindió homenaje a su hazaña tallando sus 707 números en madera dorada alrededor de la cúpula del Palais de la Découverte.'
-            : 'William Shanks surrendered twenty years of his life calculating by hand, with ink and quill, 707 decimal places of π. In 1937, the Paris Universal Exposition honored his titan sacrifice by carving all 707 numerals in gilded wood around the dome of the Palais de la Découverte.'}
-        </p>
-      </div>
+      <!-- Right Column: Full-Span Diagonal Gilded Number Stream & Alarm Stage -->
+      <div class="shanks-interactive-area choreo-artifact" id="shanks-dome">
+        <!-- Background Architectural Dome Outline -->
+        <div class="dome-wireframe-bg" aria-hidden="true">
+          <svg viewBox="0 0 400 240" class="dome-ambient-svg">
+            <path d="M 20 230 A 180 180 0 0 1 380 230" fill="none" stroke="rgba(229, 169, 60, 0.2)" stroke-width="2" />
+            <path d="M 60 230 A 140 140 0 0 1 340 230" fill="none" stroke="rgba(229, 169, 60, 0.15)" stroke-width="1.5" stroke-dasharray="4,4" />
+            <path d="M 100 230 A 100 100 0 0 1 300 230" fill="none" stroke="rgba(255, 42, 42, 0.25)" stroke-width="1.5" />
+            <line x1="200" y1="50" x2="200" y2="230" stroke="rgba(229, 169, 60, 0.25)" stroke-width="1" />
+          </svg>
+        </div>
 
-      <div class="beat" data-beat="0.42-0.80">
-        <span class="scene-kicker">07 // LA CATÁSTROFE DEL DÍGITO 528</span>
-        <h2 class="scene-title">El Derrumbe de la Cúpula</h2>
-        <p class="beat-text">
-          {locale === 'es'
-            ? 'En 1944, D. F. Ferguson utilizó una calculadora mecánica y detectó la tragedia: Shanks había cometido un error en el decimal 528 (escribió un 4 donde iba un 5). A partir de ese número, las restantes 180 cifras talladas en oro se convirtieron en escombros sin valor.'
-            : 'In 1944, D. F. Ferguson used a mechanical desktop calculator and discovered the tragedy: Shanks erred at the 528th decimal (writing a 4 instead of a 5). From that single fracture, the remaining 180 digits collapsed into ash.'}
-        </p>
-      </div>
+        <!-- The Diagonal Dome Ribbon of Digits crossing the space -->
+        <div class="dome-numbers-ribbon">
+          <div class="ribbon-prefix">
+            <span class="ribbon-tag">CÚPULA PALAIS DE LA DÉCOUVERTE · 707 DÍGITOS</span>
+            <div class="digits-flow">
+              <span class="d-stream">3.14159265358979323846264338327950288419716939937510...</span>
+              <span class="d-stream d-stream-mid">...520: 3 8 7 5 2 8 8 7 4 9 3 0</span>
+            </div>
+          </div>
 
-      <div class="beat beat-climax" data-beat="0.84-0.98">
-        <blockquote class="shanks-quote">
-          <p>«Veinte años de vigilia y tinta consumidos por el desliz de una sola pluma.»</p>
-          <cite>— D. F. Ferguson (1944) corrigiendo a William Shanks (1873)</cite>
-        </blockquote>
-      </div>
-    </div>
+          <!-- The Fatal Trigger Node #528 -->
+          <div class="fatal-node-wrapper">
+            <button type="button" class="fatal-528-node" id="shanks-fatal-528" title="Presiona para detonar el colapso">
+              <span class="node-tag">DECIMAL #528</span>
+              <span class="node-digit">4</span>
+              <span class="node-fix">DEBIÓ SER 5</span>
+            </button>
+          </div>
 
-    <!-- Right Column: Full-Span Diagonal Gilded Number Stream & Alarm Stage -->
-    <div class="shanks-interactive-area choreo-artifact" id="shanks-dome">
-      <!-- Background Architectural Dome Outline -->
-      <div class="dome-wireframe-bg" aria-hidden="true">
-        <svg viewBox="0 0 400 240" class="dome-ambient-svg">
-          <path d="M 20 230 A 180 180 0 0 1 380 230" fill="none" stroke="rgba(229, 169, 60, 0.2)" stroke-width="2" />
-          <path d="M 60 230 A 140 140 0 0 1 340 230" fill="none" stroke="rgba(229, 169, 60, 0.15)" stroke-width="1.5" stroke-dasharray="4,4" />
-          <path d="M 100 230 A 100 100 0 0 1 300 230" fill="none" stroke="rgba(255, 42, 42, 0.25)" stroke-width="1.5" />
-          <line x1="200" y1="50" x2="200" y2="230" stroke="rgba(229, 169, 60, 0.25)" stroke-width="1" />
-        </svg>
-      </div>
-
-      <!-- The Diagonal Dome Ribbon of Digits crossing the space -->
-      <div class="dome-numbers-ribbon">
-        <div class="ribbon-prefix">
-          <span class="ribbon-tag">CÚPULA PALAIS DE LA DÉCOUVERTE · 707 DÍGITOS</span>
-          <div class="digits-flow">
-            <span class="d-stream">3.14159265358979323846264338327950288419716939937510...</span>
-            <span class="d-stream d-stream-mid">...520: 3 8 7 5 2 8 8 7 4 9 3 0</span>
+          <!-- The 180 Falling Ash Digits that tumble down into the abyss -->
+          <div class="falling-digits-cascade" id="crumbling-stream">
+            <div class="ash-digits-row">
+              <span class="ash-d d-1">3</span>
+              <span class="ash-d d-2">8</span>
+              <span class="ash-d d-3">1</span>
+              <span class="ash-d d-4">9</span>
+              <span class="ash-d d-5">5</span>
+              <span class="ash-d d-6">2</span>
+              <span class="ash-d d-7">8</span>
+              <span class="ash-d d-8">4</span>
+              <span class="ash-d d-9">7</span>
+              <span class="ash-d d-10">5</span>
+              <span class="ash-d d-11">6</span>
+              <span class="ash-d d-12">4</span>
+              <span class="ash-d d-13">8</span>
+              <span class="ash-d d-14">2</span>
+              <span class="ash-d d-15">3...</span>
+            </div>
+            <span class="ash-banner">[ 180 CIFRAS DERRUMBADAS EN CENIZAS ]</span>
           </div>
         </div>
 
-        <!-- The Fatal Trigger Node #528 -->
-        <div class="fatal-node-wrapper">
-          <button type="button" class="fatal-528-node" id="shanks-fatal-528" title="Presiona para detonar el colapso">
-            <span class="node-tag">DECIMAL #528</span>
-            <span class="node-digit">4</span>
-            <span class="node-fix">DEBIÓ SER 5</span>
+        <!-- Interactive Switch HUD -->
+        <div class="shanks-footer-hud choreo-metrics">
+          <button type="button" id="toggle-shanks-btn" class="shanks-action-btn">
+            <span class="action-pulse"></span>
+            <span id="shanks-btn-text">DETONAR COLAPSO #528</span>
           </button>
+          <span class="shanks-hud-desc" id="shanks-note">
+            {locale === 'es' 
+              ? 'El desliz en el decimal 528 arruinó 20 años de cálculo humano.'
+              : 'The slip at decimal 528 ruined 20 years of human calculation.'}
+          </span>
         </div>
-
-        <!-- The 180 Falling Ash Digits that tumble down into the abyss -->
-        <div class="falling-digits-cascade" id="crumbling-stream">
-          <div class="ash-digits-row">
-            <span class="ash-d d-1">3</span>
-            <span class="ash-d d-2">8</span>
-            <span class="ash-d d-3">1</span>
-            <span class="ash-d d-4">9</span>
-            <span class="ash-d d-5">5</span>
-            <span class="ash-d d-6">2</span>
-            <span class="ash-d d-7">8</span>
-            <span class="ash-d d-8">4</span>
-            <span class="ash-d d-9">7</span>
-            <span class="ash-d d-10">5</span>
-            <span class="ash-d d-11">6</span>
-            <span class="ash-d d-12">4</span>
-            <span class="ash-d d-13">8</span>
-            <span class="ash-d d-14">2</span>
-            <span class="ash-d d-15">3...</span>
-          </div>
-          <span class="ash-banner">[ 180 CIFRAS DERRUMBADAS EN CENIZAS ]</span>
-        </div>
-      </div>
-
-      <!-- Interactive Switch HUD -->
-      <div class="shanks-footer-hud choreo-metrics">
-        <button type="button" id="toggle-shanks-btn" class="shanks-action-btn">
-          <span class="action-pulse"></span>
-          <span id="shanks-btn-text">DETONAR COLAPSO #528</span>
-        </button>
-        <span class="shanks-hud-desc" id="shanks-note">
-          {locale === 'es' 
-            ? 'El desliz en el decimal 528 arruinó 20 años de cálculo humano.'
-            : 'The slip at decimal 528 ruined 20 years of human calculation.'}
-        </span>
       </div>
     </div>
   </div>
@@ -172,11 +177,6 @@ const milestone = MILESTONES[6];
   }
 
   #shanks-stage {
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    width: 100%;
-    overflow: hidden;
     background: radial-gradient(circle at 60% 50%, #16121d 0%, #0d0a12 100%);
     transition: background 0.6s ease;
   }
@@ -192,6 +192,15 @@ const milestone = MILESTONES[6];
     40% { transform: translate(4px, -3px); }
     60% { transform: translate(-3px, -2px); }
     80% { transform: translate(3px, 2px); }
+  }
+
+  .narrative-left {
+    position: relative;
+    width: 100%;
+    max-width: 560px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
   .scene-kicker {
@@ -272,10 +281,10 @@ const milestone = MILESTONES[6];
   .dome-numbers-ribbon {
     position: relative;
     z-index: 5;
-    background: rgba(18, 14, 22, 0.78);
+    background: rgba(18, 14, 22, 0.85);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(229, 169, 60, 0.3);
+    border: 1px solid rgba(229, 169, 60, 0.4);
     padding: 24px;
     display: flex;
     flex-direction: column;
@@ -301,7 +310,7 @@ const milestone = MILESTONES[6];
   .d-stream {
     font-family: var(--font-mono);
     font-size: clamp(0.85rem, 1.5vw, 1.05rem);
-    color: rgba(229, 169, 60, 0.85);
+    color: rgba(229, 169, 60, 0.95);
     letter-spacing: 0.08em;
     word-break: break-all;
   }
@@ -321,7 +330,7 @@ const milestone = MILESTONES[6];
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.8);
     border: 2px solid #e5a93c;
     padding: 8px 24px;
     cursor: pointer;
@@ -358,118 +367,131 @@ const milestone = MILESTONES[6];
     text-transform: uppercase;
   }
 
+  /* Catastrophic Fracture State */
   .fatal-528-node.is-error {
-    border-color: #ff2a2a;
-    background: rgba(255, 42, 42, 0.18);
-    box-shadow: 0 0 30px rgba(255, 42, 42, 0.6);
+    border-color: #ff2a2a !important;
+    background: rgba(255, 42, 42, 0.18) !important;
+    animation: alarm-pulse 1s infinite alternate;
   }
 
   .fatal-528-node.is-error .node-digit {
-    color: #ff3344;
-    text-shadow: 0 0 24px #ff3344;
-    animation: pulse-error 1s infinite alternate;
+    color: #ff2a2a !important;
+    text-shadow: 0 0 24px #ff2a2a !important;
   }
 
   .fatal-528-node.is-error .node-fix {
-    color: #ff8888;
+    color: #ff2a2a !important;
     font-weight: 700;
   }
 
-  @keyframes pulse-error {
-    from { transform: scale(1); }
-    to { transform: scale(1.08); }
+  @keyframes alarm-pulse {
+    0% { transform: scale(1); box-shadow: 0 0 10px rgba(255, 42, 42, 0.4); }
+    100% { transform: scale(1.05); box-shadow: 0 0 30px rgba(255, 42, 42, 0.8); }
   }
 
-  /* Falling Ash Digits Cascade */
+  /* Falling Ash Cascade */
   .falling-digits-cascade {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    padding: 12px;
-    background: rgba(0, 0, 0, 0.4);
-    border: 1px dashed rgba(229, 169, 60, 0.3);
-    transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    padding-top: 10px;
+    border-top: 1px dashed rgba(229, 169, 60, 0.3);
+    transition: all 0.6s ease;
   }
 
   .ash-digits-row {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
     gap: 8px;
     font-family: var(--font-mono);
     font-size: 1.1rem;
-    color: rgba(229, 169, 60, 0.6);
+    color: #e5a93c;
+    transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
   }
 
   .ash-banner {
+    display: block;
+    margin-top: 10px;
     font-family: var(--font-mono);
-    font-size: 0.65rem;
-    letter-spacing: 0.14em;
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
     color: #a8a29e;
+    text-align: center;
+    transition: color 0.4s ease;
   }
 
-  .falling-digits-cascade.is-fallen {
-    border-color: rgba(255, 42, 42, 0.4);
-    background: rgba(40, 10, 15, 0.6);
+  /* Collapse into Ash Mode */
+  .falling-digits-cascade.is-fallen .ash-digits-row {
+    transform: translateY(12px) skewX(-14deg);
+    opacity: 0.45;
+    filter: blur(1px);
   }
 
-  .falling-digits-cascade.is-fallen .ash-digits-row span {
-    transform: translateY(30px) rotate(25deg);
-    opacity: 0.12;
-    filter: blur(3px);
-    transition: all 0.8s ease;
-    color: #ff3344;
+  .falling-digits-cascade.is-fallen .ash-digits-row .ash-d {
+    color: #ff4d4d;
+    text-shadow: 0 0 10px rgba(255, 77, 77, 0.6);
+    display: inline-block;
+    animation: ash-tumble 1.8s infinite alternate ease-in-out;
   }
 
   .falling-digits-cascade.is-fallen .ash-banner {
-    color: #ff4455;
+    color: #ff3344;
     font-weight: 700;
   }
 
-  /* Footer Controls HUD */
+  @keyframes ash-tumble {
+    0% { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(8px) rotate(12deg); }
+  }
+
+  /* Action HUD */
   .shanks-footer-hud {
     display: flex;
     align-items: center;
     gap: 16px;
-    background: rgba(0, 0, 0, 0.6);
-    padding: 12px 18px;
+    background: rgba(0, 0, 0, 0.65);
+    padding: 10px 16px;
     border: 1px solid rgba(229, 169, 60, 0.25);
+  }
+
+  @media (max-width: 600px) {
+    .shanks-footer-hud {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
   }
 
   .shanks-action-btn {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: #110e18;
-    border: 1px solid #e5a93c;
-    color: #ffd700;
     font-family: var(--font-mono);
-    font-size: 0.68rem;
-    letter-spacing: 0.1em;
-    padding: 6px 14px;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    background: #e5a93c;
+    color: #000;
+    font-weight: 700;
+    border: none;
+    padding: 8px 16px;
     cursor: pointer;
     transition: all 0.2s ease;
-    font-weight: 700;
   }
 
   .shanks-action-btn:hover {
-    background: #ff2a2a;
-    border-color: #ff2a2a;
-    color: #ffffff;
+    background: #ffd700;
+    transform: scale(1.03);
   }
 
   .action-pulse {
     width: 6px;
     height: 6px;
+    background: #000;
     border-radius: 50%;
-    background: #e5a93c;
   }
 
   .shanks-hud-desc {
     font-family: var(--font-mono);
-    font-size: 0.68rem;
+    font-size: 0.7rem;
     color: #a8a29e;
-    letter-spacing: 0.05em;
+    line-height: 1.4;
   }
 </style>
