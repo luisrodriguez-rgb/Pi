@@ -9,11 +9,14 @@
     "dev": "ASTRO_TELEMETRY_DISABLED=1 astro dev",
     "build": "ASTRO_TELEMETRY_DISABLED=1 astro build",
     "preview": "ASTRO_TELEMETRY_DISABLED=1 astro preview",
-    "preview:cf": "npx wrangler pages dev dist",
-    "deploy": "npm run build && npx wrangler pages deploy dist",
+    "preview:cf": "wrangler dev",
+    "deploy": "npm run build && wrangler deploy",
     "astro": "ASTRO_TELEMETRY_DISABLED=1 astro"
   },
   "dependencies": {
     "astro": "^7.4.0"
+  },
+  "devDependencies": {
+    "wrangler": "^4.151.1"
   }
 }

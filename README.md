@@ -315,12 +315,12 @@ El proyecto está diseñado y optimizado para ejecutarse en la red perimetral gl
 
 #### 1. Despliegue Directo vía CLI (Wrangler)
 ```bash
-# Compilar y publicar directamente en Cloudflare Pages
+# Compilar y publicar directamente en Cloudflare Workers / Pages
 npm run deploy
 
 # O ejecutar paso a paso con el CLI de Wrangler:
 npm run build
-npx wrangler pages deploy dist --project-name=pi-tribute
+npx wrangler deploy
 ```
 
 #### 2. Previsualización Local con el Runtime de Cloudflare
