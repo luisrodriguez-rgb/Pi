@@ -1,0 +1,56 @@
+# ==============================================================================
+# Cloudflare Pages / Workers HTTP Headers
+# Project: pi-tribute
+# ==============================================================================
+
+# Global security headers for all routes
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), browsing-topics=()
+  Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Resource-Policy: same-origin
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob:; media-src 'self' blob:; connect-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none';
+
+# Static hashed assets built by Astro/Vite (immutable 1 year cache)
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Cinematic video scrubbing loops (immutable 1 year cache, byte ranges enabled)
+/videos/*
+  Cache-Control: public, max-age=31536000, immutable
+  Accept-Ranges: bytes
+
+# Historical high-resolution art and museum plates (immutable 1 year cache)
+/images/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Documentation and visual screenshots (immutable 1 year cache)
+/screenshots/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Million decimals dataset (cached 7 days with stale-while-revalidate)
+/digits/*
+  Cache-Control: public, max-age=604800, stale-while-revalidate=86400
+
+# Favicons and webmanifest
+/favicon.svg
+  Cache-Control: public, max-age=604800, stale-while-revalidate=86400
+
+/favicon.ico
+  Cache-Control: public, max-age=604800, stale-while-revalidate=86400
+
+/site.webmanifest
+  Cache-Control: public, max-age=86400
+
+# HTML documents (always revalidate on edge for instant deployments)
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+/
+  Cache-Control: public, max-age=0, must-revalidate
+
+/en/
+  Cache-Control: public, max-age=0, must-revalidate

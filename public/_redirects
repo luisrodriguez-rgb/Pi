@@ -1,0 +1,10 @@
+# ==============================================================================
+# Cloudflare Pages / Workers Redirects & Rewrites
+# Project: pi-tribute
+# ==============================================================================
+
+# Canonical URL normalization for language paths
+/en    /en/    301
+
+# Backward compatibility / alias for digits file
+/data/pi-1m.txt    /digits/pi-1m.txt    301
