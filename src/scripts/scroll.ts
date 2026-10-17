@@ -88,10 +88,16 @@ export function initScrollEngine() {
 
         // 4. Activar bloques narrativos y cajas de datos escalonados [data-beat="0.2-0.5"]
         const beats = scene.querySelectorAll<HTMLElement>('[data-beat]');
-        beats.forEach((beat) => {
+        const numBeats = beats.length;
+        beats.forEach((beat, bIndex) => {
           const beatAttr = beat.dataset.beat || '0-1';
           const [start, end] = beatAttr.split('-').map(Number);
-          const isActive = p >= start && p <= end;
+          
+          let isActive = p >= start && p <= end;
+          // Garantizar que el primer beat siempre esté visible al entrar a la escena
+          if (bIndex === 0 && p < start) isActive = true;
+          // Garantizar que el último beat continúe visible al final de la escena
+          if (bIndex === numBeats - 1 && p > end) isActive = true;
 
           const wasActive = activeBeatsMap.get(beat) || false;
           if (isActive !== wasActive) {
