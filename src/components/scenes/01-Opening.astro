@@ -34,7 +34,7 @@ const t = UI_STRINGS[locale];
     <!-- 2-Column Responsive Layout (DSKY Midudev Philosophy) -->
     <div class="stage-layout">
       <!-- Left Column: Narrative Layer & Historical Beats -->
-      <div class="narrative-col">
+      <div class="narrative-col choreo-header">
         <div class="narrative-layer">
           <!-- Beat 1: Initial Hook -->
           <div class="beat beat-1" data-beat="0.00-0.32">
@@ -61,7 +61,7 @@ const t = UI_STRINGS[locale];
                 : '«Take away 1/9 of the diameter and construct a square upon the remainder: its area shall equal the circle». Without knowing it, Ahmes approximated the cosmos’s deepest constant to (16/9)².'}
             </p>
             <!-- Blueprint Technical Pill (Zero SaaS border-radius) -->
-            <div class="formula-blueprint blueprint-panel">
+            <div class="formula-blueprint blueprint-panel choreo-metrics">
               <span class="pill-formula">π ≈ (16/9)² = 256/81</span>
               <strong class="pill-val tabular">3.16049</strong>
             </div>
@@ -78,7 +78,7 @@ const t = UI_STRINGS[locale];
       </div>
 
       <!-- Right Column: Artifact Visualizer & Hemp Rope Compass -->
-      <div class="artifact-col">
+      <div class="artifact-col choreo-artifact">
         <!-- Museum Catalog Technical Plate (In-Flow, Zero Collisions) -->
         <div class="museum-plate">
           [ FIG. 01 // TEBAS, 1650 a.C. — PAPIRO DE RHIND — PROBLEMA 48 ]
@@ -346,8 +346,9 @@ const t = UI_STRINGS[locale];
 
   .rope-arm {
     transform-origin: 200px 200px;
-    transform: rotate(calc(var(--p, 0) * 360deg));
-    will-change: transform;
+    opacity: clamp(0, calc((var(--p, 0) - 0.20) * 8), 1);
+    transform: rotate(calc(clamp(0, calc((var(--p, 0) - 0.25) * 1.666), 1) * 360deg));
+    will-change: transform, opacity;
     transition: transform 0.08s linear;
   }
 
