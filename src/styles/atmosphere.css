@@ -322,3 +322,37 @@ body.is-blueprint #blueprint-badge {
   will-change: transform, opacity;
 }
 
+/* ============================================================
+   COREOGRAFÍA CINEMATOGRÁFICA EN 3 ACTOS (Sincronizada con Vídeo y --p)
+   ============================================================ */
+
+/* Altura generosa para ritmo pausado de 10s de vídeo */
+.scene {
+  min-height: 420vh !important;
+  height: 420vh !important;
+}
+
+/* Acto 1: Placa y Título aparecen entre --p: 0.02 y 0.18, y suben suavemente después */
+.choreo-header {
+  opacity: clamp(0, calc((var(--p, 0) - 0.02) * 8), 1);
+  transform: translate3d(0, calc((1 - clamp(0, calc((var(--p, 0) - 0.02) * 6), 1)) * 32px - (var(--p, 0) * 18px)), 0);
+  will-change: transform, opacity;
+}
+
+/* Acto 2: El artefacto/gráfico principal emerge entre --p: 0.18 y 0.38 */
+.choreo-artifact {
+  opacity: clamp(0.08, calc((var(--p, 0) - 0.15) * 4.5), 1);
+  transform: 
+    translate3d(0, calc((1 - clamp(0, calc((var(--p, 0) - 0.15) * 4), 1)) * 45px), 0)
+    scale(calc(0.94 + clamp(0, calc((var(--p, 0) - 0.15) * 4), 1) * 0.06));
+  will-change: transform, opacity;
+}
+
+/* Acto 3: Los paneles de métricas/fórmulas finales se despliegan entre --p: 0.55 y 0.78 */
+.choreo-metrics {
+  opacity: clamp(0, calc((var(--p, 0) - 0.55) * 5), 1);
+  transform: translate3d(0, calc((1 - clamp(0, calc((var(--p, 0) - 0.55) * 5), 1)) * 28px), 0);
+  will-change: transform, opacity;
+}
+
+
