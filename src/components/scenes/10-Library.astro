@@ -116,15 +116,21 @@ const t = UI_STRINGS[locale];
               placeholder="Ej: 14031992 o cualquier secuencia"
               maxlength="16"
               autocomplete="off"
+              aria-label={locale === 'es' ? 'Buscar fecha o secuencia en el primer millón de dígitos de Pi' : 'Search date or sequence in the first million digits of Pi'}
               class="pi-input tabular"
             />
-            <button type="button" id="pi-search-btn" class="pi-btn">
+            <button 
+              type="button" 
+              id="pi-search-btn" 
+              class="pi-btn"
+              aria-label={locale === 'es' ? 'Ejecutar búsqueda en el primer millón de decimales' : 'Execute search in first million decimals'}
+            >
               {locale === 'es' ? 'BUSCAR EN π' : 'SEARCH IN π'}
             </button>
           </div>
 
           <!-- Result Card (Technical Terminal Output) -->
-          <div class="search-result" id="search-result" style="display: none;">
+          <div class="search-result" id="search-result" style="display: none;" role="region" aria-live="polite">
             <div class="result-status" id="result-status"></div>
             <div class="result-snippet" id="result-snippet"></div>
             <div class="result-details" id="result-details"></div>
@@ -149,7 +155,7 @@ const t = UI_STRINGS[locale];
 
   async function loadDigits() {
     try {
-      const res = await fetch('/data/pi-1m.txt');
+      const res = await fetch('/digits/pi-1m.txt');
       if (res.ok) {
         piDigits = await res.text();
       }
