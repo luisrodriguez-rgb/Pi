@@ -21,35 +21,40 @@ const milestone = MILESTONES[7];
   data-theme={milestone.theme}
   data-scene-title={milestone.title[locale]}
 >
-  <div class="stage">
+  <div class="stage layout-split">
     <!-- Cinematic Atmospheric Video Background (Aberdeen 1949 Vacuum Tubes & Silicon Dawn) -->
     <SceneVideo 
       src="/videos/08-eniac.mp4" 
       poster="/images/08-eniac.jpg" 
       blend="screen" 
-      opacity={0.55} 
+      opacity={0.45} 
     />
 
-    <!-- Narrative Center (Uncollapsible, balanced typography positioned above rig) -->
-    <div class="narrative choreo-header">
+    <!-- Left Column: Ramanujan Mystic Notebook & Archival Photo Card -->
+    <div class="ramanujan-col choreo-header">
       <div class="beat" data-beat="0.05-0.38">
         <span class="scene-kicker">08 // MADRAS Y CAMBRIDGE, 1914 · RAMANUJAN</span>
         <h2 class="scene-title">El Sueño de Namagiri</h2>
-        <p class="beat-text">
-          {locale === 'es'
-            ? 'Srinivasa Ramanujan afirmaba que la diosa Namagiri escribía fórmulas en su lengua mientras dormía. Entre ellas, una serie infinita con el factor 2√2/9801 que destroza la lentitud: con un solo paso de cálculo clava 8 decimales exactos de golpe.'
-            : 'Srinivasa Ramanujan declared the goddess Namagiri inscribed equations upon his tongue in dreams. Among them was an infinite series with prefactor 2√2/9801 that obliterated mathematical slowness: in a single step, it nails 8 exact decimals.'}
-        </p>
-      </div>
 
-      <div class="beat" data-beat="0.42-0.80">
-        <span class="scene-kicker">08 // ABERDEEN, 1949 · EL AMANECER DEL SILICIO</span>
-        <h2 class="scene-title">ENIAC: 70 Horas para 2,037 Dígitos</h2>
+        <!-- Archival Photo Card: Ramanujan at Cambridge Notebook -->
+        <div class="archival-photo-card tilt-left" style="margin: 14px 0 16px 0;">
+          <img src="/images/08-ramanujan.jpg" alt="Srinivasa Ramanujan con sus cuadernos matemáticos en Cambridge" loading="eager" />
+          <div class="photo-caption">
+            <span>S. RAMANUJAN · CUADERNO MODULAR</span>
+            <span class="photo-badge">1914</span>
+          </div>
+        </div>
+
         <p class="beat-text">
           {locale === 'es'
-            ? 'En 1949, John von Neumann introdujo a π dentro de una bestia de 30 toneladas y 17,468 tubos de vacío. Durante el fin de semana del 4 de julio, las tarjetas perforadas devoraron 2,037 decimales en 70 horas continuas, pulverizando 4,000 años de aritmética humana.'
-            : 'In 1949, John von Neumann fed π into a 30-ton colossus of 17,468 vacuum tubes. Over the July 4th weekend, 80-column punch cards chewed out 2,037 exact decimals in 70 continuous hours, pulverizing four millennia of human labor.'}
+            ? 'Srinivasa Ramanujan afirmaba que la diosa Namagiri escribía fórmulas en su lengua mientras dormía. Entre ellas, una serie infinita con el factor 2√2/9801 que destroza la lentitud: con un solo término de cálculo clava 8 decimales exactos de golpe.'
+            : 'Srinivasa Ramanujan declared the goddess Namagiri inscribed equations upon his tongue in dreams. Among them was an infinite series with prefactor 2√2/9801 that obliterated slowness: in a single step, it nails 8 exact decimals.'}
         </p>
+
+        <div class="formula-blueprint blueprint-panel choreo-metrics" style="margin-top: 12px;">
+          <span class="pill-formula">1/π = (2√2/9801) ∑ [(4k)!(1103 + 26390k)] / [(k!)⁴ 396⁴ᵏ]</span>
+          <strong class="pill-val tabular">+8 dígitos / término</strong>
+        </div>
       </div>
 
       <div class="beat beat-climax" data-beat="0.84-0.98">
@@ -60,13 +65,31 @@ const milestone = MILESTONES[7];
       </div>
     </div>
 
-    <!-- The Dual Ramanujan / ENIAC PunchCard Rig -->
-    <div class="dual-tech-stage choreo-artifact">
-      <!-- Museum Catalog Technical Plate (In-Flow, Zero Collisions) -->
+    <!-- Right Column: ENIAC Programmers & Tactical Punched Card Rig -->
+    <div class="eniac-col choreo-artifact">
+      <!-- Archival Photo Card: ENIAC Programmers -->
+      <div class="archival-photo-card tilt-right" style="margin-bottom: 14px;">
+        <img src="/images/08-eniac.jpg" alt="Programadoras del ENIAC en Aberdeen 1949" loading="eager" />
+        <div class="photo-caption">
+          <span>KAY MCNULTY &amp; FRANCES BILAS · ENIAC</span>
+          <span class="photo-badge">1949</span>
+        </div>
+      </div>
+
       <div class="museum-plate">
         [ FIG. 08 // ABERDEEN, 1949 — IBM 80-COL // 17,468 TUBOS — 2,037 DÍGITOS ]
       </div>
 
+      <div class="beat beat-eniac" data-beat="0.40-0.80">
+        <h3 class="sub-scene-title">ENIAC: 70 Horas para 2,037 Dígitos</h3>
+        <p class="beat-text" style="font-size: 0.94rem;">
+          {locale === 'es'
+            ? 'En 1949, John von Neumann introdujo a π dentro de una bestia de 30 toneladas y 17,468 tubos de vacío. Durante el fin de semana del 4 de julio, las tarjetas perforadas devoraron 2,037 decimales en 70 horas continuas.'
+            : 'In 1949, John von Neumann fed π into a 30-ton colossus of 17,468 vacuum tubes. Over the July 4th weekend, 80-column punch cards chewed out 2,037 exact decimals in 70 continuous hours.'}
+        </p>
+      </div>
+
+      <!-- Realtime IBM 80-Col PunchCard Hardware Rig -->
       <PunchCard />
     </div>
   </div>
@@ -84,108 +107,104 @@ const milestone = MILESTONES[7];
     top: 0;
     height: 100vh;
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
     overflow: hidden;
     background: radial-gradient(circle at 50% 50%, #0d1a12 0%, #050a07 100%);
-    padding: calc(var(--hud-height, 68px) + 12px) 20px 16px;
-    box-sizing: border-box;
-    gap: 8px;
   }
 
-  .dual-tech-stage {
+  .ramanujan-col {
+    position: relative;
+    width: 100%;
+    max-width: 520px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .eniac-col {
+    position: relative;
+    width: 100%;
+    max-width: 560px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
-    margin-top: 4px;
-    z-index: 2;
-  }
-
-  /* Non-overlapping Narrative Box Positioned Above Rig */
-  .narrative {
-    position: relative;
-    width: 100% !important;
-    max-width: min(90vw, 740px) !important;
-    min-height: 110px;
-    margin: 0 auto !important;
-    text-align: center !important;
-    pointer-events: none;
-    z-index: 5;
-    flex-shrink: 0;
-  }
-
-  .beat {
-    opacity: 0;
-    transform: translate3d(0, 16px, 0);
-    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    width: 100% !important;
-  }
-
-  .beat.is-active {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-    pointer-events: auto;
+    justify-content: center;
   }
 
   .scene-kicker {
     font-family: var(--font-mono);
     font-size: 0.72rem;
     letter-spacing: 0.18em;
-    color: #33ff33;
+    color: #39ff88;
     display: inline-block;
-    margin-bottom: 6px;
+    margin-bottom: 4px;
+    font-weight: 700;
   }
 
   .scene-title {
-    font-family: var(--font-serif);
-    font-size: clamp(1.8rem, 3.8vw, 2.8rem);
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 3.4vw, 2.6rem);
     font-weight: 400;
+    font-style: italic;
     color: #fff;
-    margin: 0 0 10px;
+    margin: 0 0 8px;
     text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9);
   }
 
+  .sub-scene-title {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    color: #39ff88;
+    margin: 0 0 6px;
+    font-weight: 400;
+  }
+
   .beat-text {
-    font-family: var(--font-sans);
-    font-size: clamp(0.95rem, 1.8vw, 1.12rem);
-    color: rgba(255, 255, 255, 0.8);
-    line-height: 1.65;
+    font-family: var(--font-editorial);
+    font-size: clamp(0.94rem, 1.6vw, 1.08rem);
+    color: rgba(223, 211, 185, 0.88);
+    line-height: 1.6;
     margin: 0;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+  }
+
+  .formula-blueprint {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    background: rgba(0, 0, 0, 0.5) !important;
+    border: 1px solid rgba(57, 255, 136, 0.25) !important;
+  }
+
+  .pill-formula {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: #39ff88;
+  }
+
+  .pill-val {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: #ffd700;
+    font-weight: 700;
   }
 
   .eniac-quote {
-    font-family: var(--font-serif);
-    font-size: clamp(1.3rem, 2.8vw, 1.9rem);
+    font-family: var(--font-display);
+    font-size: clamp(1.2rem, 2.4vw, 1.7rem);
     font-style: italic;
-    color: #33ff33;
-    line-height: 1.5;
+    color: #39ff88;
+    line-height: 1.45;
     margin: 0;
-    text-shadow: 0 0 25px rgba(51, 255, 51, 0.5);
+    text-shadow: 0 0 20px rgba(57, 255, 136, 0.4);
   }
 
   .eniac-quote cite {
     display: block;
     font-family: var(--font-mono);
-    font-size: 0.8rem;
+    font-size: 0.76rem;
     font-style: normal;
-    color: rgba(255, 255, 255, 0.6);
-    margin-top: 10px;
+    color: rgba(223, 211, 185, 0.6);
+    margin-top: 8px;
     letter-spacing: 0.05em;
-  }
-
-  .dual-tech-stage {
-    margin-top: 18vh;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    z-index: 2;
   }
 </style>

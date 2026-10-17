@@ -27,9 +27,13 @@ const circularCode = `                 #include <stdio.h>
   data-theme={milestone.theme}
   data-scene-title={milestone.title[locale]}
 >
-  <div class="stage">
-    <!-- Narrative Header (Non-collapsible, balanced typography positioned cleanly above terminal) -->
-    <div class="narrative choreo-header">
+  <div class="stage layout-split" id="spigot-stage">
+    <!-- Left Column: Feynman Point Monumental Callout -->
+    <div class="feynman-col choreo-header">
+      <div class="museum-plate">
+        [ FIG. 09 // AMSTERDAM, 1988 — IOCCC WINNER // SPIGOT BASE MIXTA ]
+      </div>
+
       <div class="beat" data-beat="0.05-0.38">
         <span class="scene-kicker">09 // PASADENA Y AMSTERDAM · CULTO HACKER</span>
         <h2 class="scene-title">{milestone.title[locale]}</h2>
@@ -38,6 +42,19 @@ const circularCode = `                 #include <stdio.h>
             ? 'Dos joyas de la mitología computacional. Primero, Richard Feynman bromearía con memorizar π hasta la posición 762 solo para recitar: «nueve, nueve, nueve, nueve, nueve, nueve... y así sucesivamente», fingiendo que π era un número racional.'
             : 'Two icons of computational mythology. First, Richard Feynman quipped he would memorize π to index 762 simply to recite: «nine, nine, nine, nine, nine, nine... and so on», pretending π was a rational periodic fraction.'}
         </p>
+
+        <!-- Monumental Feynman 999999 Callout Box -->
+        <div class="feynman-card blueprint-panel choreo-artifact" style="margin-top: 16px;">
+          <span class="feynman-badge">PUNTO DE FEYNMAN · DECIMAL #762</span>
+          <div class="feynman-digits-monument tabular" id="feynman-cluster">
+            999999
+          </div>
+          <p class="feynman-footnote">
+            {locale === 'es'
+              ? 'Seis nueves consecutivos a partir de la posición 762. La probabilidad de que ocurra al azar tan temprano es de apenas 0.08%.'
+              : 'Six consecutive nines starting at position 762. The probability of this random run appearing so early is a mere 0.08%.'}
+          </p>
+        </div>
       </div>
 
       <div class="beat" data-beat="0.42-0.80">
@@ -45,8 +62,8 @@ const circularCode = `                 #include <stdio.h>
         <h2 class="scene-title">El Grifo (Spigot) de Dik Winter</h2>
         <p class="beat-text">
           {locale === 'es'
-            ? 'En 1997, Dik Winter y Achim Flammenkamp ganaron el legendario concurso IOCCC con 160 caracteres formateados con la silueta de un círculo. Cero decimales flotantes: solo aritmética entera en base mixta que gotea dígitos de 4 en 4.'
-            : 'In 1997, Dik Winter and Achim Flammenkamp won the IOCCC contest with 160 characters formatted into the physical geometry of a circle. Zero floating-point numbers: pure mixed-radix integer arithmetic dripping digits 4 by 4.'}
+            ? 'En 1997, Dik Winter y Achim Flammenkamp ganaron el concurso IOCCC con 160 caracteres en C formateados con la silueta de un círculo. Cero decimales flotantes: solo aritmética entera en base mixta que gotea dígitos de 4 en 4.'
+            : 'In 1997, Dik Winter and Achim Flammenkamp won the IOCCC contest with 160 characters formatted into the geometry of a circle. Zero floating-point: pure mixed-radix integer arithmetic dripping digits 4 by 4.'}
         </p>
       </div>
 
@@ -58,70 +75,42 @@ const circularCode = `                 #include <stdio.h>
       </div>
     </div>
 
-    <!-- The Dual Feynman Odometer & Interactive CRT Spigot Terminal Rig -->
-    <div class="hacker-stage choreo-artifact" id="hacker-stage">
-      <!-- Museum Catalog Technical Plate (In-Flow, Zero Collisions) -->
-      <div class="museum-plate">
-        [ FIG. 09 // AMSTERDAM, 1988 — IOCCC WINNER // SPIGOT BASE MIXTA ]
-      </div>
-
-      <!-- 1. The Feynman 999999 Odometer -->
-      <div class="feynman-strip blueprint-panel" id="feynman-strip">
-        <div class="feynman-header">
-          <span class="f-pos">PUNTO DE FEYNMAN (DECIMAL #762):</span>
-          <span class="f-badge">6 NUEVES CONSECUTIVOS</span>
-        </div>
-        <div class="f-stream-row">
-          <span class="f-prefix">...314159...</span>
-          <div class="f-cluster" id="feynman-cluster">
-            <span class="f-nine">9</span>
-            <span class="f-nine">9</span>
-            <span class="f-nine">9</span>
-            <span class="f-nine">9</span>
-            <span class="f-nine">9</span>
-            <span class="f-nine">9</span>
+    <!-- Right Column: GitHub / IDE Visualizer Window with Circular C Code -->
+    <div class="ide-col choreo-artifact" id="hacker-stage">
+      <div class="github-window blueprint-panel">
+        <!-- Window Top Bar (macOS Lights + Tab) -->
+        <div class="window-bar">
+          <div class="window-lights">
+            <span class="light light-red"></span>
+            <span class="light light-yellow"></span>
+            <span class="light light-green"></span>
           </div>
-          <span class="f-next" id="f-next-digit">8731...</span>
-        </div>
-      </div>
-
-      <!-- 2. Interactive Circular C Spigot Terminal (CRT Phosphor) -->
-      <div class="circle-code-terminal blueprint-panel">
-        <div class="term-header">
-          <div class="term-lights">
-            <span class="term-dot red"></span>
-            <span class="term-dot yellow"></span>
-            <span class="term-dot green"></span>
-          </div>
-          <span class="term-title">dik_winter_pi_circle.c (IOCCC 1997)</span>
-          <div class="term-status" id="term-status">STANDBY // READY</div>
+          <span class="window-tab">dik_winter_pi_circle.c</span>
+          <span class="window-badge" id="term-status">IOCCC 1997 · READY</span>
         </div>
 
-        <!-- Terminal Body with Scanlines -->
-        <div class="term-body">
+        <!-- Editor Body with Circular Code -->
+        <div class="code-viewport">
           <pre class="circle-c-pre"><code>{circularCode}</code></pre>
-          
-          <!-- Live Dripping Output Area -->
-          <div class="stream-line">
-            <span class="prompt">$ ./pi_circle &gt;</span>
-            <span class="stream-output" id="spigot-output">3141 5926 5358 9793 2384 6264 3383...</span>
+
+          <!-- Live Output Stream Terminal Line -->
+          <div class="terminal-stream-box">
+            <span class="term-prompt">$ ./pi_circle &gt;</span>
+            <span class="stream-output tabular" id="spigot-output">3141 5926 5358 9793 2384 6264 3383...</span>
             <span class="term-cursor">█</span>
           </div>
         </div>
 
-        <!-- Terminal Interactive Controls -->
-        <div class="term-controls choreo-metrics">
-          <button type="button" id="btn-run-spigot" class="term-btn" title="Iniciar ejecución del algoritmo Spigot">
-            <span class="btn-icon">▶</span>
-            <span id="run-btn-label">GOTEAR DÍGITOS</span>
+        <!-- Controls Toolbar -->
+        <div class="terminal-toolbar choreo-metrics">
+          <button type="button" id="btn-run-spigot" class="ide-btn ide-btn-primary" title="Iniciar goteo del algoritmo">
+            <span>▶ GOTEAR DÍGITOS</span>
           </button>
-          <button type="button" id="btn-feynman-highlight" class="term-btn term-btn-amber" title="Destacar el punto de Feynman">
-            <span class="btn-icon">⚡</span>
-            <span>DESTACAR FEYNMAN #762</span>
+          <button type="button" id="btn-feynman-highlight" class="ide-btn ide-btn-amber" title="Destacar punto de Feynman">
+            <span>⚡ FEYNMAN #762</span>
           </button>
-          <button type="button" id="btn-reset-spigot" class="term-btn term-btn-dim" title="Reiniciar búfer de salida">
-            <span class="btn-icon">↺</span>
-            <span>REINICIAR</span>
+          <button type="button" id="btn-reset-spigot" class="ide-btn ide-btn-dim" title="Reiniciar salida">
+            <span>↺ REINICIAR</span>
           </button>
         </div>
       </div>
@@ -133,89 +122,76 @@ const circularCode = `                 #include <stdio.h>
   import { soundEngine } from '../../scripts/audio';
 
   const hackerStage = document.getElementById('hacker-stage');
-  const nextDigit = document.getElementById('f-next-digit');
   const spigotOutput = document.getElementById('spigot-output');
   const termStatus = document.getElementById('term-status');
   const runBtn = document.getElementById('btn-run-spigot');
-  const runBtnLabel = document.getElementById('run-btn-label');
   const feynmanBtn = document.getElementById('btn-feynman-highlight');
-  const feynmanCluster = document.getElementById('feynman-cluster');
   const resetBtn = document.getElementById('btn-reset-spigot');
+  const feynmanCluster = document.getElementById('feynman-cluster');
 
-  // Precomputed Spigot chunks for high-speed fluid execution
-  const piChunks = [
+  const precomputedPiChunks = [
     '3141', '5926', '5358', '9793', '2384', '6264', '3383', '2795',
     '0288', '4197', '1693', '9937', '5105', '8209', '7494', '4592',
     '3078', '1640', '6286', '2089', '9862', '8034', '8253', '4211',
     '7067', '9821', '4808', '6513', '2823', '0664', '7093', '8446'
   ];
 
+  let currentChunkIndex = 0;
   let isRunning = false;
   let intervalId: any = null;
-  let currentChunkIdx = 7;
 
-  function toggleSpigotStream() {
-    isRunning = !isRunning;
-    if (isRunning) {
-      if (termStatus) termStatus.textContent = 'RUNNING // MIXED-RADIX SPIGOT';
-      if (runBtnLabel) runBtnLabel.textContent = 'PAUSAR';
-      runBtn?.classList.add('is-active');
-
-      intervalId = setInterval(() => {
-        if (currentChunkIdx < piChunks.length) {
-          currentChunkIdx++;
-          if (spigotOutput) {
-            spigotOutput.textContent = piChunks.slice(0, currentChunkIdx).join(' ') + '...';
-          }
-          soundEngine.playDigit(currentChunkIdx % 10);
-        } else {
-          currentChunkIdx = 1;
-        }
-      }, 220);
+  function appendChunk() {
+    if (currentChunkIndex < precomputedPiChunks.length) {
+      const chunk = precomputedPiChunks[currentChunkIndex];
+      if (spigotOutput) {
+        spigotOutput.textContent += ' ' + chunk;
+      }
+      soundEngine.playDigit(parseInt(chunk.charAt(0), 10));
+      currentChunkIndex++;
+      if (termStatus) {
+        termStatus.textContent = `COMPUTING // +${currentChunkIndex * 4} DIGITS`;
+      }
     } else {
-      clearInterval(intervalId);
-      if (termStatus) termStatus.textContent = 'PAUSED // IDLE';
-      if (runBtnLabel) runBtnLabel.textContent = 'GOTEAR DÍGITOS';
-      runBtn?.classList.remove('is-active');
+      stopSpigot();
+      if (termStatus) {
+        termStatus.textContent = 'COMPLETED // 128 DIGITS';
+      }
     }
   }
 
-  runBtn?.addEventListener('click', toggleSpigotStream);
+  function startSpigot() {
+    isRunning = true;
+    if (runBtn) runBtn.innerHTML = '<span>⏸ PAUSAR</span>';
+    intervalId = setInterval(appendChunk, 140);
+  }
+
+  function stopSpigot() {
+    isRunning = false;
+    if (runBtn) runBtn.innerHTML = '<span>▶ GOTEAR DÍGITOS</span>';
+    if (intervalId) {
+      clearInterval(intervalId);
+      intervalId = null;
+    }
+  }
+
+  runBtn?.addEventListener('click', () => {
+    if (isRunning) stopSpigot();
+    else startSpigot();
+  });
+
+  resetBtn?.addEventListener('click', () => {
+    stopSpigot();
+    currentChunkIndex = 0;
+    if (spigotOutput) {
+      spigotOutput.textContent = '3141 5926 5358 9793 2384 6264 3383...';
+    }
+    if (termStatus) termStatus.textContent = 'STANDBY // READY';
+  });
 
   feynmanBtn?.addEventListener('click', () => {
     feynmanCluster?.classList.toggle('is-pulse');
     soundEngine.playFeynmanResolution();
   });
-
-  resetBtn?.addEventListener('click', () => {
-    if (isRunning) toggleSpigotStream();
-    currentChunkIdx = 7;
-    if (spigotOutput) {
-      spigotOutput.textContent = piChunks.slice(0, 7).join(' ') + '...';
-    }
-    if (termStatus) termStatus.textContent = 'RESET // READY';
-  });
-
-  if (hackerStage) {
-    const scene = hackerStage.closest('[data-scene]') as HTMLElement | null;
-    let chordFired = false;
-
-    window.addEventListener('scroll', () => {
-      if (!scene) return;
-      const p = parseFloat(getComputedStyle(scene).getPropertyValue('--p')) || 0;
-
-      if (p > 0.45 && !chordFired) {
-        chordFired = true;
-        soundEngine.playFeynmanResolution();
-        feynmanCluster?.classList.add('is-pulse');
-      } else if (p < 0.2) {
-        chordFired = false;
-        feynmanCluster?.classList.remove('is-pulse');
-      }
-
-      nextDigit?.classList.toggle('is-revealed', p > 0.75);
-    }, { passive: true });
-  }
 </script>
 
 <style>
@@ -225,79 +201,110 @@ const circularCode = `                 #include <stdio.h>
     --p: 0;
   }
 
-  .stage {
+  #spigot-stage {
     position: sticky;
     top: 0;
     height: 100vh;
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
     overflow: hidden;
-    background: radial-gradient(circle at 50% 50%, #0d1624 0%, #050a10 100%);
-    padding: calc(var(--hud-height, 68px) + 12px) 20px 16px;
-    box-sizing: border-box;
-    gap: 8px;
+    background: #002fa7 !important; /* Engineering Klein Blue */
+    color: #ffffff !important;
   }
 
-  .hacker-stage {
+  .feynman-col {
     position: relative;
     width: 100%;
-    max-width: 800px;
+    max-width: 520px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    margin-top: 2px;
-    z-index: 2;
+    justify-content: center;
   }
 
-  /* Uncollapsible Narrative Box Positioned Above Rig */
-  .narrative {
-    position: relative;
-    width: 100% !important;
-    max-width: min(90vw, 740px) !important;
-    min-height: 115px;
-    margin: 0 auto !important;
-    text-align: center !important;
-    pointer-events: none;
-    z-index: 5;
-    flex-shrink: 0;
+  .feynman-col .museum-plate {
+    background: rgba(0, 0, 0, 0.45);
+    color: #94b9ff;
+    border-color: rgba(255, 255, 255, 0.2);
   }
 
   .scene-kicker {
     font-family: var(--font-mono);
     font-size: 0.72rem;
     letter-spacing: 0.18em;
-    color: #39ff88;
+    color: #00f0ff;
     display: inline-block;
     margin-bottom: 4px;
+    font-weight: 700;
   }
 
   .scene-title {
     font-family: var(--font-display);
-    font-size: clamp(1.6rem, 3.4vw, 2.4rem);
+    font-size: clamp(1.8rem, 3.4vw, 2.6rem);
     font-weight: 400;
     font-style: italic;
-    color: #fff;
+    color: #ffffff;
     margin: 0 0 8px;
-    filter: url(#ink-displacement);
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
   }
 
   .beat-text {
     font-family: var(--font-editorial);
-    font-size: clamp(0.92rem, 1.7vw, 1.05rem);
-    color: rgba(255, 255, 255, 0.85);
-    line-height: 1.6;
+    font-size: clamp(0.95rem, 1.7vw, 1.08rem);
+    color: rgba(255, 255, 255, 0.92);
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  /* Monumental Feynman Box */
+  .feynman-card {
+    background: rgba(0, 20, 80, 0.6) !important;
+    border: 1px solid rgba(0, 240, 255, 0.4) !important;
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+  }
+
+  .feynman-badge {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    color: #00f0ff;
+    font-weight: 700;
+  }
+
+  .feynman-digits-monument {
+    font-family: var(--font-mono);
+    font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+    font-weight: 700;
+    color: #ffd700;
+    letter-spacing: 0.12em;
+    line-height: 1;
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+  }
+
+  .feynman-digits-monument.is-pulse {
+    animation: feynman-glow 0.8s ease infinite alternate;
+  }
+
+  @keyframes feynman-glow {
+    from { color: #ffd700; text-shadow: 0 0 20px rgba(255, 215, 0, 0.6); }
+    to { color: #00ffff; text-shadow: 0 0 32px #00ffff; }
+  }
+
+  .feynman-footnote {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: #94b9ff;
+    line-height: 1.45;
     margin: 0;
   }
 
   .hacker-quote {
     font-family: var(--font-display);
-    font-size: clamp(1.2rem, 2.5vw, 1.7rem);
+    font-size: clamp(1.2rem, 2.4vw, 1.7rem);
     font-style: italic;
-    color: #39ff88;
+    color: #00f0ff;
     line-height: 1.45;
     margin: 0;
   }
@@ -307,261 +314,158 @@ const circularCode = `                 #include <stdio.h>
     font-family: var(--font-mono);
     font-size: 0.76rem;
     font-style: normal;
-    color: rgba(255, 255, 255, 0.6);
+    color: #94b9ff;
     margin-top: 8px;
     letter-spacing: 0.05em;
   }
 
-  /* 1. Feynman Strip Odometer */
-  .feynman-strip {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
+  /* Right Column: GitHub Window Visualizer */
+  .ide-col {
+    position: relative;
     width: 100%;
-    padding: 8px 16px;
-    border: 1px solid rgba(57, 255, 136, 0.3) !important;
-    background: rgba(10, 20, 16, 0.85) !important;
-  }
-
-  .feynman-header {
+    max-width: 600px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+  }
+
+  .github-window {
     width: 100%;
-    align-items: center;
-  }
-
-  .f-pos {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    letter-spacing: 0.12em;
-    color: var(--muted);
-  }
-
-  .f-badge {
-    font-family: var(--font-mono);
-    font-size: 0.58rem;
-    letter-spacing: 0.1em;
-    color: #39ff88;
-    background: rgba(57, 255, 136, 0.1);
-    border: 1px solid rgba(57, 255, 136, 0.3);
-    padding: 2px 6px;
-  }
-
-  .f-stream-row {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-family: var(--font-mono);
-    font-size: 1.15rem;
-  }
-
-  .f-prefix {
-    color: rgba(255, 255, 255, 0.4);
-    font-size: 0.95rem;
-  }
-
-  .f-cluster {
-    display: inline-flex;
-    gap: 4px;
-    transition: all 0.3s ease;
-  }
-
-  .f-nine {
-    color: #ffaa00;
-    font-weight: 700;
-    text-shadow: 0 0 10px rgba(255, 170, 0, 0.5);
-  }
-
-  .f-cluster.is-pulse .f-nine {
-    color: #39ff88;
-    text-shadow: 0 0 14px #39ff88;
-  }
-
-  .f-next {
-    color: rgba(255, 255, 255, 0.3);
-    font-size: 0.95rem;
-    transition: color 0.3s ease;
-  }
-
-  .f-next.is-revealed {
-    color: var(--fg-ink);
-  }
-
-  /* 2. Circular C Spigot Terminal */
-  .circle-code-terminal {
-    width: 100%;
-    background: #040906 !important;
-    border: 1px solid rgba(57, 255, 136, 0.35) !important;
+    background: #060d1a !important;
+    border: 1px solid rgba(255, 255, 255, 0.25) !important;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    position: relative;
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
   }
 
-  /* CRT Scanlines */
-  .circle-code-terminal::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background: repeating-linear-gradient(
-      0deg,
-      rgba(0, 0, 0, 0.15) 0px,
-      rgba(0, 0, 0, 0.15) 1px,
-      transparent 1px,
-      transparent 2px
-    );
-    opacity: 0.6;
-  }
-
-  .term-header {
+  .window-bar {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 6px 12px;
-    border-bottom: 1px solid rgba(57, 255, 136, 0.2);
-    background: rgba(10, 25, 16, 0.95);
+    background: #0d1a2d;
+    padding: 10px 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
   }
 
-  .term-lights {
+  .window-lights {
     display: flex;
     gap: 6px;
   }
 
-  .term-dot {
-    width: 8px;
-    height: 8px;
+  .light {
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
   }
-  .term-dot.red { background: #e63946; }
-  .term-dot.yellow { background: #ffaa00; }
-  .term-dot.green { background: #39ff88; }
 
-  .term-title {
+  .light-red { background: #ff5f56; }
+  .light-yellow { background: #ffbd2e; }
+  .light-green { background: #27c93f; }
+
+  .window-tab {
     font-family: var(--font-mono);
-    font-size: 0.65rem;
+    font-size: 0.72rem;
+    color: #ffffff;
+    font-weight: 600;
+  }
+
+  .window-badge {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    color: #00f0ff;
     letter-spacing: 0.1em;
-    color: #39ff88;
   }
 
-  .term-status {
-    font-family: var(--font-mono);
-    font-size: 0.58rem;
-    letter-spacing: 0.12em;
-    color: var(--muted);
-  }
-
-  .term-body {
-    padding: 10px 14px;
+  .code-viewport {
+    padding: 16px 20px;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 12px;
   }
 
   .circle-c-pre {
     margin: 0;
-    font-family: 'B612 Mono', monospace;
-    font-size: clamp(0.68rem, 1.3vw, 0.8rem);
-    line-height: 1.25;
+    font-family: var(--font-mono);
+    font-size: clamp(0.72rem, 1.2vw, 0.84rem);
+    line-height: 1.35;
     color: #39ff88;
-    text-shadow: 0 0 8px rgba(57, 255, 136, 0.4);
+    white-space: pre;
     overflow-x: auto;
-    text-align: center;
   }
 
-  .stream-line {
+  .terminal-stream-box {
     display: flex;
     align-items: center;
     gap: 8px;
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-    padding: 6px 10px;
     background: rgba(0, 0, 0, 0.6);
-    border-top: 1px solid rgba(57, 255, 136, 0.2);
-    overflow-x: hidden;
+    padding: 8px 12px;
+    border-left: 2px solid #00f0ff;
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
   }
 
-  .prompt {
-    color: #ffaa00;
+  .term-prompt {
+    color: #00f0ff;
   }
 
   .stream-output {
-    color: #39ff88;
-    letter-spacing: 0.05em;
+    color: #ffd700;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .term-cursor {
-    color: #39ff88;
-    animation: blink 0.9s infinite step-start;
+    color: #00f0ff;
+    animation: blink 1s step-end infinite;
   }
 
   @keyframes blink {
     50% { opacity: 0; }
   }
 
-  /* Interactive Controls */
-  .term-controls {
+  .terminal-toolbar {
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
     gap: 8px;
-    padding: 8px 12px;
-    border-top: 1px solid rgba(57, 255, 136, 0.2);
-    background: rgba(10, 20, 14, 0.9);
+    padding: 10px 14px;
+    background: #0a1424;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
   }
 
-  .term-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: transparent;
-    border: 1px solid rgba(57, 255, 136, 0.4);
-    color: #39ff88;
+  .ide-btn {
     font-family: var(--font-mono);
-    font-size: 0.68rem;
+    font-size: 0.65rem;
     letter-spacing: 0.08em;
-    padding: 5px 12px;
+    padding: 6px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.05);
+    color: #ffffff;
     cursor: pointer;
     transition: all 0.2s ease;
   }
 
-  .term-btn:hover, .term-btn.is-active {
-    background: rgba(57, 255, 136, 0.18);
-    border-color: #39ff88;
-    box-shadow: 0 0 10px rgba(57, 255, 136, 0.4);
+  .ide-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
   }
 
-  .term-btn-amber {
-    border-color: rgba(255, 170, 0, 0.4);
-    color: #ffaa00;
+  .ide-btn-primary {
+    background: #002fa7;
+    border-color: #00f0ff;
+    color: #00f0ff;
   }
 
-  .term-btn-amber:hover {
-    border-color: #ffaa00;
-    color: #ffaa00;
-    background: rgba(255, 170, 0, 0.15);
-    box-shadow: 0 0 10px rgba(255, 170, 0, 0.4);
+  .ide-btn-primary:hover {
+    background: #00f0ff;
+    color: #002fa7;
   }
 
-  .term-btn-dim {
-    border-color: var(--grid-line);
-    color: var(--muted);
+  .ide-btn-amber {
+    border-color: #ffd700;
+    color: #ffd700;
   }
 
-  .term-btn-dim:hover {
-    border-color: var(--muted);
-    color: var(--fg-ink);
-  }
-
-  @media (max-height: 750px) {
-    .circle-c-pre {
-      font-size: 0.62rem;
-    }
-    .narrative {
-      min-height: 95px;
-    }
+  .ide-btn-amber:hover {
+    background: #ffd700;
+    color: #000000;
   }
 </style>
