@@ -82,11 +82,21 @@ const t = UI_STRINGS[locale];
       <div class="hud-divider"></div>
 
       <!-- Language selector -->
-      <div class="lang-switch tabular">
-        <a href="/" class={locale === 'es' ? 'lang-link active' : 'lang-link'}>ES</a>
-        <span class="lang-sep">/</span>
-        <a href="/en" class={locale === 'en' ? 'lang-link active' : 'lang-link'}>EN</a>
-      </div>
+      <nav class="lang-switch tabular" aria-label={locale === 'es' ? 'Selector de idioma' : 'Language switcher'}>
+        <a 
+          href="/" 
+          class={locale === 'es' ? 'lang-link active' : 'lang-link'}
+          aria-label="Ver versión en español"
+          hreflang="es"
+        >ES</a>
+        <span class="lang-sep" aria-hidden="true">/</span>
+        <a 
+          href="/en/" 
+          class={locale === 'en' ? 'lang-link active' : 'lang-link'}
+          aria-label="View English version"
+          hreflang="en"
+        >EN</a>
+      </nav>
     </div>
   </div>
 </header>
